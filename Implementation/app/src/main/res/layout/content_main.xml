@@ -22,7 +22,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside">
 
         <TextView
             android:id="@+id/textView_welcome"
@@ -31,7 +32,7 @@
             android:fontFamily="@font/quicksand_light"
             android:gravity="center_horizontal"
             android:text="@string/welcome_text"
-            android:textSize="36sp" />
+            android:textSize="30sp" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -59,9 +60,13 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_text">
 
         <ListView
+            android:id="@+id/listView_friends"
             style="@android:style/Widget.Holo.Light.ListView"
             android:layout_width="wrap_content"
             android:layout_height="358dp"
+            android:dividerHeight="10dp"
+            android:footerDividersEnabled="true"
+            android:headerDividersEnabled="true"
             android:scrollbars="vertical" />
     </LinearLayout>
 
@@ -75,7 +80,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:background="@drawable/round_buttonRef"
+        android:text="@string/button_go"
+        android:textColor="@android:color/background_light"
+        android:textSize="90sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
