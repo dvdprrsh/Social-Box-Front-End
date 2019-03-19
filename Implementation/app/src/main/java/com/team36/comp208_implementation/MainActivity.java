@@ -12,9 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ListView myListView;
+    ArrayList<listview_item> myRows = new ArrayList<>(); // Initialises the variable which will store each row of the friend listview
+
+    String users_name = "David"; // Stores the active user's name
+    int[] friend_pp = {R.drawable.baseline_android_black_48dp}; // Stores the profile pictures of each friend
+    String[] friend_names = {"Cam Mackay", "David Parrish", "Cybil Laobena", "Josh Houghton",
+            "George Quantrell", "Javier Ballester"}; // Stores the names of all online friends
+    double[] friend_ratings = {4, 4.2, 3.8, 5, 3.9, 4}; // Stores the ratings of each of the user's friends
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        myMainMethod(); // Calls my 'main' method that I created to differentiate between automatically created code and my own
     }
 
     @Override
@@ -99,5 +113,24 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void myMainMethod(){
+        myListView = findViewById(R.id.listView_friends); // Stores the listView
+        myFillList(); // Creates all the rows that will fill the listView
 
+        // The two lines below initialise an adapter that will fill out the listView and does so
+        myAdapter myAdapter = new myAdapter(getApplicationContext(), myRows);
+        myListView.setAdapter(myAdapter);
+    }
+
+    private void myFillList() {
+        for (int i=0; i < friend_names.length; i++){
+            // Creates each individual row dor the listView
+            listview_item aRow = new listview_item();
+            aRow.setImage_pp(friend_pp[0]);
+            aRow.setText_name(friend_names[i]);
+            aRow.setRating_stars(friend_ratings[i]);
+
+            myRows.add(aRow); // Saves each row once necessary details are assigned out
+        }
+    }
 }

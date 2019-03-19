@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This XML file stores the required information to display the button on the main page as a
+    round button which changes depending on whether it is being pressed or not -->
     <item android:state_pressed="false" android:drawable="@drawable/button_bg_rounded_corners"/>
     <item android:state_pressed="true" android:drawable="@drawable/button_bg_rounded_corners_pressed"/>
 </selector>
