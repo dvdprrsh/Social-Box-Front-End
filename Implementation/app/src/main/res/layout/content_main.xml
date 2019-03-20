@@ -57,15 +57,14 @@
 
         <ListView
             android:id="@+id/listView_friends"
-            style="@android:style/Widget.Holo.Light.ListView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/listview_border"
-            android:dividerHeight="10dp"
+            android:listSelector="@android:color/transparent"
+            android:dividerHeight="2dp"
             android:footerDividersEnabled="true"
-            android:headerDividersEnabled="true"
-            android:scrollbars="vertical" />
+            android:headerDividersEnabled="true" />
     </LinearLayout>
 
     <Button

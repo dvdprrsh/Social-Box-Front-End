@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This XML file is for when the button is not pressed but makes the button circular -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorPrimary"/>
+            <size android:width="180dp" android:height="180dp"/>
+        </shape>
+    </item>
+</selector>

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,9 +24,13 @@ public class MainActivity extends AppCompatActivity
     ArrayList<listview_item> myRows = new ArrayList<>(); // Initialises the variable which will store each row of the friend listview
 
     String users_name = "David"; // Stores the active user's name
+    final String welcome_text = "Welcome %s, see your rating below!";
+
     int[] friend_pp = {R.drawable.baseline_android_black_48dp}; // Stores the profile pictures of each friend
+
     String[] friend_names = {"Cam Mackay", "David Parrish", "Cybil Laobena", "Josh Houghton",
             "George Quantrell", "Javier Ballester"}; // Stores the names of all online friends
+
     double[] friend_ratings = {4, 4.2, 3.8, 5, 3.9, 4}; // Stores the ratings of each of the user's friends
 
     @Override
@@ -116,6 +121,9 @@ public class MainActivity extends AppCompatActivity
     private void myMainMethod(){
         myListView = findViewById(R.id.listView_friends); // Stores the listView
         myFillList(); // Creates all the rows that will fill the listView
+
+        TextView textView_welcome = findViewById(R.id.textView_welcome);
+        textView_welcome.setText(String.format(welcome_text, users_name));
 
         // The two lines below initialise an adapter that will fill out the listView and does so
         myAdapter myAdapter = new myAdapter(getApplicationContext(), myRows);

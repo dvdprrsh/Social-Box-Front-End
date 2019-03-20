@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">client_frontEnd</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="text_welcome">Hi *NAME*, see your rating below!</string>
+    <string name="button_go">Go!</string>
+    <string name="textView_atAGlance"><u>At a Glance</u></string>
+    <string name="textView_friends">Freinds</string>
+    <string name="textView_journeys">Journeys</string>
+</resources>
