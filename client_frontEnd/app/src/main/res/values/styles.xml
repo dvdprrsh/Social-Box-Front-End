@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/QuickSandTextViews</item>
+        <item name="android:editTextStyle">@style/QuickSandEditTexts</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="QuickSandTextViews" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/quicksand_light</item>
+    </style>
+
+    <style name="QuickSandEditTexts" parent="android:Widget.EditText">
+        <item name="android:fontFamily">@font/quicksand_light</item>
     </style>
 
 </resources>

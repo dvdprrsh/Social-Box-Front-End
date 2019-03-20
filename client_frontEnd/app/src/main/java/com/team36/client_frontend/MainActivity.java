@@ -1,10 +1,15 @@
 package com.team36.client_frontend;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +17,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    BottomNavigationView navigation;
+
     private int[] friend_pps = {R.drawable.baseline_person_outline_black_36};
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[] friend_ratings = {4.2, 4.8, 4.0, 4.2, 4.8, 4.4};
@@ -24,14 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, navigation, "bottomNavView");
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     return true;
                 case R.id.navigation_dashboard:
+                    Intent dashboard = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(dashboard, options.toBundle());
                     return true;
                 case R.id.navigation_allJourneys:
+                    Intent allJourneys = new Intent(MainActivity.this, JourneysActivity.class);
+                    startActivity(allJourneys, options.toBundle());
                     return true;
                 case R.id.navigation_allFriends:
+                    Intent allFriends = new Intent(MainActivity.this, FriendsActivity.class);
+                    startActivity(allFriends, options.toBundle());
                     return true;
             }
             return false;
@@ -60,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(myBottomNavigationListener);
 
         BottomNavigationView navigation_atAGlance = findViewById(R.id.navigation_atAGlance);

@@ -5,11 +5,28 @@
     <string name="title_notifications">Notifications</string>
     <string name="text_welcome">Hi *NAME*, see your rating below!</string>
     <string name="button_go">Go!</string>
-    <string name="textView_atAGlance"><u>At a Glance</u></string>
+    <string name="textView_atAGlance">At a Glance</string>
     <string name="textView_friends">All Friends</string>
     <string name="textView_journeys">Journeys</string>
     <string name="atAGlance_friends">Friends</string>
     <string name="atAGlance_journeys">Journeys</string>
     <string name="navigation_mainJourneys">All Journeys</string>
     <string name="navigation_friends">All Friends</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_journeys">JourneysActivity</string>
+    <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
