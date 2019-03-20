@@ -6,6 +6,10 @@
     <string name="text_welcome">Hi *NAME*, see your rating below!</string>
     <string name="button_go">Go!</string>
     <string name="textView_atAGlance"><u>At a Glance</u></string>
-    <string name="textView_friends">Freinds</string>
+    <string name="textView_friends">All Friends</string>
     <string name="textView_journeys">Journeys</string>
+    <string name="atAGlance_friends">Friends</string>
+    <string name="atAGlance_journeys">Journeys</string>
+    <string name="navigation_mainJourneys">All Journeys</string>
+    <string name="navigation_friends">All Friends</string>
 </resources>

@@ -13,8 +13,12 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_allJourneys"
+        android:icon="@drawable/baseline_directions_car_black_36"
+        android:title="@string/navigation_mainJourneys" />
+    <item
+        android:id="@+id/navigation_allFriends"
+        android:icon="@drawable/baseline_supervised_user_circle_black_48"
+        android:title="@string/navigation_friends" />
 
 </menu>
