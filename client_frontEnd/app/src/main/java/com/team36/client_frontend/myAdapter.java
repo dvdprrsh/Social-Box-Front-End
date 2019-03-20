@@ -22,7 +22,7 @@ public class myAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return myRows.size(); // Returns the number of rows in the listview
+        return myRows.size(); // Returns the number of rows in the listView
     }
 
     @Override
@@ -37,17 +37,17 @@ public class myAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Lines 41 to 44 get a reference to the listview_row XML, effectively creating a new row
+        // Lines 41 to 44 get a reference to the listview_row.xml, effectively creating a new row
         if (convertView == null){
             convertView = myInflater.inflate(R.layout.listview_row, parent, false);
             setRow(position, convertView); // Calls setRow to set up the row with it's specific values
         }
 
-        return convertView; // Returns the row to be displayed/added to the listview
+        return convertView; // Returns the row to be displayed/added to the listView
     }
 
     private void setRow(int position, View convertView){
-        // gets all the components of each row/friend so their values can be set
+        // Gets all the components of each row/friend so their values can be set
         ImageView imageView_pp = convertView.findViewById(R.id.imageView_friendPP);
         TextView textView_name = convertView.findViewById(R.id.textView_friendName);
         RatingBar ratingBar_friend = convertView.findViewById(R.id.ratingBar_friendRating);
@@ -56,7 +56,7 @@ public class myAdapter extends BaseAdapter {
         // The below code sets each of the components values of each row/friend
         imageView_pp.setImageResource(currRow.getImage_pp());
         textView_name.setText(currRow.getText_name());
-        float rating = (float) (currRow.getRating_stars()); // Converts the rating to a float....
-        ratingBar_friend.setRating(rating); // So that it can be passed to set their rating
+        float rating = (float) (currRow.getRating_stars()); // Converts the rating to a float so that....
+        ratingBar_friend.setRating(rating); // ....it can be passed to set the friends' rating
     }
 }

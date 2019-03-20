@@ -12,6 +12,7 @@ import android.view.MenuItem;
 public class JourneysActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
+    // The method below does as stated in MainActivity.java
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -28,6 +29,7 @@ public class JourneysActivity extends AppCompatActivity {
                     startActivity(dashboard, options.toBundle());
                     return true;
                 case R.id.navigation_allJourneys:
+                    // No transition required this activity is already being displayed
                     return true;
                 case R.id.navigation_allFriends:
                     Intent allFriends = new Intent(JourneysActivity.this, FriendsActivity.class);
@@ -43,6 +45,7 @@ public class JourneysActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journeys);
 
+        // Gets the bottom navigation bar for the transition between activities
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(myBottomNavigationListener);
         navigation.setSelectedItemId(R.id.navigation_allJourneys);

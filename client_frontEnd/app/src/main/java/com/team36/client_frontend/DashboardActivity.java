@@ -15,9 +15,12 @@ public class DashboardActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        // The below code transitions between activities
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(DashboardActivity.this, navigation, "bottomNavView");
+            // Variable 'options' is as stated in MainActivity
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+                    (DashboardActivity.this, navigation, "bottomNavView");
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     Intent home = new Intent(DashboardActivity.this, MainActivity.class);
@@ -43,6 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        // Gets the bottom navigation bar for the transition between activities
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(myBottomNavigationListener);
         navigation.setSelectedItemId(R.id.navigation_dashboard);

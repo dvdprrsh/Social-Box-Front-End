@@ -4,4 +4,5 @@
         app:fontProviderPackage="com.google.android.gms"
         app:fontProviderQuery="Quicksand"
         app:fontProviderCerts="@array/com_google_android_gms_fonts_certs">
+    <!-- This is used as the font for some of the text in the application -->
 </font-family>

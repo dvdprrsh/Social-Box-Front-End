@@ -5,7 +5,7 @@ public class listview_itemJourneys {
     private String text_journeyDate;
     private double rating_journey;
 
-    // These methods below (lines 10 to 22) are for setting and getting details of each rows/friend
+    // These methods below (lines 10 to 22) are for setting and getting details of each row/journey
     public void setText_journeyDate(String text_journeyDate) {
         this.text_journeyDate = text_journeyDate;
     }
