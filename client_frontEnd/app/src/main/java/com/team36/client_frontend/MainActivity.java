@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     final static double users_rating = 4.2;
 
     private BottomNavigationView navigation;
+    private ActivityOptionsCompat options;
 
     private int[] friend_pps = {R.drawable.baseline_person_outline_black_36};
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
@@ -39,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             /* The 'options' variable below creates the screen transition with the shared element
             being the bottom navigation bar */
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
-                    (MainActivity.this, navigation, "bottomNavView");
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     // Transitions to the home/main activity, if applicable
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
             return false;
-            // TODO: Change transition to a more interesting one
         }
     };
 
@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(myBottomNavigationListener);
+        options = ActivityOptionsCompat.makeSceneTransitionAnimation
+                (MainActivity.this, navigation, "bottomNavView");
         // The navigation listener above 'listens' or detects when the user wants to change activity
         // and calls the 'myBottomNavigationListener' method when the user chooses
 
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     private void myMain(){
         atAGlance_friends(); // Causes friends to be displayed automatically without user input
         setWelcomeTextRating();
+
         // TODO: Fix the welcome message!
     }
 
@@ -163,5 +166,10 @@ public class MainActivity extends AppCompatActivity {
 
         RatingBar ratingBar_user = findViewById(R.id.ratingBar_user);
         ratingBar_user.setRating((float)users_rating);
+    }
+
+    public void go_pressed(View view){
+        Intent driving = new Intent(MainActivity.this, DrivingActivity.class);
+        startActivity(driving);
     }
 }
