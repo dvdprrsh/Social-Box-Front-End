@@ -51,6 +51,7 @@ public class myAdapter extends BaseAdapter {
         ImageView imageView_pp = convertView.findViewById(R.id.imageView_friendPP);
         TextView textView_name = convertView.findViewById(R.id.textView_friendName);
         RatingBar ratingBar_friend = convertView.findViewById(R.id.ratingBar_friendRating);
+        TextView textView_ratingDouble = convertView.findViewById(R.id.textView_ratingDouble);
         listview_item currRow = (listview_item) getItem(position);
 
         // The below code sets each of the components values of each row/friend
@@ -58,5 +59,6 @@ public class myAdapter extends BaseAdapter {
         textView_name.setText(currRow.getText_name());
         float rating = (float) (currRow.getRating_stars()); // Converts the rating to a float so that....
         ratingBar_friend.setRating(rating); // ....it can be passed to set the friends' rating
+        textView_ratingDouble.setText(currRow.getRating_double());
     }
 }

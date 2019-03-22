@@ -29,4 +29,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="text_welcomeDashboard">*NAME*\'s Dashboard</string>
+    <string name="title_activity_driving">Map</string>
+    <string name="text_breakdownDashboard">Rating Breakdown</string>
+    <string name="rating_figure">4.0</string>
 </resources>

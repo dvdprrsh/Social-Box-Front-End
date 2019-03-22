@@ -6,13 +6,22 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView navigation;
+    final String welcome_message = "Hi %s, see your rating below!";
+
+    final static String users_name = "David";
+    final static double users_rating = 4.2;
+
+    private BottomNavigationView navigation;
 
     private int[] friend_pps = {R.drawable.baseline_person_outline_black_36};
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
@@ -110,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 oneRow.setImage_pp(friend_pps[0]);
                 oneRow.setText_name(friend_names[i]);
                 oneRow.setRating_stars((float) friend_ratings[i]);
+                oneRow.setRating_double(friend_ratings[i]);
 
                 allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
             }
@@ -143,5 +153,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void myMain(){
         atAGlance_friends(); // Causes friends to be displayed automatically without user input
+        setWelcomeTextRating();
+        // TODO: Fix the welcome message!
+    }
+
+    private void setWelcomeTextRating(){
+        TextView textView_welcome = findViewById(R.id.textView_welcome);
+        textView_welcome.setText(String.format(welcome_message, users_name));
+
+        RatingBar ratingBar_user = findViewById(R.id.ratingBar_user);
+        ratingBar_user.setRating((float)users_rating);
     }
 }

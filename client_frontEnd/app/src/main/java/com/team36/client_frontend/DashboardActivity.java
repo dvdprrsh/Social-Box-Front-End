@@ -8,9 +8,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class DashboardActivity extends AppCompatActivity {
-    BottomNavigationView navigation;
+    final String welcome_dashboard = "%s's Dash";
+
+    final String users_name = MainActivity.users_name;
+    final double users_rating = MainActivity.users_rating;
+
+    private BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,11 +52,19 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         // Gets the bottom navigation bar for the transition between activities
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(myBottomNavigationListener);
         navigation.setSelectedItemId(R.id.navigation_dashboard);
 
+        myMain();
+    }
+
+    private void myMain(){
+        TextView textView_welcome = findViewById(R.id.textView_welcomeDashboard);
+        textView_welcome.setText(String.format(welcome_dashboard, users_name));
+
+        RatingBar ratingBar_dashboard = findViewById(R.id.ratingBar_dashboardOverall);
+        ratingBar_dashboard.setRating((float)users_rating);
     }
 }

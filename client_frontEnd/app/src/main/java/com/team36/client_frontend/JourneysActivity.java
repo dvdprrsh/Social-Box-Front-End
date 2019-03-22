@@ -25,7 +25,7 @@ public class JourneysActivity extends AppCompatActivity {
                     startActivity(home, options.toBundle());
                     return true;
                 case R.id.navigation_dashboard:
-                    Intent dashboard = new Intent(JourneysActivity.this, MainActivity.class);
+                    Intent dashboard = new Intent(JourneysActivity.this, DashboardActivity.class);
                     startActivity(dashboard, options.toBundle());
                     return true;
                 case R.id.navigation_allJourneys:

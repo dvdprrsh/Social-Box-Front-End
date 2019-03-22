@@ -5,6 +5,7 @@ public class listview_item {
     private int image_friendPP;
     private String text_friendName;
     private double rating_friendRating;
+    private String rating_doubleRating;
 
     // These methods below (lines 10 to 32) are for setting and getting details of each row/friend
     public void setImage_pp(int image_pp) {
@@ -29,5 +30,13 @@ public class listview_item {
 
     public double getRating_stars() {
         return rating_friendRating;
+    }
+
+    public void setRating_double(double rating_double) {
+        this.rating_doubleRating = Double.toString(rating_double);
+    }
+
+    public String getRating_double() {
+        return rating_doubleRating;
     }
 }
