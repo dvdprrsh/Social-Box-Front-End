@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?android:colorControlHighlight"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This XML file is for when the button is pressed, causing a 'ripple' effect -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorPrimary"/>
+            <size android:width="180dp" android:height="180dp"/>
+            <stroke android:width="6dp" android:color="@android:color/background_light"/>
+        </shape>
+    </item>
+</ripple>

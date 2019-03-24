@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home</string>
+    <string name="app_name">Social-Box</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -16,6 +16,8 @@
     <string name="title_activity_journeys">Journeys</string>
     <string name="title_activity_friends">Friends</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_driving">Driving</string>
+    <string name="driving_snackbar">Please press back once more to stop recording.</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -29,8 +31,10 @@
         completions."
     </string>
     <string name="text_welcomeDashboard">*NAME*\'s Dashboard</string>
-    <string name="title_activity_driving">Map</string>
     <string name="text_breakdownDashboard">Rating Breakdown</string>
     <string name="rating_figure">4.0</string>
     <string name="action_sign_in">Sign In or Register</string>
+    <string name="text_recording">Recording</string>
+    <string name="driving_Stop">Stop!</string>
+    <string name="title_activity_drive">Driving</string>
 </resources>

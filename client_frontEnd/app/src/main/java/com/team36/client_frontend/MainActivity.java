@@ -1,10 +1,14 @@
 package com.team36.client_frontend;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -18,6 +22,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_LOCATION = 1111;
+
     final String welcome_message = "Hi %s, see your rating below!";
 
     final static String users_name = "David";
@@ -154,10 +160,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void myMain(){
-        atAGlance_friends(); // Causes friends to be displayed automatically without user input
+        atAGlance_friends(); // Causes friends to be displayed automatically without user interaction
         setWelcomeTextRating();
-
-        // TODO: Fix the welcome message!
     }
 
     private void setWelcomeTextRating(){
@@ -169,6 +173,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void go_pressed(View view){
+        boolean requested = false;
+
+        while (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+           if (!requested){
+               ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_LOCATION);
+               requested = true;
+           }
+        }
+
         Intent driving = new Intent(MainActivity.this, DrivingActivity.class);
         startActivity(driving);
     }
