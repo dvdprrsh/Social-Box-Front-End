@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DashboardFragment extends Fragment {
+public class DashboardCard extends Fragment {
     public final String TITLE = "Your Dashboard";
 
     private View returnView;
@@ -24,7 +24,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        returnView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        returnView = inflater.inflate(R.layout.card_dashboard, container, false);
 
         myMain();
         return returnView;
@@ -41,21 +41,6 @@ public class DashboardFragment extends Fragment {
     }
 
     private void displayStatistics(){
-        ArrayList<listview_itemDashboard> allRows = new ArrayList<>(); // As stated previously
-        ListView myListView = returnView.findViewById(R.id.listView_dashboard);
 
-            for (int i = 0; i < SECTIONS.length; i++) {
-                listview_itemDashboard oneRow = new listview_itemDashboard(); // Creates a new row
-                // Below assigns values to their corresponding components
-                oneRow.setText_section(SECTIONS[i]);
-                oneRow.setRating_stars(RATINGS[i]);
-                oneRow.setText_rating(RATINGS[i]);
-
-                allRows.add(oneRow); // Adds each row to the list of rows
-            }
-
-        // The dashboard_adapter is is for adding all the user's statistics to the listView
-        myAdapter_dashboard dashboard_adapter = new myAdapter_dashboard(getContext(), allRows);
-        myListView.setAdapter(dashboard_adapter);
     }
 }

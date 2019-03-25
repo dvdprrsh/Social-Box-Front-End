@@ -31,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_dashboard:
                     // Transitions to the dashboard fragment, if applicable
-                    DashboardFragment dashboardFragment = new DashboardFragment();
+                    DashboardCard dashboardFragment = new DashboardCard();
                     setTitle(dashboardFragment.TITLE);
                     displayFragment(dashboardFragment);
                     return true;

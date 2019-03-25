@@ -27,7 +27,7 @@
 
     <string name="driving_snackbar">Press once more to stop recording.</string>
 
-    <string name="rating_figure">4.0</string>
+    <string name="rating_figure">3.5</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -41,4 +41,8 @@
         completions."
     </string>
     <string name="action_sign_in">Sign In or Register</string>
+    <string name="time_title">Time of Day</string>
+    <string name="speed_title">Speed</string>
+    <string name="braking_title">Braking</string>
+    <string name="acceleration_title">Acceleration</string>
 </resources>
