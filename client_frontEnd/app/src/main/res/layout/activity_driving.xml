@@ -22,15 +22,27 @@
         app:layout_constraintVertical_bias="0.0"
         tools:context="com.example.currentplacedetailsonmap.MapsActivityCurrentPlace" />
 
+    <com.esri.arcgisruntime.mapping.view.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="106dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"></com.esri.arcgisruntime.mapping.view.MapView>
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_button_with_border"
+        android:elevation="0dp"
         android:fontFamily="sans-serif-thin"
         android:onClick="stop_pressed"
-        android:text="@string/driving_Stop"
+        android:text="@string/button_stop"
         android:textColor="@android:color/background_light"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"

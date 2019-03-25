@@ -5,7 +5,18 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/LinearLayout_go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayout_welcome"
@@ -46,7 +57,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/LinearLayout_go"
@@ -60,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
-            android:text="@string/textView_atAGlance"
+            android:text="@string/text_atAGlance"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -68,12 +78,14 @@
             android:id="@+id/navigation_atAGlance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/navigation_ataglance" />
 
         <ListView
             android:id="@+id/listView_atAGlance"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/border" />
 
     </LinearLayout>
 
@@ -83,9 +95,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -96,24 +109,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_button"
             android:fontFamily="@font/quicksand_light"
-            android:onClick="go_pressed"
             android:text="@string/button_go"
             android:textAllCaps="true"
             android:textColor="@android:color/background_light"
             android:textSize="90sp" />
     </LinearLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:transitionName="bottomNavView"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
 
 </android.support.constraint.ConstraintLayout>
