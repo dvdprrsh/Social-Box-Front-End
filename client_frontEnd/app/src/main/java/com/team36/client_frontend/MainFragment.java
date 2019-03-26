@@ -14,14 +14,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainFragment extends Fragment {
     public final String TITLE = "Your Home";
+    private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
 
     private static final int REQUEST_LOCATION = 1111;
     private View returnView;
@@ -97,7 +100,7 @@ public class MainFragment extends Fragment {
             for (int i = 0; i < friend_names.length; i++) {
                 listview_item oneRow = new listview_item(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
-                oneRow.setImage_pp(friend_pps[0]);
+                setImage(friend_ratings[i], oneRow);
                 oneRow.setText_name(friend_names[i]);
                 oneRow.setRating_stars((float) friend_ratings[i]);
                 oneRow.setRating_double(friend_ratings[i]);
@@ -109,6 +112,40 @@ public class MainFragment extends Fragment {
         // The friends_adapter is for adding all the users' friends to the listView
         myAdapter friends_adapter = new myAdapter(getContext(), allRows);
         myListView.setAdapter(friends_adapter);
+    }
+
+    // Sets the image for each card view dependant on the rating of each section rating
+    private void setImage(Double sectionRating, listview_item oneRow){
+        switch (Double.toString(sectionRating)){
+            case "1.0":
+            case "1.5":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
+                break;
+
+            case "2.0":
+            case "2.5":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_dissatisfied_black_48dp);
+                break;
+
+            case "3.0":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_neutral_black_48dp);
+                break;
+
+            case "3.5":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_neutral_black_48dp);
+                break;
+
+            case "4.0":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_satisfied_black_48dp);
+                break;
+
+            case "4.5":
+                oneRow.setImage_pp(R.drawable.ic_sentiment_very_satisfied_black_48dp);
+                break;
+
+            case "5.0":
+                oneRow.setImage_pp(R.drawable.ic_whatshot_black_48dp);
+        }
     }
 
     // This method changes the 'At a Glance' section to display basic information about the user's journeys
@@ -145,6 +182,7 @@ public class MainFragment extends Fragment {
         ratingBar_user.setRating((float)users_rating);
     }
 
+    // Opens the driving activity after checking whether permission for accessing fine and coarse location
     public void onClick(View view){
         boolean requested = false;
 

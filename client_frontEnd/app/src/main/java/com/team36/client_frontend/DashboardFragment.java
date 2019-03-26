@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DashboardFragment extends Fragment {
+    // These constants are used to store the values of each of the RatingBars and ImageViews of each rating section
     private final int[] RATING_BARS = {R.id.ratingBar_acceleration, R.id.ratingBar_braking, R.id.ratingBar_speed, R.id.ratingBar_time};
     private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
 
@@ -30,6 +31,7 @@ public class DashboardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.card_dashboard, container, false);
 
+        // Sets the key values used throughout this fragment
         LoggedIn_User loggedIn_user = new LoggedIn_User();
         USERS_NAME = loggedIn_user.user_firstName;
         USERS_RATING = loggedIn_user.user_overall;
@@ -44,11 +46,12 @@ public class DashboardFragment extends Fragment {
         textView_welcome.setText(String.format(WELCOME_MESSAGE, USERS_NAME));
 
         RatingBar ratingBar_dashboard = returnView.findViewById(R.id.ratingBar_dashboardOverall);
-        ratingBar_dashboard.setRating((float)USERS_RATING);
+        ratingBar_dashboard.setRating((float)USERS_RATING); // Sets the overall rating
 
         displayStatistics();
     }
 
+    // Displays the statistics for each card view
     private void displayStatistics(){
         for (int i=0; i<RATING_BARS.length; i++){
             RatingBar ratingBar = returnView.findViewById(RATING_BARS[i]);
@@ -59,6 +62,7 @@ public class DashboardFragment extends Fragment {
         }
     }
 
+    // Sets the image for each card view dependant on the rating of each section rating
     private void setImage(Double sectionRating, ImageView imageView){
         switch (Double.toString(sectionRating)){
             case "1.0":

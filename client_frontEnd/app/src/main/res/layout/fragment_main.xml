@@ -85,7 +85,14 @@
             android:id="@+id/listView_atAGlance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border" />
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
     </LinearLayout>
 
