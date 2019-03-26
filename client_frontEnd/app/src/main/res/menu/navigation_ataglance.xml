@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/navigation_friends"
-        android:icon="@drawable/baseline_person_outline_black_48"
+        android:icon="@drawable/ic_person_outline_black_48dp"
         android:title="@string/atAGlance_friends" />
 
     <item
         android:id="@+id/navigation_journeys"
-        android:icon="@drawable/baseline_directions_car_black_36"
+        android:icon="@drawable/ic_directions_car_black_48dp"
         android:title="@string/atAGlance_journeys" />
 
 </menu>

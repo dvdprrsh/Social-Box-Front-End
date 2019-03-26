@@ -28,10 +28,10 @@ public class MainFragment extends Fragment {
 
     final private String welcome_message = "Hi %s, see your rating below!";
 
-    final static String users_name = "David";
-    final static double users_rating = 4.2;
+    private String users_name;
+    private double users_rating;
 
-    private int[] friend_pps = {R.drawable.baseline_person_outline_black_36};
+    private int[] friend_pps = {R.drawable.ic_person_outline_black_48dp};
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[] friend_ratings = {4.0, 5.0, 4.0, 4.0, 5.0, 4.5};
 
@@ -64,6 +64,10 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        LoggedIn_User loggedIn_user = new LoggedIn_User();
+        users_name = loggedIn_user.user_firstName;
+        users_rating = loggedIn_user.user_overall;
+
         BottomNavigationView navigation_atAGlance = returnView.findViewById(R.id.navigation_atAGlance);
         navigation_atAGlance.setOnNavigationItemSelectedListener(myAtAGlanceNavigationListener);
         // This navigation listener is for changing what is displayed in the 'At a Glance' section
@@ -78,6 +82,12 @@ public class MainFragment extends Fragment {
     }
 
     // This method changes the 'At a Glance' section to display basic information about the user's friends
+
+    /*
+    *  TODO: Possibly change profile picture to emoji rating?
+    *  TODO: Change row item to individual cards?
+    */
+
     private void atAGlance_friends(){
         ArrayList<listview_item> allRows = new ArrayList<>(); // To store all the rows to be displayed
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);

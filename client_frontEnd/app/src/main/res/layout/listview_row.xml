@@ -7,13 +7,12 @@
     android:gravity="left"
     android:orientation="horizontal">
     <!-- This XML file is for a single row of the listView, it sets the layout of the listView -->
-
     <ImageView
         android:id="@+id/imageView_friendPP"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_weight="1"
-        tools:srcCompat="@drawable/baseline_person_outline_black_48" />
+        tools:srcCompat="@drawable/ic_person_outline_black_48dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

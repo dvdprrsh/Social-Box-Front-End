@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
-                android:rating="3.5"
+                android:rating="4.0"
                 android:stepSize="0.5"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="174dp" />
@@ -82,7 +82,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -110,14 +110,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
-                android:rating="3"
+                android:rating="4"
                 android:stepSize="0.5" />
 
             <ImageView
                 android:id="@+id/imageView_acceleration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_sentiment_neutral_black_48dp"
+                app:srcCompat="@drawable/ic_sentiment_satisfied_black_48dp"
                 tools:src="@tools:sample/avatars" />
 
         </LinearLayout>
@@ -131,7 +131,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -141,7 +141,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_breakdown">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -180,7 +180,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -257,14 +257,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
-                android:rating="2"
+                android:rating="3"
                 android:stepSize="0.5" />
 
             <ImageView
                 android:id="@+id/imageView_time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_sentiment_dissatisfied_black_48dp"
+                app:srcCompat="@drawable/ic_sentiment_neutral_black_48dp"
                 tools:src="@tools:sample/avatars" />
 
         </LinearLayout>
