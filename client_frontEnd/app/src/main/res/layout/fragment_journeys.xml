@@ -78,11 +78,10 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView_acceleration"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -102,11 +101,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/acceleration_title"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/ratingBar_acceleration"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@android:style/Widget.Material.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
@@ -127,11 +126,10 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView_braking"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -151,11 +149,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/braking_title"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/ratingBar_braking"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@android:style/Widget.Material.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
@@ -176,9 +174,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView_speed"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
@@ -200,11 +197,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/speed_title"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/ratingBar_speed"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@android:style/Widget.Material.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
@@ -225,15 +222,12 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView_time"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/mapView_journeyRoute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView_speed"
         app:layout_constraintTop_toBottomOf="@+id/cardView_braking">
@@ -249,11 +243,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_title"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/ratingBar_time"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@android:style/Widget.Material.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="@integer/no_stars"
@@ -300,12 +294,14 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView_journeyRoute"
         android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_journeyStatistics"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView_time" />
 
 </android.support.constraint.ConstraintLayout>
