@@ -6,12 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DashboardFragment extends Fragment {
     // These constants are used to store the values of each of the RatingBars and ImageViews of each rating section
@@ -29,7 +25,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        returnView = inflater.inflate(R.layout.card_dashboard, container, false);
+        returnView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         // Sets the key values used throughout this fragment
         LoggedIn_User loggedIn_user = new LoggedIn_User();

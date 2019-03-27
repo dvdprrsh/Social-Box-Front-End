@@ -45,4 +45,7 @@
     <string name="speed_title">Speed</string>
     <string name="braking_title">Braking</string>
     <string name="acceleration_title">Acceleration</string>
+    <string name="journeys_statistics">Statistics</string>
+    <string name="journeys_statisticsContent">Here are some statistics. Here are some statistics. Here are some statistics. Here are some statistics.</string>
+    <string name="text_welcomeJourney">*DAY*\'s Journey</string>
 </resources>

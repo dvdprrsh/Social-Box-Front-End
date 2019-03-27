@@ -2,41 +2,41 @@ package com.team36.client_frontend;
 
 public class listview_item {
     // Variables to store values of each component of each row/friend
-    private int image_friendPP;
-    private String text_friendName;
-    private double rating_friendRating;
-    private String rating_doubleRating;
+    private int image_ratingImage;
+    private String text_nameDay;
+    private double rating_ratingStars;
+    private String text_ratingDouble;
 
     // These methods below (lines 10 to 32) are for setting and getting details of each row/friend
-    public void setImage_pp(int image_pp) {
-        this.image_friendPP = image_pp;
+    public void setImage_ratingImage(int image_pp) {
+        this.image_ratingImage = image_pp;
     }
 
-    public int getImage_pp() {
-        return image_friendPP;
+    public int getImage_ratingImage() {
+        return image_ratingImage;
     }
 
-    public void setText_name(String text_name) {
-        this.text_friendName = text_name;
+    public void setText_nameDay(String text_name) {
+        this.text_nameDay = text_name;
     }
 
-    public String getText_name() {
-        return text_friendName;
+    public String getText_nameDay() {
+        return text_nameDay;
     }
 
-    public void setRating_stars(double rating_stars) {
-        this.rating_friendRating = rating_stars;
+    public void setRating_ratingStars(double rating_stars) {
+        this.rating_ratingStars = rating_stars;
     }
 
-    public double getRating_stars() {
-        return rating_friendRating;
+    public float getRating_ratingStars() {
+        return (float) rating_ratingStars;
     }
 
-    public void setRating_double(double rating_double) {
-        this.rating_doubleRating = Double.toString(rating_double);
+    public void setRating_ratingString(double rating_double) {
+        this.text_ratingDouble = Double.toString(rating_double);
     }
 
-    public String getRating_double() {
-        return rating_doubleRating;
+    public String getRating_ratingString() {
+        return text_ratingDouble;
     }
 }

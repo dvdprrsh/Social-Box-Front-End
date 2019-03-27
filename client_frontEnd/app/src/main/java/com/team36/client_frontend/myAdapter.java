@@ -1,6 +1,7 @@
 package com.team36.client_frontend;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,27 +39,35 @@ public class myAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Lines 41 to 44 get a reference to the listview_row.xml, effectively creating a new row
+        FriendViews friendViews;
         if (convertView == null){
             convertView = myInflater.inflate(R.layout.listview_row, parent, false);
-            setRow(position, convertView); // Calls setRow to set up the row with it's specific values
+            // Gets all the components of each row/friend so their values can be set
+            friendViews = new FriendViews();
+            friendViews.imageView_pp = convertView.findViewById(R.id.imageView_ratingImage);
+            friendViews.textView_name = convertView.findViewById(R.id.textView_nameDay);
+            friendViews.ratingBar_friend = convertView.findViewById(R.id.ratingBar_ratingStars);
+            friendViews.textView_ratingDouble = convertView.findViewById(R.id.textView_ratingDouble);
+            convertView.setTag(friendViews);
+        }else {
+            friendViews = (FriendViews) convertView.getTag();
         }
+
+        listview_item currRow = (listview_item) getItem(position);
+
+        // The below code sets each of the components values of each row/friend
+        friendViews.imageView_pp.setImageResource(currRow.getImage_ratingImage());
+        friendViews.textView_name.setText(currRow.getText_nameDay());
+        friendViews.ratingBar_friend.setRating(currRow.getRating_ratingStars());
+        friendViews.textView_ratingDouble.setText(currRow.getRating_ratingString());
 
         return convertView; // Returns the row to be displayed/added to the listView
     }
 
-    private void setRow(int position, View convertView){
-        // Gets all the components of each row/friend so their values can be set
-        ImageView imageView_pp = convertView.findViewById(R.id.imageView_friendPP);
-        TextView textView_name = convertView.findViewById(R.id.textView_friendName);
-        RatingBar ratingBar_friend = convertView.findViewById(R.id.ratingBar_friendRating);
-        TextView textView_ratingDouble = convertView.findViewById(R.id.textView_ratingDouble);
-        listview_item currRow = (listview_item) getItem(position);
-
-        // The below code sets each of the components values of each row/friend
-        imageView_pp.setImageResource(currRow.getImage_pp());
-        textView_name.setText(currRow.getText_name());
-        float rating = (float) (currRow.getRating_stars()); // Converts the rating to a float so that....
-        ratingBar_friend.setRating(rating); // ....it can be passed to set the friends' rating
-        textView_ratingDouble.setText(currRow.getRating_double());
+    class FriendViews{
+        ImageView imageView_pp;
+        TextView textView_name;
+        RatingBar ratingBar_friend;
+        TextView textView_ratingDouble;
     }
 }

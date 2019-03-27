@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -62,6 +63,13 @@ public class MainFragment extends Fragment {
         }
     };
 
+    private ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,16 +102,17 @@ public class MainFragment extends Fragment {
     private void atAGlance_friends(){
         ArrayList<listview_item> allRows = new ArrayList<>(); // To store all the rows to be displayed
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
+        myListView.setOnItemClickListener(myItemClickListener);
 
         // This for-loop assigns values to the components of each row
-        if ((friend_names.length != 0) && (friend_names != null)) {
+        if (friend_names.length != 0) {
             for (int i = 0; i < friend_names.length; i++) {
                 listview_item oneRow = new listview_item(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
                 setImage(friend_ratings[i], oneRow);
-                oneRow.setText_name(friend_names[i]);
-                oneRow.setRating_stars((float) friend_ratings[i]);
-                oneRow.setRating_double(friend_ratings[i]);
+                oneRow.setText_nameDay(friend_names[i]);
+                oneRow.setRating_ratingStars((float) friend_ratings[i]);
+                oneRow.setRating_ratingString(friend_ratings[i]);
 
                 allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
             }
@@ -114,51 +123,20 @@ public class MainFragment extends Fragment {
         myListView.setAdapter(friends_adapter);
     }
 
-    // Sets the image for each card view dependant on the rating of each section rating
-    private void setImage(Double sectionRating, listview_item oneRow){
-        switch (Double.toString(sectionRating)){
-            case "1.0":
-            case "1.5":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
-                break;
-
-            case "2.0":
-            case "2.5":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_dissatisfied_black_48dp);
-                break;
-
-            case "3.0":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "3.5":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "4.0":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_satisfied_black_48dp);
-                break;
-
-            case "4.5":
-                oneRow.setImage_pp(R.drawable.ic_sentiment_very_satisfied_black_48dp);
-                break;
-
-            case "5.0":
-                oneRow.setImage_pp(R.drawable.ic_whatshot_black_48dp);
-        }
-    }
-
     // This method changes the 'At a Glance' section to display basic information about the user's journeys
     private void atAGlance_journeys(){
-        ArrayList<listview_itemJourneys> allRows = new ArrayList<>(); // As stated previously
+        ArrayList<listview_item> allRows = new ArrayList<>(); // As stated previously
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
+        myListView.setOnItemClickListener(myItemClickListener);
 
-        if ((journey_dates.length != 0) && (journey_dates != null)) {
+        if (journey_dates.length != 0) {
             for (int i = 0; i < journey_dates.length; i++) {
-                listview_itemJourneys oneRow = new listview_itemJourneys(); // Creates a new row
+                listview_item oneRow = new listview_item(); // Creates a new row
                 // Below assigns values to their corresponding components
-                oneRow.setText_journeyDate(journey_dates[i]);
-                oneRow.setRating_stars((float) journeyRatings[i]);
+                setImage(journeyRatings[i], oneRow);
+                oneRow.setText_nameDay(journey_dates[i]);
+                oneRow.setRating_ratingStars(journeyRatings[i]);
+                oneRow.setRating_ratingString(journeyRatings[i]);
 
                 allRows.add(oneRow); // Adds each row to the list of rows
             }
@@ -167,6 +145,40 @@ public class MainFragment extends Fragment {
         // The journeys_adapter is is for adding all the user's journeys to the listView
         myAdapter_journeys journeys_adapter = new myAdapter_journeys(getContext(), allRows);
         myListView.setAdapter(journeys_adapter);
+    }
+
+    // Sets the image for each card view dependant on the rating of each section rating
+    private void setImage(Double sectionRating, listview_item oneRow){
+        switch (Double.toString(sectionRating)){
+            case "1.0":
+            case "1.5":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
+                break;
+
+            case "2.0":
+            case "2.5":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_dissatisfied_black_48dp);
+                break;
+
+            case "3.0":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_neutral_black_48dp);
+                break;
+
+            case "3.5":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_neutral_black_48dp);
+                break;
+
+            case "4.0":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_satisfied_black_48dp);
+                break;
+
+            case "4.5":
+                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_very_satisfied_black_48dp);
+                break;
+
+            case "5.0":
+                oneRow.setImage_ratingImage(R.drawable.ic_whatshot_black_48dp);
+        }
     }
 
     private void myMain(){

@@ -5,16 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class myAdapter_journeys extends BaseAdapter {
-    private ArrayList<listview_itemJourneys> myRows; // Stores all the rows/journeys of the listView
+    private ArrayList<listview_item> myRows; // Stores all the rows/journeys of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public myAdapter_journeys(Context context, ArrayList<listview_itemJourneys> myRows){
+    public myAdapter_journeys(Context context, ArrayList<listview_item> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -37,23 +38,35 @@ public class myAdapter_journeys extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Lines 41 to 44 get's a reference to the listview_rowjourneys.xml, effectively creating a new row
+        JourneyViews journeyViews;
         if (convertView == null){
-            convertView = myInflater.inflate(R.layout.listview_rowjourneys, parent, false);
-            setRow(position, convertView); // Calls setRow to set up the row with it's specific values
+            convertView = myInflater.inflate(R.layout.listview_row, parent, false);
+            // Gets all the components of each row/journey so their values can be set
+            journeyViews = new JourneyViews();
+            journeyViews.imageView_ratingImage = convertView.findViewById(R.id.imageView_ratingImage);
+            journeyViews.textView_journeyDate = convertView.findViewById(R.id.textView_nameDay);
+            journeyViews.ratingBar_journey = convertView.findViewById(R.id.ratingBar_ratingStars);
+            journeyViews.textView_ratingDouble = convertView.findViewById(R.id.textView_ratingDouble);
+
+            convertView.setTag(journeyViews);
+
+        }else{
+            journeyViews = (JourneyViews) convertView.getTag();
         }
+        // Below sets each of the components' values of each row/journey
+        listview_item currRow = (listview_item) getItem(position);
+        journeyViews.imageView_ratingImage.setImageResource(currRow.getImage_ratingImage());
+        journeyViews.textView_journeyDate.setText(currRow.getText_nameDay());
+        journeyViews.ratingBar_journey.setRating(currRow.getRating_ratingStars());
+        journeyViews.textView_ratingDouble.setText(currRow.getRating_ratingString());
 
         return convertView; // Returns the row to be displayed/added to the listView
     }
 
-    private void setRow(int position, View convertView){
-        // Gets all the components of each row/journey so their values can be set
-        TextView textView_journeyDate = convertView.findViewById(R.id.textView_journeyDate);
-        RatingBar ratingBar_journey = convertView.findViewById(R.id.ratingBar_journey);
-        listview_itemJourneys currRow = (listview_itemJourneys) getItem(position);
-
-        // The below code sets each of the components values of each row/journey
-        textView_journeyDate.setText(currRow.getText_journeyDate());
-        float rating = (float) (currRow.getRating_stars()); // Converts the rating to a float so that....
-        ratingBar_journey.setRating(rating); // ....it can be passed to set the rating for the specified journey
+    class JourneyViews{
+        ImageView imageView_ratingImage;
+        TextView textView_journeyDate;
+        RatingBar ratingBar_journey;
+        TextView textView_ratingDouble;
     }
 }
