@@ -1,10 +1,16 @@
 package com.team36.client_frontend;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.ListMenuPresenter;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +23,7 @@ public class JourneysFragment extends Fragment {
     public final String TITLE = "Your Journeys";
     private View returnView;
     private final int RATING_ACCELERATION = 0, RATING_BRAKING = 1, RATING_SPEED = 2, RATING_TIME = 3;
+    private final JourneysFragment myJourneysFragment = this;
 
     private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
@@ -28,7 +35,14 @@ public class JourneysFragment extends Fragment {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_journeys, container, false);
         loadList();
+
         return returnView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 
     private ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
@@ -36,6 +50,17 @@ public class JourneysFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            JourneyFragment journeyFragment = new JourneyFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction
+                    .replace(R.id.fragment_layout, journeyFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            if (fragmentManager.getBackStackEntryCount() < 1){
+                fragmentTransaction.addToBackStack(null);
+            }
+            fragmentTransaction.commit();
         }
     };
 

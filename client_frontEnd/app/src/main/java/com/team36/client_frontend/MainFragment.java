@@ -107,7 +107,7 @@ public class MainFragment extends Fragment {
             for (int i = 0; i < friend_names.length; i++) {
                 listView_item oneRow = new listView_item(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
-                setImage(friend_ratings[i], oneRow);
+                oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
                 oneRow.setText_nameDay(friend_names[i]);
                 oneRow.setRating_ratingStars((float) friend_ratings[i]);
                 oneRow.setRating_ratingString(friend_ratings[i]);
@@ -131,7 +131,7 @@ public class MainFragment extends Fragment {
             for (int i = 0; i < journey_dates.length; i++) {
                 listView_item oneRow = new listView_item(); // Creates a new row
                 // Below assigns values to their corresponding components
-                setImage(journeyRatings[i], oneRow);
+                oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
                 oneRow.setText_nameDay(journey_dates[i]);
                 oneRow.setRating_ratingStars(journeyRatings[i]);
                 oneRow.setRating_ratingString(journeyRatings[i]);
@@ -143,41 +143,6 @@ public class MainFragment extends Fragment {
         // The journeys_adapter is is for adding all the user's journeys to the listView
         myAdapter_journeys journeys_adapter = new myAdapter_journeys(getContext(), allRows);
         myListView.setAdapter(journeys_adapter);
-    }
-
-    // TODO: Change to using the image calculator class!
-    // Sets the image for each card view dependant on the rating of each section rating
-    private void setImage(Double sectionRating, listView_item oneRow){
-        switch (Double.toString(sectionRating)){
-            case "1.0":
-            case "1.5":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
-                break;
-
-            case "2.0":
-            case "2.5":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_dissatisfied_black_48dp);
-                break;
-
-            case "3.0":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "3.5":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "4.0":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_satisfied_black_48dp);
-                break;
-
-            case "4.5":
-                oneRow.setImage_ratingImage(R.drawable.ic_sentiment_very_satisfied_black_48dp);
-                break;
-
-            case "5.0":
-                oneRow.setImage_ratingImage(R.drawable.ic_whatshot_black_48dp);
-        }
     }
 
     private void setWelcomeTextRating(){
@@ -202,4 +167,6 @@ public class MainFragment extends Fragment {
         Intent driving = new Intent(getActivity(), DrivingEsri.class);
         startActivity(driving);
     }
+
+
 }

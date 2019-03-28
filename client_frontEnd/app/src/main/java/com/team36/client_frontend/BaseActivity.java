@@ -7,11 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
-    private Fragment prevFragment;
+    public static Fragment prevFragment;
 
     // The below transitions between activities depending on which button in the navigation bar is pressed
     // This method appears in all other activities with the bottom navigation bar and acts in the same way
@@ -55,10 +58,19 @@ public class BaseActivity extends AppCompatActivity {
     private void displayFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction;
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_layout) != null) {
-            getSupportFragmentManager().beginTransaction().remove(prevFragment).commit();
+            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+
+            for (Fragment f:fragmentList) {
+                getSupportFragmentManager().beginTransaction().remove(f).commit();
+            }
+        }
+
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++){
+            fragmentManager.popBackStackImmediate();
         }
 
         fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fragmentTransaction.replace(R.id.fragment_layout, fragment);
         fragmentTransaction.commit();
         prevFragment = fragment;
