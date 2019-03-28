@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+// TODO: Comment code!
 public class myAdapter_journeysList extends BaseAdapter {
     private ArrayList<listView_itemJourneys> myRows;
     private LayoutInflater myInflater;

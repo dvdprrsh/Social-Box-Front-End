@@ -145,6 +145,7 @@ public class MainFragment extends Fragment {
         myListView.setAdapter(journeys_adapter);
     }
 
+    // TODO: Change to using the image calculator class!
     // Sets the image for each card view dependant on the rating of each section rating
     private void setImage(Double sectionRating, listView_item oneRow){
         switch (Double.toString(sectionRating)){
