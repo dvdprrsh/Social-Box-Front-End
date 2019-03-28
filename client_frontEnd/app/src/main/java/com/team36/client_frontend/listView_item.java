@@ -1,6 +1,6 @@
 package com.team36.client_frontend;
 
-public class listview_item {
+public class listView_item {
     // Variables to store values of each component of each row/friend
     private int image_ratingImage;
     private String text_nameDay;

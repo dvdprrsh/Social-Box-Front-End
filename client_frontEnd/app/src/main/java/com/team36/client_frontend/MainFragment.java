@@ -15,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainFragment extends Fragment {
     public final String TITLE = "Your Home";
@@ -71,7 +69,7 @@ public class MainFragment extends Fragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -92,22 +90,22 @@ public class MainFragment extends Fragment {
         return returnView;
     }
 
+
+    private void myMain(){
+        atAGlance_friends(); // Causes friends to be displayed automatically without user interaction
+        setWelcomeTextRating();
+    }
+
     // This method changes the 'At a Glance' section to display basic information about the user's friends
-
-    /*
-    *  TODO: Possibly change profile picture to emoji rating?
-    *  TODO: Change row item to individual cards?
-    */
-
     private void atAGlance_friends(){
-        ArrayList<listview_item> allRows = new ArrayList<>(); // To store all the rows to be displayed
+        ArrayList<listView_item> allRows = new ArrayList<>(); // To store all the rows to be displayed
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
         myListView.setOnItemClickListener(myItemClickListener);
 
         // This for-loop assigns values to the components of each row
-        if (friend_names.length != 0) {
+        if (friend_names != null) {
             for (int i = 0; i < friend_names.length; i++) {
-                listview_item oneRow = new listview_item(); // Creates a new row
+                listView_item oneRow = new listView_item(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
                 setImage(friend_ratings[i], oneRow);
                 oneRow.setText_nameDay(friend_names[i]);
@@ -125,13 +123,13 @@ public class MainFragment extends Fragment {
 
     // This method changes the 'At a Glance' section to display basic information about the user's journeys
     private void atAGlance_journeys(){
-        ArrayList<listview_item> allRows = new ArrayList<>(); // As stated previously
+        ArrayList<listView_item> allRows = new ArrayList<>(); // As stated previously
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
         myListView.setOnItemClickListener(myItemClickListener);
 
-        if (journey_dates.length != 0) {
+        if (journey_dates != null) {
             for (int i = 0; i < journey_dates.length; i++) {
-                listview_item oneRow = new listview_item(); // Creates a new row
+                listView_item oneRow = new listView_item(); // Creates a new row
                 // Below assigns values to their corresponding components
                 setImage(journeyRatings[i], oneRow);
                 oneRow.setText_nameDay(journey_dates[i]);
@@ -148,7 +146,7 @@ public class MainFragment extends Fragment {
     }
 
     // Sets the image for each card view dependant on the rating of each section rating
-    private void setImage(Double sectionRating, listview_item oneRow){
+    private void setImage(Double sectionRating, listView_item oneRow){
         switch (Double.toString(sectionRating)){
             case "1.0":
             case "1.5":
@@ -179,11 +177,6 @@ public class MainFragment extends Fragment {
             case "5.0":
                 oneRow.setImage_ratingImage(R.drawable.ic_whatshot_black_48dp);
         }
-    }
-
-    private void myMain(){
-        atAGlance_friends(); // Causes friends to be displayed automatically without user interaction
-        setWelcomeTextRating();
     }
 
     private void setWelcomeTextRating(){

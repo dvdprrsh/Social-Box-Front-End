@@ -12,10 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class myAdapter_journeys extends BaseAdapter {
-    private ArrayList<listview_item> myRows; // Stores all the rows/journeys of the listView
+    private ArrayList<listView_item> myRows; // Stores all the rows/journeys of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public myAdapter_journeys(Context context, ArrayList<listview_item> myRows){
+    public myAdapter_journeys(Context context, ArrayList<listView_item> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -37,7 +37,7 @@ public class myAdapter_journeys extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Lines 41 to 44 get's a reference to the listview_rowjourneys.xml, effectively creating a new row
+        // Lines 41 to 54 get's a reference to the listview_rowjourneys.xml, effectively creating a new row
         JourneyViews journeyViews;
         if (convertView == null){
             convertView = myInflater.inflate(R.layout.listview_row, parent, false);
@@ -47,14 +47,13 @@ public class myAdapter_journeys extends BaseAdapter {
             journeyViews.textView_journeyDate = convertView.findViewById(R.id.textView_nameDay);
             journeyViews.ratingBar_journey = convertView.findViewById(R.id.ratingBar_ratingStars);
             journeyViews.textView_ratingDouble = convertView.findViewById(R.id.textView_ratingDouble);
-
             convertView.setTag(journeyViews);
-
         }else{
             journeyViews = (JourneyViews) convertView.getTag();
         }
+
         // Below sets each of the components' values of each row/journey
-        listview_item currRow = (listview_item) getItem(position);
+        listView_item currRow = (listView_item) getItem(position);
         journeyViews.imageView_ratingImage.setImageResource(currRow.getImage_ratingImage());
         journeyViews.textView_journeyDate.setText(currRow.getText_nameDay());
         journeyViews.ratingBar_journey.setRating(currRow.getRating_ratingStars());

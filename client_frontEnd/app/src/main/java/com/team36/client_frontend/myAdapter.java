@@ -1,7 +1,6 @@
 package com.team36.client_frontend;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class myAdapter extends BaseAdapter {
-    private ArrayList<listview_item> myRows; // Stores all the rows/friends of the listView
+    private ArrayList<listView_item> myRows; // Stores all the rows/friends of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public myAdapter(Context context, ArrayList<listview_item> myRows){
+    public myAdapter(Context context, ArrayList<listView_item> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -53,7 +52,7 @@ public class myAdapter extends BaseAdapter {
             friendViews = (FriendViews) convertView.getTag();
         }
 
-        listview_item currRow = (listview_item) getItem(position);
+        listView_item currRow = (listView_item) getItem(position);
 
         // The below code sets each of the components values of each row/friend
         friendViews.imageView_pp.setImageResource(currRow.getImage_ratingImage());
