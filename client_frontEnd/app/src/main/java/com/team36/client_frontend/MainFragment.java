@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -61,10 +64,51 @@ public class MainFragment extends Fragment {
         }
     };
 
-    private ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
+    private ListView.OnItemClickListener myClickListenerFriend = new ListView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        }
+    };
+
+    // TODO: Fix this method!
+    private ListView.OnItemClickListener myClickListenerJourney = new ListView.OnItemClickListener(){
+        // This method is called when one of the journeys has been clicked/tapped
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            JourneyFragment journeyFragment = new JourneyFragment();
+            Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
+
+            // Finds all the views which data needs to be passed across to 'journeyFragment'
+            TextView dayDate = view.findViewById(R.id.textView_dayDate);
+            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
+            ImageView ratingAcceleration = view.findViewById(R.id.imageView_acceleration);
+            ImageView ratingBraking = view.findViewById(R.id.imageView_braking);
+            ImageView ratingSpeed = view.findViewById(R.id.imageView_speed);
+            ImageView ratingTime = view.findViewById(R.id.imageView_time);
+
+            // Adds values to the 'arguments' bundle so that the data stored in it can be used
+            arguments.putString("dayDate", dayDate.getText().toString());
+            arguments.putFloat("ratingOverall", ratingOverall.getRating());
+            arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
+            arguments.putString("ratingBraking", ratingBraking.getTag().toString());
+            arguments.putString("ratingSpeed", ratingSpeed.getTag().toString());
+            arguments.putString("ratingTime", ratingTime.getTag().toString());
+
+            journeyFragment.setArguments(arguments); // Sets the arguments for the fragment
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // Assigns values to the fragment Transaction
+            fragmentTransaction
+                    .replace(R.id.fragment_layout, journeyFragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            if (fragmentManager.getBackStackEntryCount() < 1){
+                fragmentTransaction.addToBackStack(null); // To prevent multiple 'back' button presses
+            }
+            fragmentTransaction.commit();
         }
     };
 
@@ -98,14 +142,14 @@ public class MainFragment extends Fragment {
 
     // This method changes the 'At a Glance' section to display basic information about the user's friends
     private void atAGlance_friends(){
-        ArrayList<listView_item> allRows = new ArrayList<>(); // To store all the rows to be displayed
+        ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // To store all the rows to be displayed
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
-        myListView.setOnItemClickListener(myItemClickListener);
+        myListView.setOnItemClickListener(myClickListenerFriend);
 
         // This for-loop assigns values to the components of each row
         if (friend_names != null) {
             for (int i = 0; i < friend_names.length; i++) {
-                listView_item oneRow = new listView_item(); // Creates a new row
+                ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
                 oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
                 oneRow.setText_nameDay(friend_names[i]);
@@ -117,19 +161,19 @@ public class MainFragment extends Fragment {
         }
 
         // The friends_adapter is for adding all the users' friends to the listView
-        myAdapter friends_adapter = new myAdapter(getContext(), allRows);
+        My_Adapter_FriendMain friends_adapter = new My_Adapter_FriendMain(getContext(), allRows);
         myListView.setAdapter(friends_adapter);
     }
 
     // This method changes the 'At a Glance' section to display basic information about the user's journeys
     private void atAGlance_journeys(){
-        ArrayList<listView_item> allRows = new ArrayList<>(); // As stated previously
+        ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // As stated previously
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
-        myListView.setOnItemClickListener(myItemClickListener);
+        myListView.setOnItemClickListener(myClickListenerJourney);
 
         if (journey_dates != null) {
             for (int i = 0; i < journey_dates.length; i++) {
-                listView_item oneRow = new listView_item(); // Creates a new row
+                ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // Below assigns values to their corresponding components
                 oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
                 oneRow.setText_nameDay(journey_dates[i]);
@@ -141,7 +185,7 @@ public class MainFragment extends Fragment {
         }
 
         // The journeys_adapter is is for adding all the user's journeys to the listView
-        myAdapter_journeys journeys_adapter = new myAdapter_journeys(getContext(), allRows);
+        My_Adapter_JourneysMain journeys_adapter = new My_Adapter_JourneysMain(getContext(), allRows);
         myListView.setAdapter(journeys_adapter);
     }
 

@@ -1,6 +1,6 @@
 package com.team36.client_frontend;
 
-public class listView_itemJourneys {
+public class ListView_ItemJourneys {
     private int image_ratingImage;
     private String text_nameDay;
     private double rating_ratingStars;

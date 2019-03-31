@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class myAdapter_journeys extends BaseAdapter {
-    private ArrayList<listView_item> myRows; // Stores all the rows/journeys of the listView
+public class My_Adapter_JourneysMain extends BaseAdapter {
+    private ArrayList<ListView_ItemNormal> myRows; // Stores all the rows/journeys of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public myAdapter_journeys(Context context, ArrayList<listView_item> myRows){
+    public My_Adapter_JourneysMain(Context context, ArrayList<ListView_ItemNormal> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -53,7 +53,7 @@ public class myAdapter_journeys extends BaseAdapter {
         }
 
         // Below sets each of the components' values of each row/journey
-        listView_item currRow = (listView_item) getItem(position);
+        ListView_ItemNormal currRow = (ListView_ItemNormal) getItem(position);
         journeyViews.imageView_ratingImage.setImageResource(currRow.getImage_ratingImage());
         journeyViews.textView_journeyDate.setText(currRow.getText_nameDay());
         journeyViews.ratingBar_journey.setRating(currRow.getRating_ratingStars());

@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class myAdapter extends BaseAdapter {
-    private ArrayList<listView_item> myRows; // Stores all the rows/friends of the listView
+public class My_Adapter_FriendMain extends BaseAdapter {
+    private ArrayList<ListView_ItemNormal> myRows; // Stores all the rows/friends of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public myAdapter(Context context, ArrayList<listView_item> myRows){
+    public My_Adapter_FriendMain(Context context, ArrayList<ListView_ItemNormal> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -52,7 +52,7 @@ public class myAdapter extends BaseAdapter {
             friendViews = (FriendViews) convertView.getTag();
         }
 
-        listView_item currRow = (listView_item) getItem(position);
+        ListView_ItemNormal currRow = (ListView_ItemNormal) getItem(position);
 
         // The below code sets each of the components values of each row/friend
         friendViews.imageView_pp.setImageResource(currRow.getImage_ratingImage());

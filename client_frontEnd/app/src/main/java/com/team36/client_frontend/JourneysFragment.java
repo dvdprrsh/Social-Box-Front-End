@@ -82,7 +82,7 @@ public class JourneysFragment extends Fragment {
 
     // Loads all the journeys the user has taken into a list
     private void loadList(){
-        ArrayList<listView_itemJourneys> allRows = new ArrayList<>(); // Stores all the rows (each journey) of the list
+        ArrayList<ListView_ItemJourneys> allRows = new ArrayList<>(); // Stores all the rows (each journey) of the list
         ListView listView = returnView.findViewById((R.id.listView_journeys));
         listView.setOnItemClickListener(myItemClickListener);
 
@@ -90,7 +90,7 @@ public class JourneysFragment extends Fragment {
         if (journey_dates != null){
             // Loops through each of the journeys
             for (int i=0; i<journey_dates.length; i++){
-                listView_itemJourneys oneRow = new listView_itemJourneys();
+                ListView_ItemJourneys oneRow = new ListView_ItemJourneys();
                 double journeyOverall = new OverallCalculator(journeysRatings[i]).overallRating;
                 ImageCalculator imageCalculator = new ImageCalculator(journeyOverall);
 
@@ -112,7 +112,7 @@ public class JourneysFragment extends Fragment {
             }
 
             // Displays all the rows made above
-            myAdapter_journeysList journeysList_myAdapter = new myAdapter_journeysList(getContext(), allRows);
+            My_Adapter_JourneysList journeysList_myAdapter = new My_Adapter_JourneysList(getContext(), allRows);
             listView.setAdapter(journeysList_myAdapter);
         }
     }
