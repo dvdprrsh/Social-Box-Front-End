@@ -38,7 +38,7 @@
             android:orientation="horizontal">
 
             <RatingBar
-                android:id="@+id/ratingBar_dashboardOverall"
+                android:id="@+id/ratingBar_journeyOverall"
                 style="@android:style/Widget.Material.Light.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

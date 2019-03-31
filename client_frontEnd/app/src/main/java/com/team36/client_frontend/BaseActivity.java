@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Transition;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -55,16 +54,19 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
+    // Displays the given fragment in the frame layout 'fragment_layout'
     private void displayFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction;
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_layout) != null) {
             List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
 
+            // Removes all previous fragments so they do not overlap each other
             for (Fragment f:fragmentList) {
                 getSupportFragmentManager().beginTransaction().remove(f).commit();
             }
         }
 
+        // Removes all previous fragments from the back stack to prevent overlap again
         for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++){
             fragmentManager.popBackStackImmediate();
         }

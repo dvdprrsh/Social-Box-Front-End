@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-// TODO: Comment code!
 public class myAdapter_journeysList extends BaseAdapter {
     private ArrayList<listView_itemJourneys> myRows;
     private LayoutInflater myInflater;
@@ -37,6 +36,7 @@ public class myAdapter_journeysList extends BaseAdapter {
         return position;
     }
 
+    // Returns the row for each journey given the provided data
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -58,19 +58,29 @@ public class myAdapter_journeysList extends BaseAdapter {
             journeysViews = (JourneysViews) convertView.getTag();
         }
 
+        // Assigns the values of each component of each row/journey
         listView_itemJourneys currRow = (listView_itemJourneys) getItem(position);
         journeysViews.imageView_ratingImage.setImageResource(currRow.getImage_ratingImage());
         journeysViews.textView_journeyDate.setText(currRow.getText_nameDay());
         journeysViews.ratingBar_journeyOverall.setRating(currRow.getRating_ratingStars());
         journeysViews.textView_ratingDouble.setText(currRow.getRating_ratingString());
-        journeysViews.imageView_ratingAcceleration.setImageResource(currRow.getImage_ratingAcceleration());
-        journeysViews.imageView_ratingBraking.setImageResource(currRow.getImage_ratingBraking());
-        journeysViews.imageView_ratingSpeed.setImageResource(currRow.getImage_ratingSpeed());
-        journeysViews.imageView_ratingTime.setImageResource(currRow.getImage_ratingTime());
 
-        return convertView;
+        journeysViews.imageView_ratingAcceleration.setImageResource(currRow.getImage_ratingAcceleration());
+        journeysViews.imageView_ratingAcceleration.setTag(currRow.rating_acceleration);
+
+        journeysViews.imageView_ratingBraking.setImageResource(currRow.getImage_ratingBraking());
+        journeysViews.imageView_ratingBraking.setTag(currRow.rating_braking);
+
+        journeysViews.imageView_ratingSpeed.setImageResource(currRow.getImage_ratingSpeed());
+        journeysViews.imageView_ratingSpeed.setTag(currRow.rating_speed);
+
+        journeysViews.imageView_ratingTime.setImageResource(currRow.getImage_ratingTime());
+        journeysViews.imageView_ratingTime.setTag(currRow.rating_time);
+
+        return convertView; // Returns the row/journey
     }
 
+    // A class to define the structure of each row/journey
     class JourneysViews{
         ImageView imageView_ratingImage;
         TextView textView_journeyDate;

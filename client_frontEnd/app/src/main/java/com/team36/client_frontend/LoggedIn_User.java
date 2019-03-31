@@ -1,6 +1,7 @@
 package com.team36.client_frontend;
 
 public class LoggedIn_User {
+    // Stores information about the user
     public String user_id;
     public String user_firstName = "David";
     public String user_lastName;
@@ -11,6 +12,7 @@ public class LoggedIn_User {
     public double user_overall = calcOverall();
     public String[] user_friendIDs;
 
+    // Assigns the variables above
     public void LoggedIn_UserMethod(String id, String firstName, String lastName, String email,
                   String mobileNo, String username, double[] rating, String[] friendIDs){
         user_id = id;
@@ -23,12 +25,9 @@ public class LoggedIn_User {
         user_friendIDs = friendIDs;
     }
 
+    // Calculates the overall rating for user logged in
     private double calcOverall(){
-        double sum = 0.0;
-        for (int i=0; i<user_ratings.length; i++){
-            sum += user_ratings[i];
-        }
-
-        return sum/(user_ratings.length);
+        OverallCalculator overallCalculator = new OverallCalculator(user_ratings);
+        return overallCalculator.overallRating;
     }
 }

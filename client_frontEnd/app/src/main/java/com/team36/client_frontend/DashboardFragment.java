@@ -1,6 +1,7 @@
 package com.team36.client_frontend;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,42 +54,11 @@ public class DashboardFragment extends Fragment {
             RatingBar ratingBar = returnView.findViewById(RATING_BARS[i]);
             ratingBar.setRating((float)RATINGS[i]);
 
+            // Gets the image that the rating corresponds to
+            ImageCalculator imageCalculator = new ImageCalculator(RATINGS[i]);
+
             ImageView imageView = returnView.findViewById(IMAGE_VIEWS[i]);
-            setImage(RATINGS[i], imageView);
-        }
-    }
-
-    // Sets the image for each card view dependant on the rating of each section rating
-    private void setImage(Double sectionRating, ImageView imageView){
-        switch (Double.toString(sectionRating)){
-            case "1.0":
-            case "1.5":
-                imageView.setImageResource(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
-                break;
-
-            case "2.0":
-            case "2.5":
-                imageView.setImageResource(R.drawable.ic_sentiment_dissatisfied_black_48dp);
-                break;
-
-            case "3.0":
-                imageView.setImageResource(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "3.5":
-                imageView.setImageResource(R.drawable.ic_sentiment_neutral_black_48dp);
-                break;
-
-            case "4.0":
-                imageView.setImageResource(R.drawable.ic_sentiment_satisfied_black_48dp);
-                break;
-
-            case "4.5":
-                imageView.setImageResource(R.drawable.ic_sentiment_very_satisfied_black_48dp);
-                break;
-
-            case "5.0":
-                imageView.setImageResource(R.drawable.ic_whatshot_black_48dp);
+            imageView.setImageResource(imageCalculator.image);
         }
     }
 }
