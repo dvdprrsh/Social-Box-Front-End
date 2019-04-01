@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 public class OverallCalculator {
     public double overallRating;

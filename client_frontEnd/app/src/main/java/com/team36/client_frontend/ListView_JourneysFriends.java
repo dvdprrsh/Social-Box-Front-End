@@ -1,6 +1,7 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
-public class ListView_ItemJourneys {
+public class ListView_JourneysFriends {
     private int image_ratingImage;
     private String text_nameDay;
     private double rating_ratingStars;

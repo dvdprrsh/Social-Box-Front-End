@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 public class ListView_ItemNormal {
     // Variables to store values of each component of each row/friend

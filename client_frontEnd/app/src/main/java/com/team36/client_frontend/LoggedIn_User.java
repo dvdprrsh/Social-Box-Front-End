@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 public class LoggedIn_User {
     // Stores information about the user

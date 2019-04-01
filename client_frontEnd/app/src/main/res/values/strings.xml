@@ -49,4 +49,5 @@
     <string name="journeys_statisticsContent">Here are some statistics. Here are some statistics. Here are some statistics. Here are some statistics.</string>
     <string name="text_welcomeJourney">*DAY*\'s Journey</string>
     <string name="journeys_welcome"><u>Journeys</u></string>
+    <string name="friends_welcome"><u>Friends</u></string>
 </resources>

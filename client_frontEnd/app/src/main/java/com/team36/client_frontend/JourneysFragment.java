@@ -14,22 +14,28 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class JourneysFragment extends Fragment {
     public final String TITLE = "Your Journeys";
-    private final int RATING_ACCELERATION = 0, RATING_BRAKING = 1, RATING_SPEED = 2, RATING_TIME = 3;
 
-    private View returnView;
-    private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
+    private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
     // TODO: Add a more detailed welcome message, e.g. "*NAME*'s Journeys"
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        returnView = inflater.inflate(R.layout.fragment_journeys, container, false);
-        loadList(); // Loads the list of journeys
+        View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
+
+        TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcome);
+        textView_welcomeText.setText(R.string.journeys_welcome);
+
+        ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
+        listView.setOnItemClickListener(myItemClickListener);
+
+        LoadList loadList = new LoadList(journeyDates, journeysRatings);
+        // The below displays all the rows made in the 'loadList' class above
+        My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+        listView.setAdapter(journeysList_myAdapter);
 
         return returnView;
     }
@@ -39,7 +45,7 @@ public class JourneysFragment extends Fragment {
         super.onDestroyView(); // Destroys the fragment when called
     }
 
-    private ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
+    public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
 
         // This method is called when one of the journeys has been clicked/tapped
         @Override
@@ -57,7 +63,7 @@ public class JourneysFragment extends Fragment {
             ImageView ratingTime = view.findViewById(R.id.imageView_time);
 
             // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dayDate", dayDate.getText().toString());
+            arguments.putString("dateName", dayDate.getText().toString());
             arguments.putFloat("ratingOverall", ratingOverall.getRating());
             arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
             arguments.putString("ratingBraking", ratingBraking.getTag().toString());
@@ -79,42 +85,5 @@ public class JourneysFragment extends Fragment {
             fragmentTransaction.commit();
         }
     };
-
-    // Loads all the journeys the user has taken into a list
-    private void loadList(){
-        ArrayList<ListView_ItemJourneys> allRows = new ArrayList<>(); // Stores all the rows (each journey) of the list
-        ListView listView = returnView.findViewById((R.id.listView_journeys));
-        listView.setOnItemClickListener(myItemClickListener);
-
-        // Assigns values to to each of the components of each row/journey of the list if the user has taken one or more journeys
-        if (journey_dates != null){
-            // Loops through each of the journeys
-            for (int i=0; i<journey_dates.length; i++){
-                ListView_ItemJourneys oneRow = new ListView_ItemJourneys();
-                double journeyOverall = new OverallCalculator(journeysRatings[i]).overallRating;
-                ImageCalculator imageCalculator = new ImageCalculator(journeyOverall);
-
-                Double accelerationVal = journeysRatings[i][RATING_ACCELERATION];
-                Double brakeVal = journeysRatings[i][RATING_BRAKING];
-                Double speedVal = journeysRatings[i][RATING_SPEED];
-                Double timeVal = journeysRatings[i][RATING_TIME];
-
-                oneRow.setImage_ratingImage(imageCalculator.image);
-                oneRow.setText_nameDay(journey_dates[i]);
-                oneRow.setRating_ratingStars(journeyOverall);
-                oneRow.setRating_ratingString(journeyOverall);
-                oneRow.setImage_ratingAcceleration(imageCalculator.setImage(accelerationVal), accelerationVal);
-                oneRow.setImage_ratingBraking(imageCalculator.setImage(brakeVal), brakeVal);
-                oneRow.setImage_ratingSpeed(imageCalculator.setImage(speedVal), speedVal);
-                oneRow.setImage_ratingTime(imageCalculator.setImage(timeVal), timeVal);
-
-                allRows.add(oneRow);
-            }
-
-            // Displays all the rows made above
-            My_Adapter_JourneysList journeysList_myAdapter = new My_Adapter_JourneysList(getContext(), allRows);
-            listView.setAdapter(journeysList_myAdapter);
-        }
-    }
 
 }

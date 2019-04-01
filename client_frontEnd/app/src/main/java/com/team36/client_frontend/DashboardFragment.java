@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 import android.os.Bundle;
 import android.provider.ContactsContract;

@@ -181,7 +181,7 @@
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/mapView_journeyRoute"
+        app:layout_constraintBottom_toTopOf="@+id/listView_friendJourneys"
         app:layout_constraintEnd_toStartOf="@+id/cardView_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView_acceleration">
@@ -291,8 +291,8 @@
             android:text="@string/journeys_statisticsContent" />
     </LinearLayout>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView_journeyRoute"
+    <ListView
+        android:id="@+id/listView_friendJourneys"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

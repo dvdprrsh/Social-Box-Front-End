@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,11 +12,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class My_Adapter_JourneysList extends BaseAdapter {
-    private ArrayList<ListView_ItemJourneys> myRows;
+public class My_Adapter_JourneysFriends extends BaseAdapter {
+    private ArrayList<ListView_JourneysFriends> myRows;
     private LayoutInflater myInflater;
 
-    public My_Adapter_JourneysList(Context context, ArrayList<ListView_ItemJourneys> myRows) {
+    public My_Adapter_JourneysFriends(Context context, ArrayList<ListView_JourneysFriends> myRows) {
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
@@ -59,7 +60,7 @@ public class My_Adapter_JourneysList extends BaseAdapter {
         }
 
         // Assigns the values of each component of each row/journey
-        ListView_ItemJourneys currRow = (ListView_ItemJourneys) getItem(position);
+        ListView_JourneysFriends currRow = (ListView_JourneysFriends) getItem(position);
         journeysViews.imageView_ratingImage.setImageResource(currRow.getImage_ratingImage());
         journeysViews.textView_journeyDate.setText(currRow.getText_nameDay());
         journeysViews.ratingBar_journeyOverall.setRating(currRow.getRating_ratingStars());

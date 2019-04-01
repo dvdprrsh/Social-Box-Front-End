@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class JourneyFragment extends Fragment {
-    private final String WELCOME_MESSAGE = "%s's Journey";
+public class FriendFragment extends Fragment {
+    private final String WELCOME_MESSAGE = "%s's Dashboard";
 
     private View returnView;
     private Bundle arguments;
@@ -16,7 +16,7 @@ public class JourneyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        returnView = inflater.inflate(R.layout.fragment_journey, container, false);
+        returnView = inflater.inflate(R.layout.fragment_friend, container, false);
 
         arguments = getArguments();
         ReturnView setView = new ReturnView(returnView, WELCOME_MESSAGE, arguments);
