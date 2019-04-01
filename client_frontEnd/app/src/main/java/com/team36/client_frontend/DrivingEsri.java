@@ -10,15 +10,10 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment;
-import com.esri.arcgisruntime.mapping.ArcGISMap;
-import com.esri.arcgisruntime.mapping.Basemap;
 import com.esri.arcgisruntime.mapping.view.LocationDisplay;
 import com.esri.arcgisruntime.mapping.view.MapView;
 
 public class DrivingEsri extends AppCompatActivity {
-    final Double MIN_SCALE = 7200.0;
-    final Double MAX_SCALE = 6400.0;
-
     public Snackbar mySnackbar;
 
     private MapView esriMap;
@@ -32,27 +27,14 @@ public class DrivingEsri extends AppCompatActivity {
         // The below is the license ID for the map API
         ArcGISRuntimeEnvironment.setLicense("runtimelite,1000,rud6686217235,none,C6JC7XLS1MYJ003AD167");
 
-        esriMap = findViewById(R.id.mapView_esri);
-        setMap();
+        esriMap = findViewById(R.id.mapView_esriJourney);
+        esriMap.setMap(new SetMap(esriMap).map); // Applies the style to the map
         setALocationDisplay();
 
         Chronometer chronometer = findViewById(R.id.chronometer);
         chronometer.start(); // Starts the stopwatch
 
         mySnackbar = Snackbar.make((findViewById(R.id.constraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG);
-    }
-
-    // Sets the look of the map
-    private void setMap() {
-        if (esriMap != null) {
-            // Sets the look of the map to a navigation style to make roads stand out more
-            Basemap.Type navigation_map = Basemap.Type.NAVIGATION_VECTOR;
-            ArcGISMap map = new ArcGISMap(navigation_map, 0.0, 0.0, 1);
-            // Sets the minimum and maximum zoom levels
-            map.setMinScale(MIN_SCALE);
-            map.setMaxScale(MAX_SCALE);
-            esriMap.setMap(map); // Applies the style to the map
-        }
     }
 
     // Sets the location display to display the users location

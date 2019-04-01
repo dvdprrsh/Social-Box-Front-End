@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
     public final String TITLE = "Your Home";
-    private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
 
     private static final int REQUEST_LOCATION = 1111;
     private View returnView;
@@ -37,12 +36,11 @@ public class MainFragment extends Fragment {
     private String users_name;
     private double users_rating;
 
-    private int[] friend_pps = {R.drawable.ic_person_outline_black_48dp};
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[] friend_ratings = {4.0, 5.0, 4.0, 4.0, 5.0, 4.5};
 
     private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
-    private double[] journeyRatings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
+    private double[] journey_ratings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
 
     // This method is for the navigation in the 'At a Glance' section and has the job of switching
     // what is displayed in the listView below it, being either basic friend or basic journey details
@@ -82,7 +80,7 @@ public class MainFragment extends Fragment {
             Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
 
             // Finds all the views which data needs to be passed across to 'journeyFragment'
-            TextView dayDate = view.findViewById(R.id.textView_dayDate);
+            TextView dateName = view.findViewById(R.id.textView_dayDate);
             RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
             ImageView ratingAcceleration = view.findViewById(R.id.imageView_acceleration);
             ImageView ratingBraking = view.findViewById(R.id.imageView_braking);
@@ -90,7 +88,7 @@ public class MainFragment extends Fragment {
             ImageView ratingTime = view.findViewById(R.id.imageView_time);
 
             // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dayDate", dayDate.getText().toString());
+            arguments.putString("dateName", dateName.getText().toString());
             arguments.putFloat("ratingOverall", ratingOverall.getRating());
             arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
             arguments.putString("ratingBraking", ratingBraking.getTag().toString());
@@ -176,10 +174,10 @@ public class MainFragment extends Fragment {
             for (int i = 0; i < journey_dates.length; i++) {
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // Below assigns values to their corresponding components
-                oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
+                oneRow.setImage_ratingImage(new ImageCalculator(journey_ratings[i]).image);
                 oneRow.setText_nameDay(journey_dates[i]);
-                oneRow.setRating_ratingStars(journeyRatings[i]);
-                oneRow.setRating_ratingString(journeyRatings[i]);
+                oneRow.setRating_ratingStars(journey_ratings[i]);
+                oneRow.setRating_ratingString(journey_ratings[i]);
 
                 allRows.add(oneRow); // Adds each row to the list of rows
             }

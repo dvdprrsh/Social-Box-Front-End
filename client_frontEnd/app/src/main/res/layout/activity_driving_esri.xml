@@ -49,7 +49,7 @@
     </LinearLayout>
 
     <com.esri.arcgisruntime.mapping.view.MapView
-        android:id="@+id/mapView_esri"
+        android:id="@+id/mapView_esriJourney"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button_stop"
@@ -73,6 +73,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView_esri" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView_esriJourney" />
 
 </android.support.constraint.ConstraintLayout>

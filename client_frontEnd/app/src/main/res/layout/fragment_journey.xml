@@ -177,11 +177,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/mapView_journeyRoute"
         app:layout_constraintEnd_toStartOf="@+id/cardView_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView_acceleration">
@@ -225,9 +223,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/mapView_esriJourney"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView_speed"
         app:layout_constraintTop_toBottomOf="@+id/cardView_braking">
@@ -291,8 +291,8 @@
             android:text="@string/journeys_statisticsContent" />
     </LinearLayout>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView_journeyRoute"
+    <com.esri.arcgisruntime.mapping.view.MapView
+        android:id="@+id/mapView_esriJourney"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -302,6 +302,6 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_journeyStatistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView_time" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView_speed" />
 
 </android.support.constraint.ConstraintLayout>
