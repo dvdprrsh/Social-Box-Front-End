@@ -37,9 +37,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_login" />
-        <activity
             android:name=".DrivingActivity"
             android:label="@string/title_driving" />
         <activity
