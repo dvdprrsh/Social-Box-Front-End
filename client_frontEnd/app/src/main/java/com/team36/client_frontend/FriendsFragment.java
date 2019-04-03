@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class FriendsFragment extends Fragment {
     public final String TITLE = "Your Friends";
 
-    private String[] friendNames = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
+    private String[] friendNames = null;//{"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
     private double[][] friendRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
     @Override
@@ -28,12 +28,19 @@ public class FriendsFragment extends Fragment {
         textView_welcomeText.setText(R.string.friends_welcome);
 
         ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
-        listView.setOnItemClickListener(myItemClickListener);
 
-        LoadList loadList = new LoadList(friendNames, friendRatings);
-        // The below displays all the rows made in the 'loadList' class above
-        My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
-        listView.setAdapter(friendsList_myAdapter);
+        if (friendNames != null) {
+            listView.setOnItemClickListener(myItemClickListener);
+            LoadList loadList = new LoadList(friendNames, friendRatings);
+            // The below displays all the rows made in the 'loadList' class above
+            My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+            listView.setAdapter(friendsList_myAdapter);
+        }else{
+            listView.setVisibility(View.INVISIBLE);
+            TextView textView_error = returnView.findViewById(R.id.textView_error);
+            textView_error.setVisibility(View.VISIBLE);
+            textView_error.setText(R.string.error_friends);
+        }
 
         return returnView;
     }

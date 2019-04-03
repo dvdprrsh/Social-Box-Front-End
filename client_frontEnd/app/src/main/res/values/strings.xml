@@ -50,4 +50,6 @@
     <string name="text_welcomeJourney">*DAY*\'s Journey</string>
     <string name="journeys_welcome"><u>Journeys</u></string>
     <string name="friends_welcome"><u>Friends</u></string>
+    <string name="error_journeys">No Journeys To Show!</string>
+    <string name="error_friends">No Friends To Show!</string>
 </resources>

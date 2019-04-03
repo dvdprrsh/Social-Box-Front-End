@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class JourneysFragment extends Fragment {
     public final String TITLE = "Your Journeys";
 
-    private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
+    private String[] journeyDates = null;//{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
     // TODO: Add a more detailed welcome message, e.g. "*NAME*'s Journeys"
@@ -30,13 +30,19 @@ public class JourneysFragment extends Fragment {
         textView_welcomeText.setText(R.string.journeys_welcome);
 
         ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
-        listView.setOnItemClickListener(myItemClickListener);
 
-        LoadList loadList = new LoadList(journeyDates, journeysRatings);
-        // The below displays all the rows made in the 'loadList' class above
-        My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
-        listView.setAdapter(journeysList_myAdapter);
-
+        if (journeyDates != null) {
+            listView.setOnItemClickListener(myItemClickListener);
+            LoadList loadList = new LoadList(journeyDates, journeysRatings);
+            // The below displays all the rows made in the 'loadList' class above
+            My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+            listView.setAdapter(journeysList_myAdapter);
+        }else{
+            listView.setVisibility(View.INVISIBLE);
+            TextView textView_error = returnView.findViewById(R.id.textView_error);
+            textView_error.setVisibility(View.VISIBLE);
+            textView_error.setText(R.string.error_journeys);
+        }
         return returnView;
     }
 

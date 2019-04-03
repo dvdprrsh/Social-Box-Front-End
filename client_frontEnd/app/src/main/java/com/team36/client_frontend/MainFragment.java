@@ -31,15 +31,15 @@ public class MainFragment extends Fragment {
     private static final int REQUEST_LOCATION = 1111;
     private View returnView;
 
-    final private String welcome_message = "Hi %s, see your rating below!";
+    final private String WELCOME_MESSAGE = "Hi %s, see your rating below!";
 
     private String users_name;
     private double users_rating;
 
-    private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
+    private String[] friend_names = null;//{"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[] friend_ratings = {4.0, 5.0, 4.0, 4.0, 5.0, 4.5};
 
-    private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
+    private String[] journey_dates = null;//{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[] journey_ratings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
 
     // This method is for the navigation in the 'At a Glance' section and has the job of switching
@@ -143,10 +143,10 @@ public class MainFragment extends Fragment {
     private void atAGlance_friends(){
         ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // To store all the rows to be displayed
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
-        myListView.setOnItemClickListener(myClickListenerFriend);
 
         // This for-loop assigns values to the components of each row
         if (friend_names != null) {
+            myListView.setOnItemClickListener(myClickListenerFriend);
             for (int i = 0; i < friend_names.length; i++) {
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
@@ -157,6 +157,11 @@ public class MainFragment extends Fragment {
 
                 allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
             }
+        }else {
+            myListView.setVisibility(View.INVISIBLE);
+            TextView textView_errorMain = returnView.findViewById(R.id.textView_errorMain);
+            textView_errorMain.setVisibility(View.VISIBLE);
+            textView_errorMain.setText(R.string.error_friends);
         }
 
         // The friends_adapter is for adding all the users' friends to the listView
@@ -181,6 +186,11 @@ public class MainFragment extends Fragment {
 
                 allRows.add(oneRow); // Adds each row to the list of rows
             }
+        }else {
+            myListView.setVisibility(View.INVISIBLE);
+            TextView textView_errorMain = returnView.findViewById(R.id.textView_errorMain);
+            textView_errorMain.setVisibility(View.VISIBLE);
+            textView_errorMain.setText(R.string.error_journeys);
         }
 
         // The journeys_adapter is is for adding all the user's journeys to the listView
@@ -190,7 +200,7 @@ public class MainFragment extends Fragment {
 
     private void setWelcomeTextRating(){
         TextView textView_welcome = returnView.findViewById(R.id.textView_welcome);
-        textView_welcome.setText(String.format(welcome_message, users_name));
+        textView_welcome.setText(String.format(WELCOME_MESSAGE, users_name));
 
         RatingBar ratingBar_user = returnView.findViewById(R.id.ratingBar_user);
         ratingBar_user.setRating((float)users_rating);

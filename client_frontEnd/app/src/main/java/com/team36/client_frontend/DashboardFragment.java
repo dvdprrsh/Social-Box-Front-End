@@ -21,7 +21,7 @@ public class DashboardFragment extends Fragment {
 
     private View returnView;
     private String USERS_NAME;
-    private double USERS_RATING;
+    private double USERS_RATING = -1.0;
     private double[] RATINGS;
 
     @Override
@@ -44,7 +44,7 @@ public class DashboardFragment extends Fragment {
         textView_welcome.setText(String.format(WELCOME_MESSAGE, USERS_NAME));
 
         RatingBar ratingBar_dashboard = returnView.findViewById(R.id.ratingBar_dashboardOverall);
-        ratingBar_dashboard.setRating((float)USERS_RATING); // Sets the overall rating
+        ratingBar_dashboard.setRating((float) USERS_RATING); // Sets the overall rating
 
         displayStatistics();
     }
@@ -52,14 +52,17 @@ public class DashboardFragment extends Fragment {
     // Displays the statistics for each card view
     private void displayStatistics(){
         for (int i=0; i<RATING_BARS.length; i++){
-            RatingBar ratingBar = returnView.findViewById(RATING_BARS[i]);
-            ratingBar.setRating((float)RATINGS[i]);
-
-            // Gets the image that the rating corresponds to
-            ImageCalculator imageCalculator = new ImageCalculator(RATINGS[i]);
-
             ImageView imageView = returnView.findViewById(IMAGE_VIEWS[i]);
-            imageView.setImageResource(imageCalculator.image);
+            if (USERS_RATING != -1.0) {
+                RatingBar ratingBar = returnView.findViewById(RATING_BARS[i]);
+                ratingBar.setRating((float) RATINGS[i]);
+
+                // Gets the image that the rating corresponds to
+                ImageCalculator imageCalculator = new ImageCalculator(RATINGS[i]);
+                imageView.setImageResource(imageCalculator.image);
+            }else {
+                imageView.setImageResource(R.drawable.ic_sentiment_very_dissatisfied_black_48dp);
+            }
         }
     }
 }
