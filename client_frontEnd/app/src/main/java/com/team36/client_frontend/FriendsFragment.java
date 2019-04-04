@@ -2,6 +2,7 @@ package com.team36.client_frontend;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.VisibilityAwareImageButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -92,6 +93,7 @@ public class FriendsFragment extends Fragment {
         }
 
         FloatingActionButton addFriend = returnView.findViewById(R.id.fab_add);
+        addFriend.show();
         addFriend.setOnClickListener(fabClick);
 
         return returnView;
