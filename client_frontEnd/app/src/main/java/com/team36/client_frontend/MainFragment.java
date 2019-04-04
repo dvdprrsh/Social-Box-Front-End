@@ -36,10 +36,10 @@ public class MainFragment extends Fragment {
     private String users_name;
     private double users_rating;
 
-    private String[] friend_names = null;//{"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
+    private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[] friend_ratings = {4.0, 5.0, 4.0, 4.0, 5.0, 4.5};
 
-    private String[] journey_dates = null;//{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
+    private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[] journey_ratings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
 
     // This method is for the navigation in the 'At a Glance' section and has the job of switching

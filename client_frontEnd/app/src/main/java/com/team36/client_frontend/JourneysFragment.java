@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class JourneysFragment extends Fragment {
     public final String TITLE = "Your Journeys";
 
-    private String[] journeyDates = null;//{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
+    private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
     // TODO: Add a more detailed welcome message, e.g. "*NAME*'s Journeys"

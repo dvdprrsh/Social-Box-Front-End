@@ -25,9 +25,7 @@ public class FriendFragment extends Fragment {
 
         arguments = getArguments();
         ReturnView setView = new ReturnView(returnView, WELCOME_MESSAGE, arguments);
-
         friend_journeys();
-
         return setView.returnView;
     }
 

@@ -1,6 +1,7 @@
 package com.team36.client_frontend;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,39 +17,8 @@ import android.widget.TextView;
 public class FriendsFragment extends Fragment {
     public final String TITLE = "Your Friends";
 
-    private String[] friendNames = null;//{"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
+    private String[] friendNames = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
     private double[][] friendRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
-
-        TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcome);
-        textView_welcomeText.setText(R.string.friends_welcome);
-
-        ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
-
-        if (friendNames != null) {
-            listView.setOnItemClickListener(myItemClickListener);
-            LoadList loadList = new LoadList(friendNames, friendRatings);
-            // The below displays all the rows made in the 'loadList' class above
-            My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
-            listView.setAdapter(friendsList_myAdapter);
-        }else{
-            listView.setVisibility(View.INVISIBLE);
-            TextView textView_error = returnView.findViewById(R.id.textView_error);
-            textView_error.setVisibility(View.VISIBLE);
-            textView_error.setText(R.string.error_friends);
-        }
-
-        return returnView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView(); // Destroys the fragment when called
-    }
 
     public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
 
@@ -90,6 +60,49 @@ public class FriendsFragment extends Fragment {
             fragmentTransaction.commit();
         }
     };
+
+    public View.OnClickListener fabClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
+
+        TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcome);
+        textView_welcomeText.setText(R.string.friends_welcome);
+
+        ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
+
+        if (friendNames != null) {
+            listView.setOnItemClickListener(myItemClickListener);
+            LoadList loadList = new LoadList(friendNames, friendRatings);
+            // The below displays all the rows made in the 'loadList' class above
+            My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+            listView.setAdapter(friendsList_myAdapter);
+        }else{
+            listView.setVisibility(View.INVISIBLE);
+            TextView textView_error = returnView.findViewById(R.id.textView_error);
+            textView_error.setVisibility(View.VISIBLE);
+            textView_error.setText(R.string.error_friends);
+        }
+
+        FloatingActionButton addFriend = returnView.findViewById(R.id.fab_add);
+        addFriend.setOnClickListener(fabClick);
+
+        return returnView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView(); // Destroys the fragment when called
+    }
+
+
 
 
 }
