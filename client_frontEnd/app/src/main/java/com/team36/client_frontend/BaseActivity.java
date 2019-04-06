@@ -83,6 +83,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new RemoveStatus(this);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_base);
         fragmentManager = getSupportFragmentManager();
         prevFragment = fragmentManager.findFragmentById(R.id.fragment_layout);
