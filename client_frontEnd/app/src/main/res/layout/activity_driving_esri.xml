@@ -5,13 +5,14 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
     tools:context=".DrivingEsri">
 
     <LinearLayout
         android:id="@+id/linearLayout_journeyStatistics"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorDark"
+        android:background="@drawable/gradient"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +24,6 @@
             android:id="@+id/textView_recording"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:text="@string/text_recording"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -40,18 +40,20 @@
             android:id="@+id/chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="@font/quicksand_light"
             android:textAllCaps="false"
             android:textColor="@android:color/background_light"
             android:textSize="36sp"
             tools:layout_editor_absoluteX="77dp"
             tools:layout_editor_absoluteY="146dp" />
+
     </LinearLayout>
 
     <com.esri.arcgisruntime.mapping.view.MapView
         android:id="@+id/mapView_esriJourney"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,16 +62,19 @@
 
     <Button
         android:id="@+id/button_stop"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/round_button_with_border"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_capsule"
         android:elevation="0dp"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="@font/quicksand_light"
         android:onClick="stop_pressed"
         android:text="@string/button_stop"
         android:textColor="@android:color/background_light"
-        android:textSize="60sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,6 @@
 package com.team36.client_frontend;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 public class LoginActivity extends AppCompatActivity {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
 
+    private boolean loggedIn = false;
+
     private EditText username;
     private EditText password;
     private TextView attempts;
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        checkLogInState();
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
@@ -39,6 +42,20 @@ public class LoginActivity extends AppCompatActivity {
 
         login.setOnClickListener(this::onLogin);
         register.setOnClickListener(this::onRegister);
+    }
+
+    private void checkLogInState(){
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
+            loggedIn = sharedPreferences.getBoolean("Stay_Logged", false);
+        }catch (NullPointerException e){
+            System.out.print("User not previously logged in.");
+        }
+
+        if (loggedIn){
+            Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onLogin(View view){
@@ -71,8 +88,12 @@ public class LoginActivity extends AppCompatActivity {
     }
     // TODO: Save the users Log In State on successful Log In
     private void SaveLogInState(){
-        SharedPreferences sharedPreferences;
-        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Stay_Logged", true);
+        editor.putString("Username", username.getText().toString());
+        editor.apply();
     }
 
     private void registerUser () {

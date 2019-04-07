@@ -61,5 +61,6 @@
     <string name="textView_or">Or</string>
 
     <string name="attemptsRemaining">Number of attempts remaining:</string>
+    <string name="button_add">Add Friend</string>
 
 </resources>

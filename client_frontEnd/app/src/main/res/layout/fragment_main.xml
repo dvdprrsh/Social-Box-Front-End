@@ -7,11 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
+    <Button
+        android:id="@+id/button_go"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_capsule"
+        android:elevation="4dp"
+        android:fontFamily="@font/quicksand_light"
+        android:onClick="onClick"
+        android:text="@string/button_go"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_light"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/LinearLayout_go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,7 +95,7 @@
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/LinearLayout_go"
+        app:layout_constraintBottom_toTopOf="@+id/button_go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LinearLayout_welcome"
@@ -95,6 +114,7 @@
             android:id="@+id/navigation_atAGlance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:itemHorizontalTranslationEnabled="false"
             app:labelVisibilityMode="selected"
             app:menu="@menu/navigation_ataglance" />
 
@@ -104,40 +124,9 @@
             android:layout_height="match_parent"
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp"
-            android:elevation="4dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LinearLayout_go"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/button_go"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_button"
-            android:fontFamily="@font/quicksand_light"
-            android:text="@string/button_go"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
-            android:textSize="90sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

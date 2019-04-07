@@ -30,25 +30,21 @@ public class BaseActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     // Transitions to the home/main fragment, if applicable
                     MainFragment mainFragment = new MainFragment();
-                    setTitle(mainFragment.TITLE);
                     displayFragment(mainFragment);
                     return true;
                 case R.id.navigation_dashboard:
                     // Transitions to the dashboard fragment, if applicable
                     DashboardFragment dashboardFragment = new DashboardFragment();
-                    setTitle(dashboardFragment.TITLE);
                     displayFragment(dashboardFragment);
                     return true;
                 case R.id.navigation_allJourneys:
                     // Transitions to the journeys fragment, if applicable
                     JourneysFragment journeysFragment = new JourneysFragment();
-                    setTitle(journeysFragment.TITLE);
                     displayFragment(journeysFragment);
                     return true;
                 case R.id.navigation_allFriends:
                     // Transitions to the friends fragment, if applicable
                     FriendsFragment friendsFragment = new FriendsFragment();
-                    setTitle(friendsFragment.TITLE);
                     displayFragment(friendsFragment);
                     return true;
             }
@@ -92,7 +88,6 @@ public class BaseActivity extends AppCompatActivity {
 
         MainFragment mainFragment = new MainFragment();
         displayFragment(mainFragment);
-        setTitle(mainFragment.TITLE);
 
         BottomNavigationView navigation_base = findViewById(R.id.navigation_base);
         navigation_base.setOnNavigationItemSelectedListener(myBottomNavigationListener);

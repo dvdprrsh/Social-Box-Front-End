@@ -16,7 +16,6 @@ public class DashboardFragment extends Fragment {
     private final int[] RATING_BARS = {R.id.ratingBar_acceleration, R.id.ratingBar_braking, R.id.ratingBar_speed, R.id.ratingBar_time};
     private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
 
-    public final String TITLE = "Your Dashboard";
     private final String WELCOME_MESSAGE = "%s's Dashboard";
 
     private View returnView;

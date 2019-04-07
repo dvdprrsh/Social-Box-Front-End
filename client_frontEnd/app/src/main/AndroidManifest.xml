@@ -26,14 +26,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddPendingFriendsActivity"></activity>
+
+        <activity android:name=".AddPendingFriendsActivity"/>
+
         <activity
             android:name=".BaseActivity"
-            android:label="@string/title_activity_base_main">
-        </activity>
+            android:label="@string/title_activity_base_main"/>
+
         <activity
             android:name=".DrivingActivity"
             android:label="@string/title_driving" />
+
         <activity
             android:name=".DrivingEsri"
             android:label="@string/title_driving" />
@@ -50,6 +53,7 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_register"/>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

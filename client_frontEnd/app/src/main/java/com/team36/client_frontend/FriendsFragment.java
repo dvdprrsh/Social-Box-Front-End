@@ -1,5 +1,6 @@
 package com.team36.client_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.VisibilityAwareImageButton;
@@ -16,8 +17,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class FriendsFragment extends Fragment {
-    public final String TITLE = "Your Friends";
-
     private String[] friendNames = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
     private double[][] friendRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
@@ -65,7 +64,8 @@ public class FriendsFragment extends Fragment {
     public View.OnClickListener fabClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(getActivity(), AddPendingFriendsActivity.class);
+            startActivity(intent);
         }
     };
 

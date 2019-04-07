@@ -1,7 +1,9 @@
 package com.team36.client_frontend;
 // David Parrish - 201232252
 
+import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -22,6 +24,8 @@ public class DrivingEsri extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new RemoveStatus(this);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_driving_esri);
 
         // The below is the license ID for the map API
@@ -31,7 +35,10 @@ public class DrivingEsri extends AppCompatActivity {
         esriMap.setMap(new SetMap(esriMap).map); // Applies the style to the map
         setALocationDisplay();
 
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.quicksand_light);
+
         Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer.setTypeface(typeface);
         chronometer.start(); // Starts the stopwatch
 
         mySnackbar = Snackbar.make((findViewById(R.id.constraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG);

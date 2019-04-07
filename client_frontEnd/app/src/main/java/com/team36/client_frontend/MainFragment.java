@@ -26,8 +26,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
-    public final String TITLE = "Your Home";
-
     private static final int REQUEST_LOCATION = 1111;
     private View returnView;
 
