@@ -23,6 +23,8 @@ public class FriendFragment extends Fragment {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_friend, container, false);
 
+
+
         arguments = getArguments();
         ReturnView setView = new ReturnView(returnView, WELCOME_MESSAGE, arguments);
         friend_journeys();

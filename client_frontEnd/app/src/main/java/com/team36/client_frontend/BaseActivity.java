@@ -17,6 +17,8 @@ public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     public static Fragment prevFragment;
 
+    private int prevPos = 0;
+
     // The below transitions between activities depending on which button in the navigation bar is pressed
     // This method appears in all other activities with the bottom navigation bar and acts in the same way
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
@@ -70,7 +72,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.replace(R.id.fragment_layout, fragment);
         fragmentTransaction.commit();
         prevFragment = fragment;
