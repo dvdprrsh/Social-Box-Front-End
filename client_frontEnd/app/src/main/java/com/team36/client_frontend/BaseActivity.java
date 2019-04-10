@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Transition;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -34,11 +33,6 @@ public class BaseActivity extends AppCompatActivity {
                     MainFragment mainFragment = new MainFragment();
                     displayFragment(mainFragment);
                     return true;
-                case R.id.navigation_dashboard:
-                    // Transitions to the dashboard fragment, if applicable
-                    DashboardFragment dashboardFragment = new DashboardFragment();
-                    displayFragment(dashboardFragment);
-                    return true;
                 case R.id.navigation_allJourneys:
                     // Transitions to the journeys fragment, if applicable
                     JourneysFragment journeysFragment = new JourneysFragment();
@@ -48,6 +42,11 @@ public class BaseActivity extends AppCompatActivity {
                     // Transitions to the friends fragment, if applicable
                     FriendsFragment friendsFragment = new FriendsFragment();
                     displayFragment(friendsFragment);
+                    return true;
+                case R.id.navigation_profile:
+                    // Transitions to the dashboard fragment, if applicable
+                    ProfileFragment profileFragment = new ProfileFragment();
+                    displayFragment(profileFragment);
                     return true;
             }
             return false;

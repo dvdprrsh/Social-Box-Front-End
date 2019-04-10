@@ -1,17 +1,20 @@
 package com.team36.client_frontend;
 // David Parrish - 201232252
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class DashboardFragment extends Fragment {
+public class ProfileFragment extends Fragment {
     // These constants are used to store the values of each of the RatingBars and ImageViews of each rating section
     private final int[] RATING_BARS = {R.id.ratingBar_acceleration, R.id.ratingBar_braking, R.id.ratingBar_speed, R.id.ratingBar_time};
     private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
@@ -26,7 +29,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        returnView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        returnView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Sets the key values used throughout this fragment
         LoggedIn_User loggedIn_user = new LoggedIn_User();
@@ -34,8 +37,22 @@ public class DashboardFragment extends Fragment {
         USERS_RATING = loggedIn_user.user_overall;
         RATINGS = loggedIn_user.user_ratings;
 
+        Button button = returnView.findViewById(R.id.button_logout);
+        button.setOnClickListener(this::onLogout);
+
         myMain();
         return returnView;
+    }
+
+    public void onLogout(View view){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("logged_in", false);
+        editor.apply();
+
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.putExtra("checkLogin", false);
+        startActivity(intent);
     }
 
     private void myMain(){

@@ -9,7 +9,7 @@ public class OverallCalculator {
     }
 
     // Calculates the overall (average) rating from the ratings provided
-    private double calcOverall(double[] ratings){
+    public double calcOverall(double[] ratings){
         double sum = 0.0;
         for (int i=0; i<ratings.length; i++){
             sum += ratings[i];

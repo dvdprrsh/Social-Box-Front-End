@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
 
     private boolean loggedIn = false;
-
+    private String username_text = null;
     private EditText username;
     private EditText password;
     private TextView attempts;
@@ -25,7 +25,17 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkLogInState();
+        boolean checkLogin = true;
+
+        try {
+            checkLogin = getIntent().getBooleanExtra("checkLogin", true);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
+            username_text = sharedPreferences.getString("Username",null);
+        }catch (NullPointerException e){
+            System.out.print("First Open");
+        }
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
@@ -36,18 +46,23 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.editText_username); // Assigning variables
         password = findViewById(R.id.editText_password);
         attempts = findViewById(R.id.textView_attempts);
-        login = findViewById(R.id.button_login);
         attempts.setText(String.format(attemptsRemaining, 5));
-        register = findViewById(R.id.button_register);
 
+        login = findViewById(R.id.button_login);
+        register = findViewById(R.id.button_register);
         login.setOnClickListener(this::onLogin);
         register.setOnClickListener(this::onRegister);
+
+        setUsername();
+        if (checkLogin) checkLogInState();
     }
 
+    // Checks if the user has logged in previously and not logged out
     private void checkLogInState(){
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
-            loggedIn = sharedPreferences.getBoolean("Stay_Logged", false);
+            loggedIn = sharedPreferences.getBoolean("logged_in", false);
+            username_text = sharedPreferences.getString("Username",null);
         }catch (NullPointerException e){
             System.out.print("User not previously logged in.");
         }
@@ -55,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         if (loggedIn){
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
             startActivity(intent);
+        }else{
+            setUsername();
         }
     }
 
@@ -69,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validate (String userName, String userPassword) {// Sets the username and password
-        if ((userName.equals("")) && (userPassword.equals(""))) {
+        if ((userName.equals("Dave")) && (userPassword.equals(""))) {
             // Opens base fragment is what links to the rest of the app
             SaveLogInState();
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
@@ -86,12 +103,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    // TODO: Save the users Log In State on successful Log In
+
+    // If username has previously been entered, sets the username field to this value
+    private void setUsername(){
+        if (username_text != null){
+            username.setText(username_text);
+        }
+    }
+
+    // Saves the users log in status so they do not have to log in each time
     private void SaveLogInState(){
         SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("Stay_Logged", true);
+        editor.putBoolean("logged_in", true);
         editor.putString("Username", username.getText().toString());
         editor.apply();
     }

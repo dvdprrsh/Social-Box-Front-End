@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_48dp"
         android:title="@string/text_home" />
-
-    <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_48dp"
-        android:title="@string/text_dashboard" />
 
     <item
         android:id="@+id/navigation_allJourneys"
@@ -20,4 +16,8 @@
         android:id="@+id/navigation_allFriends"
         android:icon="@drawable/ic_people_black_48dp"
         android:title="@string/text_mainFriends" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_account_box_black_48dp"
+        android:title="@string/text_profile" />
 </menu>

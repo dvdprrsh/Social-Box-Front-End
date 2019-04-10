@@ -35,10 +35,10 @@ public class MainFragment extends Fragment {
     private double users_rating;
 
     private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
-    private double[] friend_ratings = {4.0, 5.0, 4.0, 4.0, 5.0, 4.5};
+    private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
 
     private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
-    private double[] journey_ratings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
+    private double[][] journey_ratings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
     // This method is for the navigation in the 'At a Glance' section and has the job of switching
     // what is displayed in the listView below it, being either basic friend or basic journey details
@@ -79,14 +79,12 @@ public class MainFragment extends Fragment {
 
             // Finds all the views which data needs to be passed across to 'journeyFragment'
             TextView dateName = view.findViewById(R.id.textView_dayDate);
+            String journeyDate = dateName.getText().toString();
+
             RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
-            ImageView ratingAcceleration = view.findViewById(R.id.imageView_acceleration);
-            ImageView ratingBraking = view.findViewById(R.id.imageView_braking);
-            ImageView ratingSpeed = view.findViewById(R.id.imageView_speed);
-            ImageView ratingTime = view.findViewById(R.id.imageView_time);
 
             // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dateName", dateName.getText().toString());
+            arguments.putString("dateName", journeyDate);
             arguments.putFloat("ratingOverall", ratingOverall.getRating());
             arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
             arguments.putString("ratingBraking", ratingBraking.getTag().toString());
@@ -145,13 +143,17 @@ public class MainFragment extends Fragment {
         // This for-loop assigns values to the components of each row
         if (friend_names != null) {
             myListView.setOnItemClickListener(myClickListenerFriend);
+            OverallCalculator overallCalculator;
             for (int i = 0; i < friend_names.length; i++) {
+                overallCalculator = new OverallCalculator(friend_ratings[i]);
+                double overall = overallCalculator.overallRating;
+
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
-                oneRow.setImage_ratingImage(new ImageCalculator(friend_ratings[i]).image);
+                oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
                 oneRow.setText_nameDay(friend_names[i]);
-                oneRow.setRating_ratingStars((float) friend_ratings[i]);
-                oneRow.setRating_ratingString(friend_ratings[i]);
+                oneRow.setRating_ratingStars((float) overall);
+                oneRow.setRating_ratingString(overall);
 
                 allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
             }
@@ -172,15 +174,19 @@ public class MainFragment extends Fragment {
         ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // As stated previously
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
         myListView.setOnItemClickListener(myClickListenerJourney);
+        OverallCalculator overallCalculator;
 
         if (journey_dates != null) {
             for (int i = 0; i < journey_dates.length; i++) {
+                overallCalculator = new OverallCalculator(friend_ratings[i]);
+                double overall = overallCalculator.overallRating;
+
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // Below assigns values to their corresponding components
-                oneRow.setImage_ratingImage(new ImageCalculator(journey_ratings[i]).image);
+                oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
                 oneRow.setText_nameDay(journey_dates[i]);
-                oneRow.setRating_ratingStars(journey_ratings[i]);
-                oneRow.setRating_ratingString(journey_ratings[i]);
+                oneRow.setRating_ratingStars(overall);
+                oneRow.setRating_ratingString(overall);
 
                 allRows.add(oneRow); // Adds each row to the list of rows
             }

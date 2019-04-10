@@ -10,10 +10,9 @@
     <string name="text_atAGlance">At a Glance</string>
     <string name="text_journeys">Journeys</string>
     <string name="text_home">Home</string>
-    <string name="text_dashboard">Dashboard</string>
     <string name="text_mainJourneys">Journeys</string>
     <string name="text_mainFriends">Friends</string>
-    <string name="text_welcomeDashboard">*NAME*\'s Dashboard</string>
+    <string name="text_welcomeDashboard">*NAME*\'s Profile</string>
     <string name="text_breakdownDashboard">Rating Breakdown</string>
     <string name="text_recording">Recording -</string>
 
@@ -62,5 +61,7 @@
 
     <string name="attemptsRemaining">Number of attempts remaining:</string>
     <string name="button_add">Add Friend</string>
+    <string name="text_profile">Profile</string>
+    <string name="button_logout">Log Out</string>
 
 </resources>
