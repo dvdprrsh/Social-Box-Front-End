@@ -56,14 +56,6 @@ public class BaseActivity extends AppCompatActivity {
     // Displays the given fragment in the frame layout 'fragment_layout'
     private void displayFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction;
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_layout) != null) {
-            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-
-            // Removes all previous fragments so they do not overlap each other
-            for (Fragment f:fragmentList) {
-                getSupportFragmentManager().beginTransaction().remove(f).commit();
-            }
-        }
 
         // Removes all previous fragments from the back stack to prevent overlap again
         for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++){
@@ -71,7 +63,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         fragmentTransaction.replace(R.id.fragment_layout, fragment);
         fragmentTransaction.commit();
         prevFragment = fragment;
@@ -80,9 +72,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new RemoveStatus(this);
-        getSupportActionBar().hide();
-
         setContentView(R.layout.activity_base);
         fragmentManager = getSupportFragmentManager();
         prevFragment = fragmentManager.findFragmentById(R.id.fragment_layout);

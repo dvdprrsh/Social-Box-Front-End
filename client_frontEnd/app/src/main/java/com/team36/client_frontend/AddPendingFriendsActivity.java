@@ -13,8 +13,6 @@ public class AddPendingFriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new RemoveStatus(this);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_add_pending_friends);
 
         checkPendingFriendRequests();

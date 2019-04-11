@@ -33,11 +33,11 @@ public class JourneyFragment extends Fragment {
 
     private View returnView;
     private Bundle arguments;
+
     private MapView esriMap;
 
     private double[] xCoords = {-2.936182, -2.930346};
     private double[] yCoords = {53.394124, 53.390423};
-
     private final int START_COORDINATE = 0;
     private int END_COORDINATE;
 

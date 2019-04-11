@@ -1,13 +1,15 @@
 <resources>
 
     <!-- BaseActivity application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/QuickSandTextViews</item>
         <item name="android:editTextStyle">@style/QuickSandEditTexts</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
@@ -26,6 +28,10 @@
 
     <style name="QuickSandChronometer" parent="">
         <item name="android:fontFamily">@font/quicksand_light</item>
+    </style>
+
+    <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/gradient</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

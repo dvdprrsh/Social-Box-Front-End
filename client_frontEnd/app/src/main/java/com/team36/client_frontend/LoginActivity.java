@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
-
+    private Snackbar snackbar;
     private boolean loggedIn = false;
     private String username_text = null;
     private EditText username;
@@ -40,11 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
-        new RemoveStatus(this);
-
         setContentView(R.layout.activity_login);
+
+        snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_LONG);
 
         username = findViewById(R.id.editText_username); // Assigning variables
         password = findViewById(R.id.editText_password);
@@ -72,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (loggedIn){
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+            finish();
             startActivity(intent);
         }else{
             setUsername();
@@ -102,17 +100,21 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
-            Snackbar snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+            if (!snackbar.isShown()){
+                snackbar.show();
+            }
 
             counter--;
             attempts.setText(String.format(attemptsRemaining, counter));
             // Converts int to string to show how many remaining attempts you have
 
             if (counter == 0) {//after 5 attempts button disabled
-                finish();
-                System.exit(0);
+                Snackbar snackbar_disabledLogIn = Snackbar.make(findViewById(R.id.constraintLayoutLoginActivity), R.string.login_snackbar_loginDisabled, Snackbar.LENGTH_LONG);
+                snackbar_disabledLogIn.show();
+
+                login.setEnabled(false);
             }
         }
     }

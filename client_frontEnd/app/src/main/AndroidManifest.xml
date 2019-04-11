@@ -29,30 +29,20 @@
 
         <activity android:name=".AddPendingFriendsActivity"/>
 
-        <activity
-            android:name=".BaseActivity"
-            android:label="@string/title_activity_base_main"/>
+        <activity android:name=".BaseActivity" android:label="@string/title_activity_base_main"/>
 
-        <activity
-            android:name=".DrivingActivity"
-            android:label="@string/title_driving" />
+        <activity android:name=".DrivingActivity" android:label="@string/title_driving" />
 
-        <activity
-            android:name=".DrivingEsri"
-            android:label="@string/title_driving" />
+        <activity android:name=".DrivingEsri" android:label="@string/title_driving" />
 
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name">
+        <activity android:name=".LoginActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_register"/>
+        <activity android:name=".RegisterActivity" android:label="@string/title_register"/>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

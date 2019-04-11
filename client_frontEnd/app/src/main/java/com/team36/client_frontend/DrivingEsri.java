@@ -24,8 +24,6 @@ public class DrivingEsri extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new RemoveStatus(this);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_driving_esri);
 
         // The below is the license ID for the map API
