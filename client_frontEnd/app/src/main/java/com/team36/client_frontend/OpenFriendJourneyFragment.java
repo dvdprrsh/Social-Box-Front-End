@@ -28,7 +28,6 @@ public class OpenFriendJourneyFragment {
             // Assigns values to the fragment Transaction
             fragmentTransaction.replace(R.id.fragment_layout, journeyFragment);
         }
-
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .addToBackStack(null) // To prevent multiple 'back' button presses
                 .commit();
