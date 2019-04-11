@@ -1,12 +1,15 @@
 package com.team36.client_frontend;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -90,10 +93,20 @@ public class LoginActivity extends AppCompatActivity {
             // Opens base fragment is what links to the rest of the app
             SaveLogInState();
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }else {
-            counter--;
+            View view = this.getCurrentFocus();
+            if(view == null){
+                view = new View(this);
+            }
 
+            InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+            Snackbar snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_SHORT);
+            snackbar.show();
+
+            counter--;
             attempts.setText(String.format(attemptsRemaining, counter));
             // Converts int to string to show how many remaining attempts you have
 

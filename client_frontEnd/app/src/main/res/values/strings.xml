@@ -25,6 +25,7 @@
     <string name="dashboard_feedback">Feedback</string>
     <string name="dashboard_feedbackContent">Here is some feedback. Here is some feedback. Here is some feedback. Here is some feedback.</string>
 
+    <string name="login_snackbar">Incorrect Username and/or Password</string>
     <string name="driving_snackbar">Press once more to stop recording.</string>
 
     <string name="rating_figure">4.0</string>
@@ -63,5 +64,6 @@
     <string name="button_add">Add Friend</string>
     <string name="text_profile">Profile</string>
     <string name="button_logout">Log Out</string>
+    <string name="error_pending">No Friend Requests Pending!</string>
 
 </resources>

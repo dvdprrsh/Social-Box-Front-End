@@ -1,16 +1,11 @@
 package com.team36.client_frontend;
 
-import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.VisibilityAwareImageButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -19,47 +14,35 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class FriendsFragment extends Fragment {
-    private String[] friendNames = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
-    private double[][] friendRatings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
+    private String[] friend_names = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
+    private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
+
 
     public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
 
         // This method is called when one of the journeys has been clicked/tapped
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
             FriendFragment friendFragment = new FriendFragment();
-            Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
 
             // Finds all the views which data needs to be passed across to 'journeyFragment'
             TextView name = view.findViewById(R.id.textView_dayDate);
-            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
-            ImageView ratingAcceleration = view.findViewById(R.id.imageView_acceleration);
-            ImageView ratingBraking = view.findViewById(R.id.imageView_braking);
-            ImageView ratingSpeed = view.findViewById(R.id.imageView_speed);
-            ImageView ratingTime = view.findViewById(R.id.imageView_time);
+            RatingBar rating0 = view.findViewById(R.id.ratingBar_overallStars);
+            ImageView rating1 = view.findViewById(R.id.imageView_acceleration);
+            ImageView rating2 = view.findViewById(R.id.imageView_braking);
+            ImageView rating3 = view.findViewById(R.id.imageView_speed);
+            ImageView rating4 = view.findViewById(R.id.imageView_time);
 
-            // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dateName", name.getText().toString());
-            arguments.putFloat("ratingOverall", ratingOverall.getRating());
-            arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
-            arguments.putString("ratingBraking", ratingBraking.getTag().toString());
-            arguments.putString("ratingSpeed", ratingSpeed.getTag().toString());
-            arguments.putString("ratingTime", ratingTime.getTag().toString());
+            String friendName = name.getText().toString();
+            Float ratingOverall = rating0.getRating();
+            String ratingAcceleration = rating1.getTag().toString();
+            String ratingBraking = rating2.getTag().toString();
+            String ratingSpeed = rating3.getTag().toString();
+            String ratingTime = rating4.getTag().toString();
 
-            friendFragment.setArguments(arguments); // Sets the arguments for the fragment
-
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Assigns values to the fragment Transaction
-            fragmentTransaction
-                    .replace(R.id.fragment_layout, friendFragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            if (fragmentManager.getBackStackEntryCount() < 1){
-                fragmentTransaction.addToBackStack(null); // To prevent multiple 'back' button presses
-            }
-            fragmentTransaction.commit();
+            // Opens the selected friend's fragment
+            new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(),
+                    friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
         }
     };
 
@@ -81,9 +64,9 @@ public class FriendsFragment extends Fragment {
 
         ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
 
-        if (friendNames != null) {
+        if (friend_names != null) {
             listView.setOnItemClickListener(myItemClickListener);
-            LoadList loadList = new LoadList(friendNames, friendRatings);
+            LoadList loadList = new LoadList(friend_names, friend_ratings);
             // The below displays all the rows made in the 'loadList' class above
             My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
             listView.setAdapter(friendsList_myAdapter);

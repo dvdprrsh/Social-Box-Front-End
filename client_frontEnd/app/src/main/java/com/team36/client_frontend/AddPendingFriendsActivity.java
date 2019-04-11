@@ -4,9 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class AddPendingFriendsActivity extends AppCompatActivity {
     private EditText friendsUsername;
+    private boolean friendRequests = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +17,42 @@ public class AddPendingFriendsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_pending_friends);
 
+        checkPendingFriendRequests();
         friendsUsername = findViewById(R.id.editText_friendsUsername);
     }
 
     public void addFriend(View view){
         // Check username exists and send request here
+    }
+
+    private void checkPendingFriendRequests(){
+        // Check for friend requests
+        if (friendRequests){
+            // Load friend requests here
+
+            /*
+            String[] friends_keys = new String[friends.size()];
+            friends.keySet().toArray(friends_keys);
+
+            myListView.setOnItemClickListener(myClickListenerFriend);
+            OverallCalculator overallCalculator;
+            for (int i = 0; i < friends.size(); i++) {
+                overallCalculator = new OverallCalculator(friends.get(friends_keys[i]));
+                double overall = overallCalculator.overallRating;
+
+                ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
+                // The below assigns each of the values to their corresponding components
+                oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
+                oneRow.setText_nameDay(friends_keys[i]);
+                oneRow.setRating_ratingStars((float) overall);
+                oneRow.setRating_ratingString(overall);
+
+                allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
+            }
+            */
+        }else{
+            TextView errorText = findViewById(R.id.textView_noPending);
+            errorText.setVisibility(View.VISIBLE);
+        }
     }
 }

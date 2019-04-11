@@ -94,7 +94,6 @@ public class BaseActivity extends AppCompatActivity {
         navigation_base.setOnNavigationItemSelectedListener(myBottomNavigationListener);
         // The navigation listener above 'listens' or detects when the user wants to change activity
         // and calls the 'myBottomNavigationListener' method when the user chooses
-
     }
 
 }

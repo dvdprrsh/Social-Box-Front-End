@@ -15,9 +15,36 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class JourneysFragment extends Fragment {
-
     private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
+
+    public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
+
+        // This method is called when one of the journeys has been clicked/tapped
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            JourneyFragment journeyFragment = new JourneyFragment();
+
+            // Finds all the views which data needs to be passed across to 'journeyFragment'
+            TextView date = view.findViewById(R.id.textView_dayDate);
+            RatingBar rating0 = view.findViewById(R.id.ratingBar_overallStars);
+            ImageView rating1 = view.findViewById(R.id.imageView_acceleration);
+            ImageView rating2 = view.findViewById(R.id.imageView_braking);
+            ImageView rating3 = view.findViewById(R.id.imageView_speed);
+            ImageView rating4 = view.findViewById(R.id.imageView_time);
+
+            String journeyDate = date.getText().toString();
+            Float ratingOverall = rating0.getRating();
+            String ratingAcceleration = rating1.getTag().toString();
+            String ratingBraking = rating2.getTag().toString();
+            String ratingSpeed = rating3.getTag().toString();
+            String ratingTime = rating4.getTag().toString();
+
+            // opens the selected journey's fragment
+            new OpenFriendJourneyFragment(null, journeyFragment, getActivity().getSupportFragmentManager(),
+                    journeyDate, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
+        }
+    };
 
     // TODO: Add a more detailed welcome message, e.g. "*NAME*'s Journeys"
     @Override
@@ -49,46 +76,5 @@ public class JourneysFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView(); // Destroys the fragment when called
     }
-
-    public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
-
-        // This method is called when one of the journeys has been clicked/tapped
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            JourneyFragment journeyFragment = new JourneyFragment();
-            Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
-
-            // Finds all the views which data needs to be passed across to 'journeyFragment'
-            TextView dayDate = view.findViewById(R.id.textView_dayDate);
-            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
-            ImageView ratingAcceleration = view.findViewById(R.id.imageView_acceleration);
-            ImageView ratingBraking = view.findViewById(R.id.imageView_braking);
-            ImageView ratingSpeed = view.findViewById(R.id.imageView_speed);
-            ImageView ratingTime = view.findViewById(R.id.imageView_time);
-
-            // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dateName", dayDate.getText().toString());
-            arguments.putFloat("ratingOverall", ratingOverall.getRating());
-            arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
-            arguments.putString("ratingBraking", ratingBraking.getTag().toString());
-            arguments.putString("ratingSpeed", ratingSpeed.getTag().toString());
-            arguments.putString("ratingTime", ratingTime.getTag().toString());
-
-            journeyFragment.setArguments(arguments); // Sets the arguments for the fragment
-
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Assigns values to the fragment Transaction
-            fragmentTransaction
-                    .replace(R.id.fragment_layout, journeyFragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            if (fragmentManager.getBackStackEntryCount() < 1){
-                fragmentTransaction.addToBackStack(null); // To prevent multiple 'back' button presses
-            }
-            fragmentTransaction.commit();
-        }
-    };
 
 }

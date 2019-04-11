@@ -18,12 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainFragment extends Fragment {
     private static final int REQUEST_LOCATION = 1111;
@@ -34,11 +34,29 @@ public class MainFragment extends Fragment {
     private String users_name;
     private double users_rating;
 
-    private String[] friend_names = {"Cam", "Josh", "Dave", "Cybs", "George", "Javier"};
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
+    private Map<String, double[]> friends = new HashMap<String, double[]>(){
+        {
+            put("Cam", friend_ratings[0]);
+            put("Josh", friend_ratings[1]);
+            put("Dave", friend_ratings[2]);
+            put("Cybs", friend_ratings[3]);
+            put("George", friend_ratings[4]);
+            put("Javier", friend_ratings[5]);
+        }
+    };
 
-    private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journey_ratings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
+    private Map<String, double[]> journeys = new HashMap<String, double[]>(){
+        {
+            put("Monday", journey_ratings[0]);
+            put("Tuesday", journey_ratings[1]);
+            put("Wednesday", journey_ratings[2]);
+            put("Thursday", journey_ratings[3]);
+            put("Friday", journey_ratings[4]);
+            put("Saturday", journey_ratings[5]);
+        }
+    };
 
     // This method is for the navigation in the 'At a Glance' section and has the job of switching
     // what is displayed in the listView below it, being either basic friend or basic journey details
@@ -64,46 +82,27 @@ public class MainFragment extends Fragment {
     private ListView.OnItemClickListener myClickListenerFriend = new ListView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            FriendFragment friendFragment = new FriendFragment();
+            // Finds all the views which data needs to be passed across to 'journeyFragment'
+            TextView dateName = view.findViewById(R.id.textView_nameDay);
+            String friendName = dateName.getText().toString();
+            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_ratingStars);
 
+            new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(), friendName, ratingOverall.getRating(), String.valueOf(friends.get(friendName)[0]), String.valueOf(friends.get(friendName)[1]), String.valueOf(friends.get(friendName)[2]), String.valueOf(friends.get(friendName)[3]));
         }
     };
 
-    // TODO: Fix this method!
     private ListView.OnItemClickListener myClickListenerJourney = new ListView.OnItemClickListener(){
         // This method is called when one of the journeys has been clicked/tapped
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
             JourneyFragment journeyFragment = new JourneyFragment();
-            Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
-
             // Finds all the views which data needs to be passed across to 'journeyFragment'
-            TextView dateName = view.findViewById(R.id.textView_dayDate);
+            TextView dateName = view.findViewById(R.id.textView_nameDay);
             String journeyDate = dateName.getText().toString();
+            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_ratingStars);
 
-            RatingBar ratingOverall = view.findViewById(R.id.ratingBar_overallStars);
-
-            // Adds values to the 'arguments' bundle so that the data stored in it can be used
-            arguments.putString("dateName", journeyDate);
-            arguments.putFloat("ratingOverall", ratingOverall.getRating());
-            arguments.putString("ratingAcceleration", ratingAcceleration.getTag().toString());
-            arguments.putString("ratingBraking", ratingBraking.getTag().toString());
-            arguments.putString("ratingSpeed", ratingSpeed.getTag().toString());
-            arguments.putString("ratingTime", ratingTime.getTag().toString());
-
-            journeyFragment.setArguments(arguments); // Sets the arguments for the fragment
-
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // Assigns values to the fragment Transaction
-            fragmentTransaction
-                    .replace(R.id.fragment_layout, journeyFragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            if (fragmentManager.getBackStackEntryCount() < 1){
-                fragmentTransaction.addToBackStack(null); // To prevent multiple 'back' button presses
-            }
-            fragmentTransaction.commit();
+            new OpenFriendJourneyFragment(null, journeyFragment, getActivity().getSupportFragmentManager(), journeyDate, ratingOverall.getRating(), String.valueOf(journeys.get(journeyDate)[0]), String.valueOf(journeys.get(journeyDate)[1]), String.valueOf(journeys.get(journeyDate)[2]), String.valueOf(journeys.get(journeyDate)[3]));
         }
     };
 
@@ -141,17 +140,20 @@ public class MainFragment extends Fragment {
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
 
         // This for-loop assigns values to the components of each row
-        if (friend_names != null) {
+        if (friends != null) {
+            String[] friends_keys = new String[friends.size()];
+            friends.keySet().toArray(friends_keys);
+
             myListView.setOnItemClickListener(myClickListenerFriend);
             OverallCalculator overallCalculator;
-            for (int i = 0; i < friend_names.length; i++) {
-                overallCalculator = new OverallCalculator(friend_ratings[i]);
+            for (int i = 0; i < friends.size(); i++) {
+                overallCalculator = new OverallCalculator(friends.get(friends_keys[i]));
                 double overall = overallCalculator.overallRating;
 
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
                 oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
-                oneRow.setText_nameDay(friend_names[i]);
+                oneRow.setText_nameDay(friends_keys[i]);
                 oneRow.setRating_ratingStars((float) overall);
                 oneRow.setRating_ratingString(overall);
 
@@ -176,15 +178,18 @@ public class MainFragment extends Fragment {
         myListView.setOnItemClickListener(myClickListenerJourney);
         OverallCalculator overallCalculator;
 
-        if (journey_dates != null) {
-            for (int i = 0; i < journey_dates.length; i++) {
-                overallCalculator = new OverallCalculator(friend_ratings[i]);
+        if (journeys != null) {
+            String[] journeys_keys = new String[journeys.size()];
+            journeys.keySet().toArray(journeys_keys);
+
+            for (int i = 0; i < journeys.size(); i++) {
+                overallCalculator = new OverallCalculator(journeys.get(journeys_keys[i]));
                 double overall = overallCalculator.overallRating;
 
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // Below assigns values to their corresponding components
                 oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
-                oneRow.setText_nameDay(journey_dates[i]);
+                oneRow.setText_nameDay(journeys_keys[i]);
                 oneRow.setRating_ratingStars(overall);
                 oneRow.setRating_ratingString(overall);
 
