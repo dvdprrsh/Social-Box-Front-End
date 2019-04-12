@@ -23,11 +23,22 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class DrivingActivity extends AppCompatActivity implements OnMapReadyCallback {
     public Snackbar mySnackbar;
     public Location lastKnown;
     public String locationProvider;
     private GoogleMap myMap;
+
+    Queue<Double> latitudePoints = new LinkedList<>();
+    Queue<Double> longitudePoints = new LinkedList<>();
+    Queue<Double> timeRecorded = new LinkedList<>();
+    Queue<Double>[] queues = new Queue[3];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,7 @@ public class DrivingActivity extends AppCompatActivity implements OnMapReadyCall
         mySnackbar = Snackbar.make((findViewById(R.id.contraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG);
 
         try{
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
         }catch (SecurityException e){
 
         }
@@ -52,7 +63,12 @@ public class DrivingActivity extends AppCompatActivity implements OnMapReadyCall
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
+            Calendar currenttime = Calendar.getInstance();
+            timeRecorded.add((double)currenttime.getTimeInMillis());
+            latitudePoints.add(location.getLatitude());
+            longitudePoints.add(location.getLongitude());
             myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
+
         }
 
         @Override
@@ -127,7 +143,46 @@ public class DrivingActivity extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
 
+    public String ConvertToJSON() {
+        queues[0] = latitudePoints;
+        queues[1] = longitudePoints;
+        queues[2] = timeRecorded;
+
+        String completeStringToSend = "";
+
+        String[] dataNames = {"Latitude", "Longitude", "TimeLogged"};
+        int size = queues[0].size();
+        //   try {
+        for (int i = 0; i < queues.length;  i++) {
+            String toAdd = "";
+            for (int x = 0; x < size; x++) {
+                if(x == size-1) {
+                    toAdd = toAdd + (queues[i].remove());
+                } else {
+                    toAdd = toAdd + (queues[i].remove() + ",");
+                }
+            }
+
+            if (i != 0) {
+                completeStringToSend = completeStringToSend + "&" + dataNames[i] + "=" + toAdd;
+            }
+            else {
+                completeStringToSend = dataNames[i] + "=" + toAdd;
+            }
+        }
+
+        return(completeStringToSend);
+    }
+
     private void stopRecording(){
         // This method will be called when the user either presses the back button twice or the stop button is called
+        String postString = ConvertToJSON();
+
+       // SendToServer sender = new SendToServer();
+       // try {
+       //     sender.Send(postString,"");
+       // } catch (IOException e) {
+       //     e.printStackTrace();
+        //}
     }
 }
