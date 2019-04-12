@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8213512a-ede3-4e67-a187-30e539523849" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client_frontEnd/app/src/main/java/com/team36/client_frontend/SendToServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client_frontEnd/app/src/main/java/com/team36/client_frontend/DrivingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client_frontEnd/app/src/main/java/com/team36/client_frontend/DrivingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client_frontEnd/app/src/main/java/com/team36/client_frontend/DrivingEsri.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client_frontEnd/app/src/main/java/com/team36/client_frontend/DrivingEsri.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
