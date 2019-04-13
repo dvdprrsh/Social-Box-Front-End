@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
             System.out.print("First Open");
         }
 
+        if (checkLogin) checkLogInState();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -54,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(this::onRegister);
 
         setUsername();
-        if (checkLogin) checkLogInState();
     }
 
     // Checks if the user has logged in previously and not logged out
@@ -69,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (loggedIn){
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
-            finish();
             startActivity(intent);
+            finish();
         }else{
             setUsername();
         }

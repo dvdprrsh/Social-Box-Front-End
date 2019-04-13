@@ -156,7 +156,6 @@ public class DrivingEsri extends AppCompatActivity {
     private void stopRecording(){
         // This method will be called when the user either presses the 'Stop!' button once or
         // the back button twice
-        // This method will be called when the user either presses the back button twice or the stop button is called
         String postString = ConvertToJSON();
         postString = postString;
         // SendToServer sender = new SendToServer();
