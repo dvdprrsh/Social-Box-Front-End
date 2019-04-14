@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class FriendsFragment extends Fragment {
     public View.OnClickListener fabClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            // Transitions ot the add friends and pending friend requests activity
             Intent intent = new Intent(getActivity(), AddPendingFriendsActivity.class);
             startActivity(intent);
         }
@@ -77,6 +79,7 @@ public class FriendsFragment extends Fragment {
             textView_error.setText(R.string.error_friends);
         }
 
+        // Shows the add friend floating action button
         FloatingActionButton addFriend = returnView.findViewById(R.id.fab_add);
         addFriend.show();
         addFriend.setOnClickListener(fabClick);

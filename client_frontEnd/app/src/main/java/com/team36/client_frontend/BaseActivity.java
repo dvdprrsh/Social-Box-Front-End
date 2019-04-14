@@ -10,8 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import java.util.List;
-
 public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private BottomNavigationView navigation_base;
@@ -28,29 +26,29 @@ public class BaseActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     // Transitions to the home/main fragment, if applicable
-                    if (!(sameSelected(R.id.navigation_home))) {
-                        MainFragment mainFragment = new MainFragment();
+                    MainFragment mainFragment = new MainFragment();
+                    if (!(sameSelected(R.id.navigation_home, mainFragment))) { // Prevents transition to same fragment
                         displayFragment(mainFragment);
                     }
                     return true;
                 case R.id.navigation_allJourneys:
                     // Transitions to the journeys fragment, if applicable
-                    if (!(sameSelected(R.id.navigation_allJourneys))) {
-                        JourneysFragment journeysFragment = new JourneysFragment();
+                    JourneysFragment journeysFragment = new JourneysFragment();
+                    if (!(sameSelected(R.id.navigation_allJourneys, journeysFragment))) { // Prevents transition to same fragment
                         displayFragment(journeysFragment);
                     }
                     return true;
                 case R.id.navigation_allFriends:
                     // Transitions to the friends fragment, if applicable
-                    if (!(sameSelected(R.id.navigation_allFriends))) {
-                        FriendsFragment friendsFragment = new FriendsFragment();
+                    FriendsFragment friendsFragment = new FriendsFragment();
+                    if (!(sameSelected(R.id.navigation_allFriends, friendsFragment))) { // Prevents transition to same fragment
                         displayFragment(friendsFragment);
                     }
                     return true;
                 case R.id.navigation_profile:
                     // Transitions to the dashboard fragment, if applicable
-                    if (!(sameSelected(R.id.navigation_profile))) {
-                        ProfileFragment profileFragment = new ProfileFragment();
+                    ProfileFragment profileFragment = new ProfileFragment();
+                    if (!(sameSelected(R.id.navigation_profile, profileFragment))) { // Prevents transition to same fragment
                         displayFragment(profileFragment);
                     }
                     return true;
@@ -59,8 +57,12 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
-    private boolean sameSelected(int selectedItem){
-        return navigation_base.getSelectedItemId() == selectedItem;
+    /* This function prevents the user from pressing the same navigation button multiple times,
+       this prevents the fragment from showing its displayed animation multiple times */
+    private boolean sameSelected(int selectedItem, Fragment toDisplay){
+        Fragment displayedFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
+        Class c = displayedFragment.getClass();
+        return (navigation_base.getSelectedItemId() == selectedItem) && (c == toDisplay.getClass());
     }
 
     // Displays the given fragment in the frame layout 'fragment_layout'
@@ -71,13 +73,16 @@ public class BaseActivity extends AppCompatActivity {
             fragmentManager.popBackStackImmediate();
         }
 
+        // The next two lines remove the previous fragment (if there is one) before the next fragment is displayed to prevent overlap of transition animations
         Fragment f = fragmentManager.findFragmentByTag("prevFragment");
         if (f != null) fragmentManager.beginTransaction().remove(f).commit();
 
+        // Displays the next fragment
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.add(R.id.fragment_layout, fragment, "prevFragment");
-        fragmentTransaction.commit();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+
+                .add(R.id.fragment_layout, fragment, "prevFragment")
+                .commit();
     }
 
     @Override

@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -207,6 +206,7 @@ public class MainFragment extends Fragment {
         myListView.setAdapter(journeys_adapter);
     }
 
+    // Displays the welcome message with the user's name to the user
     private void setWelcomeTextRating(){
         TextView textView_welcome = returnView.findViewById(R.id.textView_welcome);
         textView_welcome.setText(String.format(WELCOME_MESSAGE, users_name));

@@ -1,11 +1,11 @@
 package com.team36.client_frontend;
+// Cameron MacKay
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -32,7 +32,7 @@ public class SendToServer {
         os.close();
         // For POST only - END
 
-        //get responce code
+        //get response code
         int responseCode = con.getResponseCode();
         System.out.println("POST Response Code :: " + responseCode);
 

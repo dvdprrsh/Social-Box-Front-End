@@ -16,7 +16,7 @@ public class My_Adapter_JourneysMain extends BaseAdapter {
     private ArrayList<ListView_ItemNormal> myRows; // Stores all the rows/journeys of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public My_Adapter_JourneysMain(Context context, ArrayList<ListView_ItemNormal> myRows){
+    My_Adapter_JourneysMain(Context context, ArrayList<ListView_ItemNormal> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }

@@ -1,4 +1,5 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 
 public class OpenFriendJourneyFragment {
 
-    public OpenFriendJourneyFragment(@Nullable FriendFragment friendFragment, @Nullable JourneyFragment journeyFragment, FragmentManager fragmentManager, String dateName, Float ratingOverall, String ratingAcceleration, String ratingBraking, String ratingSpeed, String ratingTime){
+    OpenFriendJourneyFragment(@Nullable FriendFragment friendFragment, @Nullable JourneyFragment journeyFragment, FragmentManager fragmentManager, String dateName, Float ratingOverall, String ratingAcceleration, String ratingBraking, String ratingSpeed, String ratingTime){
         Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

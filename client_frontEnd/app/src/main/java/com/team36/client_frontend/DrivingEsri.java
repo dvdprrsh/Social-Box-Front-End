@@ -6,10 +6,10 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Chronometer;
@@ -18,23 +18,23 @@ import android.widget.TextView;
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment;
 import com.esri.arcgisruntime.mapping.view.LocationDisplay;
 import com.esri.arcgisruntime.mapping.view.MapView;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class DrivingEsri extends AppCompatActivity {
-    public Snackbar mySnackbar;
+    public Snackbar snackbar;
     private MapView esriMap;
     private LocationDisplay locationDisplay;
     public String locationProvider;
 
+    //**** Cameron MacKay ****//
     Queue<Double> latitudePoints = new LinkedList<>();
     Queue<Double> longitudePoints = new LinkedList<>();
     Queue<Double> timeRecorded = new LinkedList<>();
     Queue<Double>[] queues = new Queue[3];
+    //********//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,11 @@ public class DrivingEsri extends AppCompatActivity {
 
         Chronometer chronometer = findViewById(R.id.chronometer);
         chronometer.setTypeface(typeface);
-        chronometer.start(); // Starts the stopwatch
+        chronometer.start(); // Starts the stopwatch to show how long it has been recording
 
-        mySnackbar = Snackbar.make((findViewById(R.id.constraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG);
+        snackbar = Snackbar.make((findViewById(R.id.constraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG); // Snackbar for when the back button is pressed
 
+        //**** Cameron MacKay ****//
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationProvider = LocationManager.NETWORK_PROVIDER;
 
@@ -63,8 +64,10 @@ public class DrivingEsri extends AppCompatActivity {
         }catch (SecurityException e){
 
         }
+        //********//
     }
 
+    //**** Cameron MacKay ****//
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -91,6 +94,37 @@ public class DrivingEsri extends AppCompatActivity {
 
         }
     };
+    //********//
+
+    /*
+     * Lines 108 to 128 pause the map to save battery when the user leaves the app;
+     * resume the map if the user returns to the app after leaving it;
+     * and destroys the map if the activity is destroyed by the OS or otherwise.
+     * These are all done only if the map is not null (is displaying the users location)
+     */
+    @Override
+    public void onPause() {
+        if (esriMap!=null){
+            esriMap.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (esriMap!=null){
+            esriMap.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (esriMap!=null){
+            esriMap.dispose();
+        }
+        super.onDestroy();
+    }
 
     // Sets the location display to display the users location
     private void setALocationDisplay() {
@@ -109,18 +143,19 @@ public class DrivingEsri extends AppCompatActivity {
     // This method is used to notify the user that they must press the back button once more to return to the main screen
     @Override
     public boolean onKeyDown(int kCode, KeyEvent kEvent){
-        if((!mySnackbar.isShown()) && (kCode == KeyEvent.KEYCODE_BACK)){
-            View view = mySnackbar.getView();
+        if((!snackbar.isShown()) && (kCode == KeyEvent.KEYCODE_BACK)){
+            View view = snackbar.getView();
             TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            mySnackbar.show();
-        }else if (mySnackbar.isShown()){
+            snackbar.show();
+        }else if (snackbar.isShown()){
             stopRecording();
             finish();
         }
         return true;
     }
 
+    //**** Cameron MacKay ****//
     public String ConvertToJSON() {
         queues[0] = latitudePoints;
         queues[1] = longitudePoints;
@@ -151,10 +186,12 @@ public class DrivingEsri extends AppCompatActivity {
 
         return(completeStringToSend);
     }
+    //********//
 
     private void stopRecording(){
-        // This method will be called when the user either presses the 'Stop!' button once or
-        // the back button twice
+        // This method will be called when the user either presses the 'Stop!' button once or the back button twice
+
+        //**** Cameron MacKay ****//
         String postString = ConvertToJSON();
         postString = postString;
         // SendToServer sender = new SendToServer();
@@ -163,5 +200,6 @@ public class DrivingEsri extends AppCompatActivity {
         // } catch (IOException e) {
         //     e.printStackTrace();
         //}
+        //********//
     }
 }

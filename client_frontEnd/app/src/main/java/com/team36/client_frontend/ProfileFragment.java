@@ -44,15 +44,17 @@ public class ProfileFragment extends Fragment {
         return returnView;
     }
 
+    // When the logout button is pressed, this method is called
     public void onLogout(View view){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("logged_in", false);
+        editor.putBoolean("logged_in", false); // This indicates the user has logged out so the app will display the login page when it is next opened
         editor.apply();
 
         Intent intent = new Intent(getActivity(), LoginActivity.class);
+        // These flags below are used to disable the user pressing the back button to take them back to the profile fragment
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("checkLogin", false);
+        intent.putExtra("checkLogin", false); // Indicates to the login activity not to check if the user is logged in
         startActivity(intent);
     }
 

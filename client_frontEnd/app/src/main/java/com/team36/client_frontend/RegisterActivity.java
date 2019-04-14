@@ -1,9 +1,10 @@
 package com.team36.client_frontend;
+// Javier Ballester
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -27,25 +28,32 @@ public class RegisterActivity extends AppCompatActivity {
         newPassword = findViewById(R.id.editText_passwordRegister);
         passwordConfirmation = findViewById(R.id.editText_passwordConfirm);
         email = findViewById(R.id.editText_emailRegister);
-        snackbar = Snackbar.make((findViewById(R.id.constrainLayoutRegisterActivity)), R.string.register_snackbar_fieldError, Snackbar.LENGTH_SHORT);
+        snackbar = Snackbar.make((findViewById(R.id.constrainLayoutRegisterActivity)), R.string.register_snackbar_fieldError, Snackbar.LENGTH_SHORT); //**** David Parrish ****//
         newRegister = findViewById(R.id.button_registerRegister);
 
         newRegister.setOnClickListener(this::onRegister);
     }
 
     public void onRegister(View view){
-        hideKeyboard();
+        //**** David Parrish ****//
+        hideKeyboard(); // Hides the keyboard so that the snackbar can be seen by the user
         if (checkBlank() && !(snackbar.isShown())){
-            snackbar.show();
+            snackbar.show(); // Shows the snackbar if fields are left blank and the snackbar is not already shown
         }
+        //********//
     }
 
+    //**** David Parrish ****//
     private boolean checkBlank(){
+        // Checks whether any of the fields are left blank
         return (newUsername.getText().toString().equals("") || newPassword.getText().toString().equals("") ||
                 passwordConfirmation.getText().toString().equals("") || email.getText().toString().equals(""));
     }
+    //********//
 
+    //**** David Parrish ****//
     private void hideKeyboard(){
+        // The below hides the keyboard if open
         View view = this.getCurrentFocus();
         if(view == null){
             view = new View(this);
@@ -53,4 +61,5 @@ public class RegisterActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    //********//
 }

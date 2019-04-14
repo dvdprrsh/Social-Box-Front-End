@@ -16,7 +16,7 @@ public class My_Adapter_FriendMain extends BaseAdapter {
     private ArrayList<ListView_ItemNormal> myRows; // Stores all the rows/friends of the listView
     private LayoutInflater myInflater; // Inflater for adding each row to the listView
 
-    public My_Adapter_FriendMain(Context context, ArrayList<ListView_ItemNormal> myRows){
+    My_Adapter_FriendMain(Context context, ArrayList<ListView_ItemNormal> myRows){
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }

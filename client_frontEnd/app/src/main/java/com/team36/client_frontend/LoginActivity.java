@@ -1,12 +1,13 @@
 package com.team36.client_frontend;
+// Javier Ballester
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         boolean checkLogin = true;
 
+        //**** David Parrish ****//
         try {
             checkLogin = getIntent().getBooleanExtra("checkLogin", true);
 
@@ -37,11 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         }catch (NullPointerException e){
             System.out.print("First Open");
         }
+        //********//
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_LONG);
+        snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_LONG); //**** David Parrish ****//
 
         username = findViewById(R.id.editText_username); // Assigning variables
         password = findViewById(R.id.editText_password);
@@ -50,13 +53,17 @@ public class LoginActivity extends AppCompatActivity {
 
         login = findViewById(R.id.button_login);
         register = findViewById(R.id.button_register);
+
+        //**** David Parrish ****//
         login.setOnClickListener(this::onLogin);
         register.setOnClickListener(this::onRegister);
 
         if (checkLogin) checkLogInState();
         setUsername();
+        //********//
     }
 
+    //**** David Parrish ****//
     // Checks if the user has logged in previously and not logged out
     private void checkLogInState(){
         try {
@@ -75,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             setUsername();
         }
     }
+    //********//
 
     public void onLogin(View view){
         validate(username.getText().toString(), password.getText().toString());
@@ -88,10 +96,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validate (String userName, String userPassword) {// Sets the username and password
         if ((userName.equals("Dave")) && (userPassword.equals(""))) {
-            // Opens base fragment is what links to the rest of the app
-            SaveLogInState();
+            // Opens base activity which links to the rest of the app
+            SaveLogInState(); //**** David Parrish ****//
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //**** David Parrish ****//
             startActivity(intent);
         }else {
             View view = this.getCurrentFocus();
@@ -99,25 +107,29 @@ public class LoginActivity extends AppCompatActivity {
                 view = new View(this);
             }
 
+            //**** David Parrish ****//
             InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
             if (!snackbar.isShown()){
                 snackbar.show();
             }
+            //********//
 
             counter--;
             attempts.setText(String.format(attemptsRemaining, counter));
             // Converts int to string to show how many remaining attempts you have
 
             if (counter == 0) {//after 5 attempts button disabled
-                Snackbar snackbar_disabledLogIn = Snackbar.make(findViewById(R.id.constraintLayoutLoginActivity), R.string.login_snackbar_loginDisabled, Snackbar.LENGTH_LONG);
+                Snackbar snackbar_disabledLogIn = Snackbar.make(findViewById(R.id.constraintLayoutLoginActivity), R.string.login_snackbar_loginDisabled, Snackbar.LENGTH_LONG); //**** David Parrish ****//
                 snackbar_disabledLogIn.show();
 
                 login.setEnabled(false);
             }
         }
     }
+
+    //**** David Parrish ****//
 
     // If username has previously been entered, sets the username field to this value
     private void setUsername(){
@@ -134,6 +146,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("Username", username.getText().toString());
         editor.apply();
     }
+
+    //********//
 
     private void registerUser () {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);

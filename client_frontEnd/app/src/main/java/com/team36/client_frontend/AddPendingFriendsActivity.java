@@ -1,12 +1,14 @@
 package com.team36.client_frontend;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class AddPendingFriendsActivity extends AppCompatActivity {
+    // David Parrish - 21232252
+
     private EditText friendsUsername;
     private boolean friendRequests = false;
 
@@ -49,6 +51,7 @@ public class AddPendingFriendsActivity extends AppCompatActivity {
             }
             */
         }else{
+            // Displays message to user indicating that they have no friend requests at that time
             TextView errorText = findViewById(R.id.textView_noPending);
             errorText.setVisibility(View.VISIBLE);
         }

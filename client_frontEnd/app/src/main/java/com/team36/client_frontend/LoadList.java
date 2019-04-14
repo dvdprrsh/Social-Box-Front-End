@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class LoadList {
     private final int RATING_ACCELERATION = 0, RATING_BRAKING = 1, RATING_SPEED = 2, RATING_TIME = 3;
-    public ArrayList<ListView_JourneysFriends> allRows = new ArrayList<>();
+    ArrayList<ListView_JourneysFriends> allRows = new ArrayList<>();
     private String[] datesNames;
     private double[][] ratings;
 

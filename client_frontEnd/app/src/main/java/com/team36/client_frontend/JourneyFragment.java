@@ -34,20 +34,14 @@ public class JourneyFragment extends Fragment {
     private View returnView;
     private Bundle arguments;
 
-    private MapView esriMap;
-    private ArcGISMap arcGISMap;
-
-    private Envelope envelope = null;
-
     private double[] xCoords = {-2.936182, -2.930346};
     private double[] yCoords = {53.394124, 53.390423};
-
+    private MapView esriMap;
     private double[] coords = {-2.936182, 53.394124, -2.930346, 53.390423};
 
     private final int START_COORDINATE = 0;
     private int END_COORDINATE;
 
-    private Point pointStart;
     private Point pointEnd;
 
     @Override
@@ -66,10 +60,16 @@ public class JourneyFragment extends Fragment {
 
         END_COORDINATE = (coords.length)-1;
 
-        setStart();
+        setRoute();
         return setView.returnView;
     }
 
+    /*
+     * Lines 74 to 94 pause the map to save battery when the user leaves the app;
+     * resume the map if the user returns to the app after leaving it;
+     * and destroys the map if the activity is destroyed by the OS or otherwise.
+     * These are all done only if the map is not null (is displaying the users location)
+     */
     @Override
     public void onPause() {
         if (esriMap!=null){
@@ -83,7 +83,6 @@ public class JourneyFragment extends Fragment {
         super.onResume();
         if (esriMap!=null){
             esriMap.resume();
-            esriMap.setViewpointGeometryAsync(envelope);
         }
     }
 
@@ -95,9 +94,10 @@ public class JourneyFragment extends Fragment {
         super.onDestroy();
     }
 
-    private void setStart(){
+    // Displays the route for the given journey
+    private void setRoute(){
         PointCollection points = new PointCollection(SpatialReferences.getWgs84());
-        pointStart = new Point(coords[0], coords[1], SpatialReferences.getWgs84());
+        Point pointStart = new Point(coords[0], coords[1], SpatialReferences.getWgs84());
 
         for (int i=0; i<coords.length;){
             points.add(coords[i], coords[i+1]);
@@ -107,15 +107,16 @@ public class JourneyFragment extends Fragment {
             i=i+2;
         }
 
-        Polyline polyline = new Polyline(points, SpatialReferences.getWgs84());
+        Polyline polyline = new Polyline(points, SpatialReferences.getWgs84()); // Creates the journey route line
 
+        // Adds the route with start and end points to the graphics overlay and displays it
         GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
         esriMap.getGraphicsOverlays().add(graphicsOverlay);
         graphicsOverlay.getGraphics().add(new Graphic(polyline, simpleLineSymbol));
         graphicsOverlay.getGraphics().add(new Graphic(pointStart, simpleMarkerSymbolStart));
         graphicsOverlay.getGraphics().add(new Graphic(pointEnd, simpleMarkerSymbolEnd));
 
-        envelope = new Envelope(coords[START_COORDINATE], coords[START_COORDINATE+1], coords[END_COORDINATE-1], coords[END_COORDINATE], SpatialReferences.getWgs84());
-        esriMap.setViewpointGeometryAsync(envelope);
+        Envelope envelope = new Envelope(coords[START_COORDINATE], coords[START_COORDINATE+1], coords[END_COORDINATE-1], coords[END_COORDINATE], SpatialReferences.getWgs84());
+        esriMap.setViewpointGeometryAsync(envelope); // Sets the view of the map to scale to the start and endpoint
     }
 }

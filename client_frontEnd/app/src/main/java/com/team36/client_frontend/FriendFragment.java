@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 public class FriendFragment extends Fragment {
     private final String WELCOME_MESSAGE = "%s's Dashboard";
-
     private View returnView;
-    private Bundle arguments;
+
     private String[] journey_dates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[] journey_ratings = {3.0, 4.5, 4.5, 3.5, 5.0, 4.0};
 
@@ -23,7 +22,7 @@ public class FriendFragment extends Fragment {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_friend, container, false);
 
-        arguments = getArguments();
+        Bundle arguments = getArguments();
         ReturnView setView = new ReturnView(returnView, WELCOME_MESSAGE, arguments);
         friend_journeys();
         return setView.returnView;

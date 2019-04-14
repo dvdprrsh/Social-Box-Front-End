@@ -3,17 +3,17 @@ package com.team36.client_frontend;
 
 public class LoggedIn_User {
     // Stores information about the user
-    public String api_key;
-    public String user_firstName = "David";
-    public String user_lastName;
-    public String user_email;
-    public String user_username;
-    public double[] user_ratings = {4.0, 4.0, 5.0, 3.5};
-    public double user_overall = calcOverall();
-    public String[] user_friendIDs;
+    String api_key;
+    String user_firstName = "David";
+    String user_lastName;
+    String user_email;
+    String user_username;
+    double[] user_ratings = {4.0, 4.0, 5.0, 3.5};
+    double user_overall = calcOverall();
+    String[] user_friendIDs;
 
     // Assigns the variables above
-    public void LoggedIn_UserMethod(String key, String firstName, String lastName, String email,
+    void LoggedIn_UserMethod(String key, String firstName, String lastName, String email,
                                     String username, double[] rating, String[] friendIDs){
         api_key = key;
         user_firstName = firstName;

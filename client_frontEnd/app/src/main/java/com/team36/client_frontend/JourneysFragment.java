@@ -1,10 +1,9 @@
 package com.team36.client_frontend;
+// David Parrish - 201232252
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class JourneysFragment extends Fragment {
     private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
@@ -52,11 +49,10 @@ public class JourneysFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
 
+        View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
         TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcome);
         textView_welcomeText.setText(R.string.journeys_welcome);
-
         ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
 
         if (journeyDates != null) {
@@ -66,6 +62,7 @@ public class JourneysFragment extends Fragment {
             My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
             listView.setAdapter(journeysList_myAdapter);
         }else{
+            // Displays a message to the user if they have not taken any journeys yet
             listView.setVisibility(View.INVISIBLE);
             TextView textView_error = returnView.findViewById(R.id.textView_error);
             textView_error.setVisibility(View.VISIBLE);

@@ -16,7 +16,7 @@ public class My_Adapter_JourneysFriends extends BaseAdapter {
     private ArrayList<ListView_JourneysFriends> myRows;
     private LayoutInflater myInflater;
 
-    public My_Adapter_JourneysFriends(Context context, ArrayList<ListView_JourneysFriends> myRows) {
+    My_Adapter_JourneysFriends(Context context, ArrayList<ListView_JourneysFriends> myRows) {
         this.myRows = myRows;
         myInflater = LayoutInflater.from(context);
     }
