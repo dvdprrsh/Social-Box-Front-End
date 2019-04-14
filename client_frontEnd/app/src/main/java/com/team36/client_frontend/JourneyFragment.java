@@ -35,9 +35,15 @@ public class JourneyFragment extends Fragment {
     private Bundle arguments;
 
     private MapView esriMap;
+    private ArcGISMap arcGISMap;
+
+    private Envelope envelope = null;
 
     private double[] xCoords = {-2.936182, -2.930346};
     private double[] yCoords = {53.394124, 53.390423};
+
+    private double[] coords = {-2.936182, 53.394124, -2.930346, 53.390423};
+
     private final int START_COORDINATE = 0;
     private int END_COORDINATE;
 
@@ -54,23 +60,51 @@ public class JourneyFragment extends Fragment {
 
         // The below is the license ID for the map API
         ArcGISRuntimeEnvironment.setLicense("runtimelite,1000,rud6686217235,none,C6JC7XLS1MYJ003AD167");
-
         esriMap = returnView.findViewById(R.id.mapView_esriJourney);
         ArcGISMap arcGISMap = new ArcGISMap(Basemap.createNavigationVector());
         esriMap.setMap(arcGISMap);
 
-        END_COORDINATE = (xCoords.length)-1;
+        END_COORDINATE = (coords.length)-1;
 
         setStart();
         return setView.returnView;
     }
 
+    @Override
+    public void onPause() {
+        if (esriMap!=null){
+            esriMap.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (esriMap!=null){
+            esriMap.resume();
+            esriMap.setViewpointGeometryAsync(envelope);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (esriMap!=null){
+            esriMap.dispose();
+        }
+        super.onDestroy();
+    }
+
     private void setStart(){
         PointCollection points = new PointCollection(SpatialReferences.getWgs84());
-        pointStart = new Point(xCoords[0], yCoords[0], SpatialReferences.getWgs84());
-        for (int i=0; i<xCoords.length; i++){
-            points.add(xCoords[i], yCoords[i]);
-            if (i == (xCoords.length)-1) pointEnd = new Point(xCoords[i], yCoords[i], SpatialReferences.getWgs84());
+        pointStart = new Point(coords[0], coords[1], SpatialReferences.getWgs84());
+
+        for (int i=0; i<coords.length;){
+            points.add(coords[i], coords[i+1]);
+            if (i == (coords.length)-2){
+                pointEnd = new Point(coords[i], coords[i+1], SpatialReferences.getWgs84());
+            }
+            i=i+2;
         }
 
         Polyline polyline = new Polyline(points, SpatialReferences.getWgs84());
@@ -81,7 +115,7 @@ public class JourneyFragment extends Fragment {
         graphicsOverlay.getGraphics().add(new Graphic(pointStart, simpleMarkerSymbolStart));
         graphicsOverlay.getGraphics().add(new Graphic(pointEnd, simpleMarkerSymbolEnd));
 
-        Envelope envelope = new Envelope(xCoords[START_COORDINATE], yCoords[START_COORDINATE], xCoords[END_COORDINATE], yCoords[END_COORDINATE], SpatialReferences.getWgs84());
+        envelope = new Envelope(coords[START_COORDINATE], coords[START_COORDINATE+1], coords[END_COORDINATE-1], coords[END_COORDINATE], SpatialReferences.getWgs84());
         esriMap.setViewpointGeometryAsync(envelope);
     }
 }

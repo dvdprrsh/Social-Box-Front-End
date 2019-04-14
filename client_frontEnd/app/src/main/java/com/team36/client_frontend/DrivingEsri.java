@@ -43,7 +43,6 @@ public class DrivingEsri extends AppCompatActivity {
 
         // The below is the license ID for the map API
         ArcGISRuntimeEnvironment.setLicense("runtimelite,1000,rud6686217235,none,C6JC7XLS1MYJ003AD167");
-
         esriMap = findViewById(R.id.mapView_esriJourney);
         esriMap.setMap(new SetMap(esriMap).map); // Applies the style to the map
         setALocationDisplay();
