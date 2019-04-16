@@ -19,13 +19,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-class LoginLink extends AsyncTask<String,String,String> {
+class ServerSender extends AsyncTask<String,String,String> {
 
     private ServerResponded mCallback;
 
     private Context mContext;
 
-    public LoginLink(Context context) {
+    public ServerSender(Context context) {
         mContext = context;
         mCallback = (ServerResponded) context;
     }

@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
         // Gets the username and password from what the user typed into the boxes
         String toSend = ("username=" + username.getText().toString() + "&password=" + password.getText().toString());
         //Send to the server
-        new LoginLink(LoginActivity.this).execute(toSend, "http://social-box.xyz/api/login", "");
+        new ServerSender(LoginActivity.this).execute(toSend, "http://social-box.xyz/api/login", "");
 
 
     }
