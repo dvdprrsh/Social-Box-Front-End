@@ -14,7 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+public class LoginActivity extends AppCompatActivity implements ServerResponded {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
     private Snackbar snackbar;
     private boolean loggedIn = false;
@@ -85,8 +90,12 @@ public class LoginActivity extends AppCompatActivity {
     //********//
 
     public void onLogin(View view){
-        validate(username.getText().toString(), password.getText().toString());
         // Gets the username and password from what the user typed into the boxes
+        String toSend = ("username=" + username.getText().toString() + "&password=" + password.getText().toString());
+        //Send to the server
+        new LoginLink(LoginActivity.this).execute(toSend, "http://social-box.xyz/api/login", "");
+
+
     }
 
     public void onRegister(View view){
@@ -94,8 +103,13 @@ public class LoginActivity extends AppCompatActivity {
         // Register new user
     }
 
-    private void validate (String userName, String userPassword) {// Sets the username and password
-        if ((userName.equals("Dave")) && (userPassword.equals(""))) {
+    public void validate (String responseJSON) throws JSONException {// Sets the username and password
+
+        //Get responce from server check if login was successful
+        JSONObject serverResponce = new JSONObject(responseJSON);
+        Boolean isVaid = serverResponce.getBoolean("ok");
+
+        if (isVaid) {
             // Opens base activity which links to the rest of the app
             SaveLogInState(); //**** David Parrish ****//
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
@@ -154,4 +168,16 @@ public class LoginActivity extends AppCompatActivity {
             // Second activity is what links to the rest of the app
             startActivity(intent);
     }
+
+
+    //When the server gets response it comes here
+    @Override
+    public void onTaskComplete(String result) {
+        try {
+            validate(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
