@@ -67,5 +67,7 @@
     <string name="text_profile">Profile</string>
     <string name="button_logout">Log Out</string>
     <string name="error_pending">No Friend Requests Pending!</string>
+    <string name="prompt_first">First Name</string>
+    <string name="prompt_last">Last Name</string>
 
 </resources>

@@ -10,9 +10,8 @@
 
     <TextView
         android:id="@+id/textView_registerName"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="411dp"
+        android:layout_height="256dp"
         android:background="@drawable/gradient"
         android:gravity="center_vertical"
         android:text="@string/app_name"
@@ -20,19 +19,56 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText_usernameRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_firstName"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:autoLink="all"
+        android:ems="10"
+        android:fontFamily="@font/quicksand_light"
+        android:hint="@string/prompt_first"
+        android:inputType="textPersonName|textAutoComplete"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_registerName" />
+
+    <EditText
+        android:id="@+id/editText_lastName"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:autoLink="all"
+        android:ems="10"
+        android:fontFamily="@font/quicksand_light"
+        android:hint="@string/prompt_last"
+        android:inputType="textPersonName|textAutoComplete"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_firstName" />
 
     <EditText
         android:id="@+id/editText_usernameRegister"
         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:autoLink="all"
         android:ems="10"
         android:fontFamily="@font/quicksand_light"
@@ -40,65 +76,63 @@
         android:inputType="text|textAutoComplete"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/editText_passwordRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_lastName" />
 
     <EditText
         android:id="@+id/editText_passwordRegister"
         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:fontFamily="@font/quicksand_light"
         android:hint="@string/prompt_password"
         android:inputType="textPassword|textWebPassword"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/editText_passwordConfirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_usernameRegister" />
 
     <EditText
         android:id="@+id/editText_passwordConfirm"
         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:fontFamily="@font/quicksand_light"
         android:hint="@string/prompt_confirmPassword"
         android:inputType="textPassword|textWebPassword"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/editText_emailRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_passwordRegister" />
 
     <EditText
         android:id="@+id/editText_emailRegister"
         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:fontFamily="@font/quicksand_light"
         android:hint="@string/prompt_email"
         android:inputType="textWebEmailAddress|textEmailAddress"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/button_registerRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_passwordConfirm" />
 
     <Button
         android:id="@+id/button_registerRegister"
@@ -106,15 +140,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="268dp"
         android:background="@drawable/button_capsule"
         android:fontFamily="@font/quicksand_light"
         android:text="@string/button_register"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_emailRegister" />
 
 </android.support.constraint.ConstraintLayout>

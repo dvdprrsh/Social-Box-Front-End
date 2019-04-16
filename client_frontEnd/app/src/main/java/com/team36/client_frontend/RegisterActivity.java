@@ -13,23 +13,26 @@ import android.widget.EditText;
 public class RegisterActivity extends AppCompatActivity {
 
     private Snackbar snackbar;
+    private EditText newFirst;
+    private EditText newLast;
     private EditText newUsername;
     private EditText newPassword;
     private EditText passwordConfirmation;
     private EditText email;
-    private Button newRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        newFirst = findViewById(R.id.editText_firstName);
+        newLast = findViewById(R.id.editText_lastName);
         newUsername = findViewById(R.id.editText_usernameRegister); //assigning variables
         newPassword = findViewById(R.id.editText_passwordRegister);
         passwordConfirmation = findViewById(R.id.editText_passwordConfirm);
         email = findViewById(R.id.editText_emailRegister);
         snackbar = Snackbar.make((findViewById(R.id.constrainLayoutRegisterActivity)), R.string.register_snackbar_fieldError, Snackbar.LENGTH_SHORT); //**** David Parrish ****//
-        newRegister = findViewById(R.id.button_registerRegister);
+        Button newRegister = findViewById(R.id.button_registerRegister);
 
         newRegister.setOnClickListener(this::onRegister);
     }
@@ -46,7 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
     //**** David Parrish ****//
     private boolean checkBlank(){
         // Checks whether any of the fields are left blank
-        return (newUsername.getText().toString().equals("") || newPassword.getText().toString().equals("") ||
+        return (newFirst.getText().toString().equals("") || newLast.getText().toString().equals("") ||
+                newUsername.getText().toString().equals("") || newPassword.getText().toString().equals("") ||
                 passwordConfirmation.getText().toString().equals("") || email.getText().toString().equals(""));
     }
     //********//
