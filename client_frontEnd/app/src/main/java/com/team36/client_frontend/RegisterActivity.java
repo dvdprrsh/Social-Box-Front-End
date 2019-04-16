@@ -41,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
             snackbar.show(); // Shows the snackbar if fields are left blank and the snackbar is not already shown
         }
         //********//
+
+        String toSend = ("username="+newUsername.getText().toString()+"&password=" + newPassword.getText().toString());
     }
 
     //**** David Parrish ****//
