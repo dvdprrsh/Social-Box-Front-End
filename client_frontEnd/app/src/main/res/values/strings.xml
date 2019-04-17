@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Social-Box</string>
+    <string name="app_welcome">Welcome to\nSocial-Box</string>
 
     <string name="title_login">Sign in</string>
     <string name="title_driving">Driving</string>
@@ -28,6 +29,8 @@
     <string name="login_snackbar">Incorrect Username and/or Password.</string>
     <string name="login_snackbar_loginDisabled">Too many incorrect attempts, please restart to try again.</string>
     <string name="register_snackbar_fieldError">Please fill in all the fields above.</string>
+    <string name="register_snackbar_emailError">Email Address Not Valid.</string>
+
     <string name="driving_snackbar">Press once more to stop recording.</string>
 
     <string name="rating_figure">4.0</string>
@@ -69,5 +72,6 @@
     <string name="error_pending">No Friend Requests Pending!</string>
     <string name="prompt_first">First Name</string>
     <string name="prompt_last">Last Name</string>
+    <string name="button_backToLogin">Back To Login</string>
 
 </resources>

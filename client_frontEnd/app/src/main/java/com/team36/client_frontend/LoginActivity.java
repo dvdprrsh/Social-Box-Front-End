@@ -17,8 +17,6 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 public class LoginActivity extends AppCompatActivity implements ServerResponded {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
     private Snackbar snackbar;
@@ -49,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        snackbar = Snackbar.make((findViewById(R.id.constraintLayoutLoginActivity)), R.string.login_snackbar, Snackbar.LENGTH_LONG); //**** David Parrish ****//
+        snackbar = Snackbar.make(findViewById(R.id.scroll), R.string.login_snackbar, Snackbar.LENGTH_LONG); //**** David Parrish ****//
 
         username = findViewById(R.id.editText_username); // Assigning variables
         password = findViewById(R.id.editText_password);
@@ -135,8 +133,8 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
             // Converts int to string to show how many remaining attempts you have
 
             if (counter == 0) {//after 5 attempts button disabled
-                Snackbar snackbar_disabledLogIn = Snackbar.make(findViewById(R.id.constraintLayoutLoginActivity), R.string.login_snackbar_loginDisabled, Snackbar.LENGTH_LONG); //**** David Parrish ****//
-                snackbar_disabledLogIn.show();
+                Snackbar.make(findViewById(R.id.constraintLayoutLoginActivity), R.string.login_snackbar_loginDisabled,
+                        Snackbar.LENGTH_INDEFINITE).show(); //**** David Parrish ****//
 
                 login.setEnabled(false);
             }
