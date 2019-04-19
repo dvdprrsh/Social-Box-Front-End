@@ -123,6 +123,7 @@ public class DrivingEsri extends AppCompatActivity {
         if (esriMap!=null){
             esriMap.dispose();
         }
+        finish();
         super.onDestroy();
     }
 
@@ -140,7 +141,7 @@ public class DrivingEsri extends AppCompatActivity {
         finish();
     }
 
-    // This method is used to notify the user that they must press the back button once more to return to the main screen
+    // This method is used to notify the user that they must press the back button twice to return to the main screen
     @Override
     public boolean onKeyDown(int kCode, KeyEvent kEvent){
         if((!snackbar.isShown()) && (kCode == KeyEvent.KEYCODE_BACK)){

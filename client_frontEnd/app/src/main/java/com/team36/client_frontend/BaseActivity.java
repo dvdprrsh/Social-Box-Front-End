@@ -60,28 +60,22 @@ public class BaseActivity extends AppCompatActivity {
     /* This function prevents the user from pressing the same navigation button multiple times,
        this prevents the fragment from showing its displayed animation multiple times */
     private boolean sameSelected(int selectedItem, Fragment toDisplay){
-        Fragment displayedFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
-        Class c = displayedFragment.getClass();
+        Class c = null;
+        Fragment displayedFragment = fragmentManager.findFragmentById(R.id.fragment_layout);
+        if (displayedFragment!=null) {
+            c = displayedFragment.getClass();
+        }
         return (navigation_base.getSelectedItemId() == selectedItem) && (c == toDisplay.getClass());
     }
 
     // Displays the given fragment in the frame layout 'fragment_layout'
     private void displayFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction;
-        // Removes all previous fragments from the back stack
-        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++){
-            fragmentManager.popBackStackImmediate();
-        }
 
-        // The next two lines remove the previous fragment (if there is one) before the next fragment is displayed to prevent overlap of transition animations
-        Fragment f = fragmentManager.findFragmentByTag("prevFragment");
-        if (f != null) fragmentManager.beginTransaction().remove(f).commit();
-
-        // Displays the next fragment
         fragmentTransaction = fragmentManager.beginTransaction();
+        // Displays the next fragment
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-
-                .add(R.id.fragment_layout, fragment, "prevFragment")
+                .replace(R.id.fragment_layout, fragment)
                 .commit();
     }
 
@@ -93,7 +87,7 @@ public class BaseActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         MainFragment mainFragment = new MainFragment();
-        displayFragment(mainFragment);
+        fragmentManager.beginTransaction().add(R.id.fragment_layout, mainFragment).commit();
 
         navigation_base = findViewById(R.id.navigation_base);
         navigation_base.setOnNavigationItemSelectedListener(myBottomNavigationListener);

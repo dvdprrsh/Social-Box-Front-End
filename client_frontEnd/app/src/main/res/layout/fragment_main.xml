@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainFragment">
 
     <Button
@@ -27,32 +28,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <TextView
+        android:id="@+id/textView_errorMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_sentiment_very_dissatisfied_black_48dp"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:text="@string/error_friends"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView_errorMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_sentiment_very_dissatisfied_black_48dp"
-            android:scaleX="1.4"
-            android:scaleY="1.4"
-            android:text="@string/error_friends"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.385" />
-    </android.support.constraint.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385" />
 
     <LinearLayout
         android:id="@+id/LinearLayout_welcome"
@@ -107,16 +99,28 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
             android:text="@string/text_atAGlance"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textAllCaps="false"
+            android:textSize="28sp" />
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation_atAGlance"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout_atGlance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemHorizontalTranslationEnabled="false"
-            app:labelVisibilityMode="selected"
-            app:menu="@menu/navigation_ataglance" />
+            app:tabTextAppearance="@style/QuickSandTabLayout"
+            app:tabUnboundedRipple="false">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/glance_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/atAGlance_friends" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/glance_journeys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/atAGlance_journeys" />
+        </android.support.design.widget.TabLayout>
 
         <ListView
             android:id="@+id/listView_atAGlance"

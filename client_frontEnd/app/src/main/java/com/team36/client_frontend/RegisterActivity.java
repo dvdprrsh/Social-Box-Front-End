@@ -3,14 +3,18 @@ package com.team36.client_frontend;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -19,6 +23,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity implements ServerResponded {
 
     private Snackbar snackbar;
+    private Button newRegister;
     private EditText newFirst;
     private EditText newLast;
     private EditText newUsername;
@@ -38,31 +43,35 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
         passwordConfirmation = findViewById(R.id.editText_passwordConfirm);
         email = findViewById(R.id.editText_emailRegister);
         snackbar = Snackbar.make(findViewById(R.id.scrollView), R.string.register_snackbar_fieldError, Snackbar.LENGTH_SHORT); //**** David Parrish ****//
-        Button newRegister = findViewById(R.id.button_registerRegister);
+        newRegister = findViewById(R.id.button_registerRegister);
 
         newRegister.setOnClickListener(this::onRegister);
 
         Button back = findViewById(R.id.button_registerBack);
         back.setOnClickListener(this::onBack);
+
+        networkAvailable();
     }
 
     public void onRegister(View view){
         //**** David Parrish ****//
-        hideKeyboard(); // Hides the keyboard so that the snackbar can be seen by the user
+        if (networkAvailable()) {
+            hideKeyboard(); // Hides the keyboard so that the snackbar can be seen by the user
 
-        if (checkBlank()){
-            snackbar.show(); // Shows the snackbar if fields are left blank and the snackbar is not already shown
+            if (checkBlank()) {
+                snackbar.show(); // Shows the snackbar if fields are left blank and the snackbar is not already shown
 
-        }else if (!checkEmail()) {
-            Snackbar.make(findViewById(R.id.scrollView), R.string.register_snackbar_emailError, Snackbar.LENGTH_SHORT).show();
-        //********//
+            } else if (!checkEmail()) {
+                Snackbar.make(findViewById(R.id.scrollView), R.string.register_snackbar_emailError, Snackbar.LENGTH_SHORT).show();
+                //********//
 
-        }else{
-            //**** Cameron MacKay ****//
-            String toSend = ("username=" + newUsername.getText().toString() + "&password=" + newPassword.getText().toString() + "&firstname="
-                    + newFirst.getText().toString() + "&surname=" + newLast + "&email=" + email);
-            new ServerSender(RegisterActivity.this).execute(toSend, "http://social-box.xyz/api/register", "");
-            //********//
+            } else {
+                //**** Cameron MacKay ****//
+                String toSend = ("username=" + newUsername.getText().toString() + "&password=" + newPassword.getText().toString() + "&firstname="
+                        + newFirst.getText().toString() + "&surname=" + newLast + "&email=" + email);
+                new ServerSender(RegisterActivity.this).execute(toSend, "http://social-box.xyz/api/register", "");
+                //********//
+            }
         }
     }
 
@@ -73,6 +82,25 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
 
         onBackPressed();
         finish();
+    }
+
+    private boolean networkAvailable(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        boolean netAvailable = networkInfo != null && networkInfo.isConnected();
+        if (!netAvailable) {
+            Snackbar snackbar_network = Snackbar.make(findViewById(R.id.scrollView), R.string.login_snackbar_networkError, Snackbar.LENGTH_LONG);
+            View view = snackbar_network.getView();
+            TextView textView_networkError = view.findViewById(android.support.design.R.id.snackbar_text);
+            textView_networkError.setGravity(Gravity.CENTER_HORIZONTAL);
+            textView_networkError.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            snackbar_network.show();
+
+            newRegister.setEnabled(false);
+        }
+
+        return netAvailable;
     }
 
     private boolean checkBlank(){
