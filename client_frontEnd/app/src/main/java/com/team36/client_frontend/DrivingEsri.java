@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,9 @@ public class DrivingEsri extends AppCompatActivity {
         esriMap = findViewById(R.id.mapView_esriJourney);
         esriMap.setMap(new SetMap(esriMap).map); // Applies the style to the map
         setALocationDisplay();
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingButton_resetView);
+        floatingActionButton.setOnClickListener(this::reset_map);
 
         Typeface typeface = ResourcesCompat.getFont(this, R.font.quicksand_light);
 
@@ -133,6 +137,10 @@ public class DrivingEsri extends AppCompatActivity {
         // Navigation pan mode to face the direction of travel and move while the user moves
         locationDisplay.setAutoPanMode(LocationDisplay.AutoPanMode.NAVIGATION);
         locationDisplay.startAsync(); // Starts getting tracking location
+    }
+
+    public void reset_map(View view){
+        setALocationDisplay();
     }
 
     // Closes the driving activity and and stops recording

@@ -54,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/gradient"
         app:layout_constraintBottom_toTopOf="@+id/button_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -79,5 +80,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView_esriJourney" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingButton_resetView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        android:foregroundTint="@android:color/black"
+        android:src="@drawable/ic_my_location_black_48dp"
+        app:backgroundTint="@android:color/background_light"
+        app:elevation="0dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView_esriJourney"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
