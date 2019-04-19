@@ -28,7 +28,7 @@
 
     <string name="login_snackbar">Incorrect Username and/or Password.</string>
     <string name="login_snackbar_loginDisabled">Too many incorrect attempts, please restart to try again.</string>
-    <string name="login_snackbar_networkError">No internet connection. Please close the app and try again when you are connected to the internet.</string>
+    <string name="login_snackbar_networkError">No internet connection. Please reload and try again when you are connected to the internet.</string>
     <string name="register_snackbar_fieldError">Please fill in all the fields above.</string>
     <string name="register_snackbar_emailError">Email Address Not Valid.</string>
     <string name="driving_snackbar">Press once more to stop recording.</string>

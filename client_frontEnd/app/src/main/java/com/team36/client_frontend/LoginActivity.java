@@ -5,12 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,6 +21,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements ServerResponded {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
+    private NetworkAvailable networkAvailable;
     private Snackbar snackbar;
     private boolean loggedIn = false;
     private String username_text = null;
@@ -66,7 +64,11 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
         login.setOnClickListener(this::onLogin);
         register.setOnClickListener(this::onRegister);
 
-        if (checkLogin) checkLogInState();
+        networkAvailable = new NetworkAvailable(this);
+
+        if (networkAvailable.netAvailable()){
+            if (checkLogin) checkLogInState();
+        }
         setUsername();
         //********//
     }
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
     //**** David Parrish ****//
     // Checks if the user has logged in previously and not logged out
     private void checkLogInState(){
-        if (networkAvailable()) {
+        if (networkAvailable.netAvailable()) {
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
                 loggedIn = sharedPreferences.getBoolean("logged_in", false);
@@ -92,30 +94,11 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
             }
         }
     }
-
-    private boolean networkAvailable(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        boolean netAvailable = networkInfo != null && networkInfo.isConnected();
-        if (!netAvailable) {
-            Snackbar snackbar_network = Snackbar.make(findViewById(R.id.scroll), R.string.login_snackbar_networkError, Snackbar.LENGTH_INDEFINITE);
-            View view = snackbar_network.getView();
-            TextView textView_networkError = view.findViewById(android.support.design.R.id.snackbar_text);
-            textView_networkError.setGravity(Gravity.CENTER_HORIZONTAL);
-            textView_networkError.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            snackbar_network.show();
-
-            login.setEnabled(false);
-            register.setEnabled(false);
-        }
-
-        return netAvailable;
-    }
     //********//
 
     public void onLogin(View view){
-        if (networkAvailable()) { //**** David Parrish ****//
+        if (networkAvailable.netAvailable()) { //**** David Parrish ****//
+            login.setEnabled(false);
             //**** Cameron MacKay ****//
             // Gets the username and password from what the user typed into the boxes
             String toSend = ("username=" + username.getText().toString() + "&password=" + password.getText().toString());
@@ -126,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
     }
 
     public void onRegister(View view){
-        if (networkAvailable()) { //**** David Parrish ****//
+        if (networkAvailable.netAvailable()) { //**** David Parrish ****//
             registerUser();
             // Register new user
         }
@@ -202,6 +185,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
     //When the server gets response it comes here
     @Override
     public void onTaskComplete(String result) {
+        login.setEnabled(true);
         try {
             validate(result);
         } catch (JSONException e) {

@@ -3,25 +3,21 @@ package com.team36.client_frontend;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity implements ServerResponded {
-
+    private NetworkAvailable networkAvailable;
     private Snackbar snackbar;
     private Button newRegister;
     private EditText newFirst;
@@ -50,12 +46,15 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
         Button back = findViewById(R.id.button_registerBack);
         back.setOnClickListener(this::onBack);
 
-        networkAvailable();
+        networkAvailable = new NetworkAvailable(this);
+        if (!networkAvailable.netAvailable()){
+            newRegister.setEnabled(false);
+        }
     }
 
     public void onRegister(View view){
         //**** David Parrish ****//
-        if (networkAvailable()) {
+        if (networkAvailable.netAvailable()) {
             hideKeyboard(); // Hides the keyboard so that the snackbar can be seen by the user
 
             if (checkBlank()) {
@@ -66,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
                 //********//
 
             } else {
+                newRegister.setEnabled(false);
                 //**** Cameron MacKay ****//
                 String toSend = ("username=" + newUsername.getText().toString() + "&password=" + newPassword.getText().toString() + "&firstname="
                         + newFirst.getText().toString() + "&surname=" + newLast + "&email=" + email);
@@ -82,25 +82,6 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
 
         onBackPressed();
         finish();
-    }
-
-    private boolean networkAvailable(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        boolean netAvailable = networkInfo != null && networkInfo.isConnected();
-        if (!netAvailable) {
-            Snackbar snackbar_network = Snackbar.make(findViewById(R.id.scrollView), R.string.login_snackbar_networkError, Snackbar.LENGTH_LONG);
-            View view = snackbar_network.getView();
-            TextView textView_networkError = view.findViewById(android.support.design.R.id.snackbar_text);
-            textView_networkError.setGravity(Gravity.CENTER_HORIZONTAL);
-            textView_networkError.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            snackbar_network.show();
-
-            newRegister.setEnabled(false);
-        }
-
-        return netAvailable;
     }
 
     private boolean checkBlank(){
@@ -149,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity implements ServerRespond
 
     @Override
     public void onTaskComplete(String result) {
+        newRegister.setEnabled(true);
         try {
             CheckRegistered(result);
         } catch (JSONException e) {

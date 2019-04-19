@@ -30,24 +30,27 @@ public class FriendFragment extends Fragment {
 
     // This method changes the listView to display basic information about the friend's journeys
     private void friend_journeys(){
-        ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // As stated previously
-        ListView myListView = returnView.findViewById(R.id.listView_friendJourneys);
+        if (new NetworkAvailable(getActivity()).netAvailable()) {
 
-        if (journey_dates != null) {
-            for (int i = 0; i < journey_dates.length; i++) {
-                ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
-                // Below assigns values to their corresponding components
-                oneRow.setImage_ratingImage(new ImageCalculator(journey_ratings[i]).image);
-                oneRow.setText_nameDay(journey_dates[i]);
-                oneRow.setRating_ratingStars(journey_ratings[i]);
-                oneRow.setRating_ratingString(journey_ratings[i]);
+            ArrayList<ListView_ItemNormal> allRows = new ArrayList<>(); // As stated previously
+            ListView myListView = returnView.findViewById(R.id.listView_friendJourneys);
 
-                allRows.add(oneRow); // Adds each row to the list of rows
+            if (journey_dates != null) {
+                for (int i = 0; i < journey_dates.length; i++) {
+                    ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
+                    // Below assigns values to their corresponding components
+                    oneRow.setImage_ratingImage(new ImageCalculator(journey_ratings[i]).image);
+                    oneRow.setText_nameDay(journey_dates[i]);
+                    oneRow.setRating_ratingStars(journey_ratings[i]);
+                    oneRow.setRating_ratingString(journey_ratings[i]);
+
+                    allRows.add(oneRow); // Adds each row to the list of rows
+                }
             }
-        }
 
-        // The journeys_adapter is is for adding all the user's journeys to the listView
-        My_Adapter_JourneysMain journeys_adapter = new My_Adapter_JourneysMain(getContext(), allRows);
-        myListView.setAdapter(journeys_adapter);
+            // The journeys_adapter is is for adding all the user's journeys to the listView
+            My_Adapter_JourneysMain journeys_adapter = new My_Adapter_JourneysMain(getContext(), allRows);
+            myListView.setAdapter(journeys_adapter);
+        }
     }
 }

@@ -45,7 +45,6 @@ public class JourneysFragment extends Fragment {
         }
     };
 
-    // TODO: Add a more detailed welcome message, e.g. "*NAME*'s Journeys"
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,18 +54,22 @@ public class JourneysFragment extends Fragment {
         textView_welcomeText.setText(R.string.journeys_welcome);
         ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
 
-        if (journeyDates != null) {
-            listView.setOnItemClickListener(myItemClickListener);
-            LoadList loadList = new LoadList(journeyDates, journeysRatings);
-            // The below displays all the rows made in the 'loadList' class above
-            My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
-            listView.setAdapter(journeysList_myAdapter);
-        }else{
-            // Displays a message to the user if they have not taken any journeys yet
-            listView.setVisibility(View.INVISIBLE);
-            TextView textView_error = returnView.findViewById(R.id.textView_error);
-            textView_error.setVisibility(View.VISIBLE);
-            textView_error.setText(R.string.error_journeys);
+        if (new NetworkAvailable(getActivity()).netAvailable()) {
+
+            if (journeyDates != null) {
+                listView.setOnItemClickListener(myItemClickListener);
+                LoadList loadList = new LoadList(journeyDates, journeysRatings);
+                // The below displays all the rows made in the 'loadList' class above
+                My_Adapter_JourneysFriends journeysList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+                listView.setAdapter(journeysList_myAdapter);
+            } else {
+                // Displays a message to the user if they have not taken any journeys yet
+                listView.setVisibility(View.INVISIBLE);
+                TextView textView_error = returnView.findViewById(R.id.textView_error);
+                textView_error.setVisibility(View.VISIBLE);
+                textView_error.setText(R.string.error_journeys);
+            }
+
         }
         return returnView;
     }

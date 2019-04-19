@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/gradient"
+                    android:background="@color/colorPrimaryDark"
                     tools:layout_editor_absoluteY="498dp" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/gradient"
+                    android:background="@color/colorPrimaryDark"
                     tools:layout_editor_absoluteY="498dp" />
 
             </LinearLayout>
