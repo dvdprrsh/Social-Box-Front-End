@@ -54,8 +54,7 @@
     <string name="journeys_statistics">Statistics</string>
     <string name="journeys_statisticsContent">Here are some statistics. Here are some statistics. Here are some statistics. Here are some statistics.</string>
     <string name="text_welcomeJourney">*DAY*\'s Journey</string>
-    <string name="journeys_welcome"><u>Journeys</u></string>
-    <string name="friends_welcome"><u>Friends</u></string>
+    <string name="friends_journeys_welcomeText">Your Friends/Journeys</string>
     <string name="error_journeys">No Journeys To Show!</string>
     <string name="error_friends">No Friends To Show!</string>
     <string name="title_activity_settings">Settings</string>
@@ -73,5 +72,4 @@
     <string name="prompt_first">First Name</string>
     <string name="prompt_last">Last Name</string>
     <string name="button_backToLogin">Back To Login</string>
-
 </resources>

@@ -14,6 +14,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class JourneysFragment extends Fragment {
+    private final String WELCOME_TEXT = "Your Journeys";
+
     private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
     private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
 
@@ -48,10 +50,10 @@ public class JourneysFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View returnView = inflater.inflate(R.layout.fragment_journeysfriends_list, container, false);
-        TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcome);
-        textView_welcomeText.setText(R.string.journeys_welcome);
+        TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcomeJsFs);
+        textView_welcomeText.setText(WELCOME_TEXT);
+
         ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
 
         if (new NetworkAvailable(getActivity()).netAvailable()) {

@@ -5,7 +5,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:drawable/screen_background_light"
     tools:context=".ProfileFragment">
 
     <LinearLayout
@@ -40,12 +39,9 @@
 
             <RatingBar
                 android:id="@+id/ratingBar_barOverall"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:numStars="@integer/no_stars"
-                android:rating="4.0"
-                android:stepSize="0.5"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="174dp" />
 
@@ -66,7 +62,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/quicksand_light"
         android:text="@string/text_breakdownDashboard"
@@ -80,9 +75,6 @@
         android:id="@+id/cardView_acceleration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -106,12 +98,9 @@
 
             <RatingBar
                 android:id="@+id/ratingBar_acceleration"
-                style="@android:style/Widget.Material.RatingBar.Small"
+                style="@style/RatingMini"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="@integer/no_stars"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageView_acceleration"
@@ -128,9 +117,6 @@
         android:id="@+id/cardView_braking"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -154,12 +140,9 @@
 
             <RatingBar
                 android:id="@+id/ratingBar_braking"
-                style="@android:style/Widget.Material.Light.RatingBar.Small"
+                style="@style/RatingMini"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="@integer/no_stars"
-                android:rating="4"
-                android:stepSize="0.5" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageView_braking"
@@ -176,8 +159,6 @@
         android:id="@+id/cardView_speed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="4dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
@@ -200,12 +181,9 @@
 
             <RatingBar
                 android:id="@+id/ratingBar_speed"
-                style="@android:style/Widget.Material.Light.RatingBar.Small"
+                style="@style/RatingMini"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="@integer/no_stars"
-                android:rating="5"
-                android:stepSize="0.5" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageView_speed"
@@ -222,13 +200,9 @@
         android:id="@+id/cardView_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toTopOf="@+id/mapView_esriJourney"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView_speed"
         app:layout_constraintTop_toBottomOf="@+id/cardView_braking">
@@ -248,12 +222,9 @@
 
             <RatingBar
                 android:id="@+id/ratingBar_time"
-                style="@android:style/Widget.Material.Light.RatingBar.Small"
+                style="@style/RatingMini"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="@integer/no_stars"
-                android:rating="3"
-                android:stepSize="0.5" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/imageView_time"
@@ -266,41 +237,13 @@
 
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout_journeyStatistics"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView_feedbackTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/journeys_statistics"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView_statistics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/journeys_statisticsContent" />
-    </LinearLayout>
-
     <com.esri.arcgisruntime.mapping.view.MapView
         android:id="@+id/mapView_esriJourney"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout_journeyStatistics"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView_speed" />

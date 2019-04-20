@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-public class OpenFriendJourneyFragment {
+class OpenFriendJourneyFragment {
 
     OpenFriendJourneyFragment(@Nullable FriendFragment friendFragment, @Nullable JourneyFragment journeyFragment, FragmentManager fragmentManager, String dateName, Float ratingOverall, String ratingAcceleration, String ratingBraking, String ratingSpeed, String ratingTime){
         Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment

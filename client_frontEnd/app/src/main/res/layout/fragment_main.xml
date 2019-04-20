@@ -5,54 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".MainFragment">
-
-    <Button
-        android:id="@+id/button_go"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_capsule"
-        android:elevation="4dp"
-        android:fontFamily="@font/quicksand_light"
-        android:onClick="onClick"
-        android:text="@string/button_go"
-        android:textAllCaps="true"
-        android:textColor="@android:color/background_light"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_errorMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_sentiment_very_dissatisfied_black_48dp"
-        android:scaleX="1.4"
-        android:scaleY="1.4"
-        android:text="@string/error_friends"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385" />
 
     <LinearLayout
         android:id="@+id/LinearLayout_welcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,18 +21,15 @@
             android:id="@+id/textView_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_light"
             android:text="@string/text_welcome"
             android:textAlignment="center"
-            android:textSize="36sp" />
+            android:textSize="30sp" />
 
         <RatingBar
             android:id="@+id/ratingBar_user"
-            style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+            style="@style/RatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="@integer/no_stars"
-            android:stepSize="0.1" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -82,9 +37,6 @@
         android:id="@+id/LinearLayout_atAGlance"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/button_go"
@@ -98,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:text="@string/text_atAGlance"
             android:textAllCaps="false"
             android:textSize="28sp" />
@@ -106,6 +60,8 @@
             android:id="@+id/tabLayout_atGlance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             app:tabTextAppearance="@style/QuickSandTabLayout"
             app:tabUnboundedRipple="false">
 
@@ -133,5 +89,43 @@
             android:scrollbars="none" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_errorMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_sentiment_very_dissatisfied_black_48dp"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:text="@string/error_friends"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385" />
+
+    <Button
+        android:id="@+id/button_go"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_capsule"
+        android:elevation="4dp"
+        android:fontFamily="@font/quicksand_light"
+        android:onClick="onClick"
+        android:text="@string/button_go"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_light"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

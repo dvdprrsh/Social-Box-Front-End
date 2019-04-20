@@ -19,7 +19,7 @@ public class ProfileFragment extends Fragment {
     private final int[] RATING_BARS = {R.id.ratingBar_acceleration, R.id.ratingBar_braking, R.id.ratingBar_speed, R.id.ratingBar_time};
     private final int[] IMAGE_VIEWS = {R.id.imageView_acceleration, R.id.imageView_braking, R.id.imageView_speed, R.id.imageView_time};
 
-    private final String WELCOME_MESSAGE = "%s's Dashboard";
+    private final String WELCOME_MESSAGE = "Your Dashboard";
 
     private View returnView;
     private String USERS_NAME;
@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment {
 
     private void myMain(){
         TextView textView_welcome = returnView.findViewById(R.id.textView_welcomeDashboard);
-        textView_welcome.setText(String.format(WELCOME_MESSAGE, USERS_NAME));
+        textView_welcome.setText(WELCOME_MESSAGE);
 
         RatingBar ratingBar_dashboard = returnView.findViewById(R.id.ratingBar_dashboardOverall);
         ratingBar_dashboard.setRating((float) USERS_RATING); // Sets the overall rating
