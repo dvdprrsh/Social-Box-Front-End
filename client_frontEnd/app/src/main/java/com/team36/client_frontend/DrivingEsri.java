@@ -2,6 +2,7 @@ package com.team36.client_frontend;
 // David Parrish - 201232252
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
@@ -146,6 +147,10 @@ public class DrivingEsri extends AppCompatActivity {
     // Closes the driving activity and and stops recording
     public void stop_pressed(View view){
         stopRecording();
+
+        Intent intent = new Intent(this, TripActivity.class);
+        startActivity(intent);
+
         finish();
     }
 

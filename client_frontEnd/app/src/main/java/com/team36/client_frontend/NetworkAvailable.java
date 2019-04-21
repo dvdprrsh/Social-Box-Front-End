@@ -19,7 +19,7 @@ class NetworkAvailable {
         ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        boolean netAvailable = networkInfo != null && networkInfo.isConnected();
+        boolean netAvailable = ((networkInfo != null) && (networkInfo.isConnected()));
         if (!netAvailable) {
             Toast toast = Toast.makeText(activity, R.string.login_snackbar_networkError, Toast.LENGTH_LONG);
             toast.show();

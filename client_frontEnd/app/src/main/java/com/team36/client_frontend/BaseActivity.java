@@ -13,7 +13,7 @@ import android.view.MenuItem;
 public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private BottomNavigationView navigation_base;
-
+    private boolean netAvailable;
     // The below transitions between activities depending on which button in the navigation bar is pressed
     // This method appears in all other activities with the bottom navigation bar and acts in the same way
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
@@ -29,29 +29,29 @@ public class BaseActivity extends AppCompatActivity {
                     MainFragment mainFragment = new MainFragment();
                     if (!(sameSelected(R.id.navigation_home, mainFragment))) { // Prevents transition to same fragment
                         displayFragment(mainFragment);
+                        if (netAvailable) return true;
                     }
-                    return true;
                 case R.id.navigation_allJourneys:
                     // Transitions to the journeys fragment, if applicable
                     JourneysFragment journeysFragment = new JourneysFragment();
                     if (!(sameSelected(R.id.navigation_allJourneys, journeysFragment))) { // Prevents transition to same fragment
                         displayFragment(journeysFragment);
+                        if (netAvailable) return true;
                     }
-                    return true;
                 case R.id.navigation_allFriends:
                     // Transitions to the friends fragment, if applicable
                     FriendsFragment friendsFragment = new FriendsFragment();
                     if (!(sameSelected(R.id.navigation_allFriends, friendsFragment))) { // Prevents transition to same fragment
                         displayFragment(friendsFragment);
+                        if (netAvailable) return true;
                     }
-                    return true;
                 case R.id.navigation_profile:
                     // Transitions to the dashboard fragment, if applicable
                     ProfileFragment profileFragment = new ProfileFragment();
                     if (!(sameSelected(R.id.navigation_profile, profileFragment))) { // Prevents transition to same fragment
                         displayFragment(profileFragment);
+                        if (netAvailable) return true;
                     }
-                    return true;
             }
             return false;
         }
@@ -70,13 +70,16 @@ public class BaseActivity extends AppCompatActivity {
 
     // Displays the given fragment in the frame layout 'fragment_layout'
     private void displayFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction;
+        netAvailable = new NetworkAvailable(this).netAvailable();
+        if (netAvailable) {
+            FragmentTransaction fragmentTransaction;
 
-        fragmentTransaction = fragmentManager.beginTransaction();
-        // Displays the next fragment
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_layout, fragment)
-                .commit();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            // Displays the next fragment
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(R.id.fragment_layout, fragment)
+                    .commit();
+        }
     }
 
     @Override
