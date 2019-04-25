@@ -22,10 +22,13 @@ import com.esri.arcgisruntime.mapping.view.MapView;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static android.graphics.Color.rgb;
 
 
-public class JourneyFragment extends Fragment {
+public class JourneyFragment extends Fragment implements ServerResponded{
     private final String WELCOME_MESSAGE = "%s's Journey";
     private final SimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 4);
     private final SimpleMarkerSymbol simpleMarkerSymbolStart = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, rgb(81, 184, 74), 10);
@@ -118,5 +121,26 @@ public class JourneyFragment extends Fragment {
 
         Envelope envelope = new Envelope(coords[START_COORDINATE], coords[START_COORDINATE+1], coords[END_COORDINATE-1], coords[END_COORDINATE], SpatialReferences.getWgs84());
         esriMap.setViewpointGeometryAsync(envelope); // Sets the view of the map to scale to the start and endpoint
+    }
+
+
+    //This does all the server shit
+    private void GetData(String apiKey, String tripId) {
+        String toSend = "api_key=" + apiKey + "trip_id=" + tripId;
+        new ServerSender(getActivity()).execute(toSend, "http://social-box.xyz/api/login", "");
+    }
+
+    private void handleData(String jsonStr) throws JSONException {
+        JSONObject json = new JSONObject(jsonStr);
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+
+        try {
+            handleData(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

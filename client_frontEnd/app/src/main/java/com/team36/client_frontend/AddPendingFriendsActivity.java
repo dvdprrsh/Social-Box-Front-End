@@ -6,7 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class AddPendingFriendsActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class AddPendingFriendsActivity extends AppCompatActivity implements ServerResponded {
     // David Parrish - 21232252
 
     private EditText friendsUsername;
@@ -23,7 +26,17 @@ public class AddPendingFriendsActivity extends AppCompatActivity {
 
     public void addFriend(View view){
         // Check username exists and send request here
+        String username = friendsUsername.toString();
+        /*
+        String toSend = ("api_key=" + need to put in api key + "friend_username=" + friendUsername);
+        new ServerSender(getActivity()).execute(toSend, "http://social-box.xyz/api/login", "");
+        */
     }
+
+    public void handleAddFriend(String result) throws JSONException {
+        JSONObject json = new JSONObject(result);
+    }
+
 
     private void checkPendingFriendRequests(){
         // Check for friend requests
@@ -54,6 +67,16 @@ public class AddPendingFriendsActivity extends AppCompatActivity {
             // Displays message to user indicating that they have no friend requests at that time
             TextView errorText = findViewById(R.id.textView_noPending);
             errorText.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+
+        try {
+            handleAddFriend(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
