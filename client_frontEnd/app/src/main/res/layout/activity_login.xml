@@ -98,8 +98,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/gradient"
                     tools:layout_editor_absoluteY="498dp" />
+
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/textView_divider"
@@ -108,16 +112,21 @@
                     android:background="@android:color/background_light"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/textView_or"
+                    android:textAllCaps="true"
                     android:textSize="18sp"
                     tools:layout_editor_absoluteX="185dp"
                     tools:layout_editor_absoluteY="487dp" />
+
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent" />
 
                 <View
                     android:id="@+id/divider_right"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/gradient_reversed"
                     tools:layout_editor_absoluteY="498dp" />
 
             </LinearLayout>

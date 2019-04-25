@@ -21,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             /* The 'options' variable below creates the screen transition with the shared element
             being the bottom navigation bar */
             switch (item.getItemId()) {
@@ -29,29 +30,33 @@ public class BaseActivity extends AppCompatActivity {
                     MainFragment mainFragment = new MainFragment();
                     if (!(sameSelected(R.id.navigation_home, mainFragment))) { // Prevents transition to same fragment
                         displayFragment(mainFragment);
-                        if (netAvailable) return true;
+                        return netAvailable;
                     }
+                    return false;
                 case R.id.navigation_allJourneys:
                     // Transitions to the journeys fragment, if applicable
                     JourneysFragment journeysFragment = new JourneysFragment();
                     if (!(sameSelected(R.id.navigation_allJourneys, journeysFragment))) { // Prevents transition to same fragment
                         displayFragment(journeysFragment);
-                        if (netAvailable) return true;
+                        return netAvailable;
                     }
+                    return false;
                 case R.id.navigation_allFriends:
                     // Transitions to the friends fragment, if applicable
                     FriendsFragment friendsFragment = new FriendsFragment();
                     if (!(sameSelected(R.id.navigation_allFriends, friendsFragment))) { // Prevents transition to same fragment
                         displayFragment(friendsFragment);
-                        if (netAvailable) return true;
+                        return netAvailable;
                     }
+                    return false;
                 case R.id.navigation_profile:
                     // Transitions to the dashboard fragment, if applicable
                     ProfileFragment profileFragment = new ProfileFragment();
                     if (!(sameSelected(R.id.navigation_profile, profileFragment))) { // Prevents transition to same fragment
                         displayFragment(profileFragment);
-                        if (netAvailable) return true;
+                        return netAvailable;
                     }
+                    return false;
             }
             return false;
         }
