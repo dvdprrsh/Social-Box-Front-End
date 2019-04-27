@@ -1,6 +1,6 @@
 package com.team36.client_frontend;
 
-public class StarCalculator {
+class StarCalculator {
     double[] starRatings;
 
     StarCalculator(double[] ratings){

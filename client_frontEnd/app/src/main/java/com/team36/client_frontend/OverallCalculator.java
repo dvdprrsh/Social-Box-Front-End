@@ -2,11 +2,10 @@ package com.team36.client_frontend;
 // David Parrish - 201232252
 
 class OverallCalculator {
-    double[] starRatings;
     double overallRating;
 
     OverallCalculator(double[] ratings){
-        starRatings = new StarCalculator(ratings).starRatings;
+        double[] starRatings = new StarCalculator(ratings).starRatings;
         overallRating = calcOverall(starRatings);
     }
 
