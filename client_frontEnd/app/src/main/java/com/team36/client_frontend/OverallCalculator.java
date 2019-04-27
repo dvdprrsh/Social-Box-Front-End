@@ -1,11 +1,12 @@
 package com.team36.client_frontend;
 // David Parrish - 201232252
 
-public class OverallCalculator {
+class OverallCalculator {
     double overallRating;
 
     OverallCalculator(double[] ratings){
-        overallRating = calcOverall(ratings);
+        double[] starRatings = new StarCalculator(ratings).starRatings;
+        overallRating = calcOverall(starRatings);
     }
 
     // Calculates the overall (average) rating from the ratings provided
