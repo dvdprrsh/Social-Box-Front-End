@@ -81,4 +81,7 @@ public class JourneysFragment extends Fragment {
         super.onDestroyView(); // Destroys the fragment when called
     }
 
+
+
+
 }

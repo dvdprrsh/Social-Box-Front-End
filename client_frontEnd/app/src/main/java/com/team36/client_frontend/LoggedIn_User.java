@@ -11,10 +11,12 @@ public class LoggedIn_User {
     double[] user_ratings = {4.0, 4.0, 5.0, 3.5};
     double user_overall = calcOverall();
     String[] user_friendIDs;
+    String api = "566fdade-11ae-4405-a1a2-f333b3cd4da7";
+
 
     // Assigns the variables above
     void LoggedIn_UserMethod(String key, String firstName, String lastName, String email,
-                                    String username, double[] rating, String[] friendIDs){
+                                    String username, double[] rating, String[] friendIDs, String Givenapi){
         api_key = key;
         user_firstName = firstName;
         user_lastName = lastName;
@@ -22,6 +24,7 @@ public class LoggedIn_User {
         user_username = username;
         user_ratings = rating;
         user_friendIDs = friendIDs;
+        api = Givenapi;
     }
 
     // Calculates the overall rating for user logged in

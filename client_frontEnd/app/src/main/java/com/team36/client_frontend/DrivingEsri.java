@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.JsonReader;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Chronometer;
@@ -21,15 +22,20 @@ import com.esri.arcgisruntime.ArcGISRuntimeEnvironment;
 import com.esri.arcgisruntime.mapping.view.LocationDisplay;
 import com.esri.arcgisruntime.mapping.view.MapView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class DrivingEsri extends AppCompatActivity {
+public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     public Snackbar snackbar;
     private MapView esriMap;
     private LocationDisplay locationDisplay;
     public String locationProvider;
+    private String trip_id;
+    LoggedIn_User loggedIn_user = new LoggedIn_User();
 
     //**** Cameron MacKay ****//
     Queue<Double> latitudePoints = new LinkedList<>();
@@ -60,16 +66,7 @@ public class DrivingEsri extends AppCompatActivity {
 
         snackbar = Snackbar.make((findViewById(R.id.constraintLayout)), R.string.driving_snackbar, Snackbar.LENGTH_LONG); // Snackbar for when the back button is pressed
 
-        //**** Cameron MacKay ****//
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationProvider = LocationManager.NETWORK_PROVIDER;
-
-        try{
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-        }catch (SecurityException e){
-
-        }
-        //********//
+        startRecording();
     }
 
     //**** Cameron MacKay ****//
@@ -132,6 +129,19 @@ public class DrivingEsri extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void startTrip() {
+        //**** Cameron MacKay ****//
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationProvider = LocationManager.NETWORK_PROVIDER;
+
+        try{
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        }catch (SecurityException e){
+
+        }
+        //********//
+    }
+
     // Sets the location display to display the users location
     private void setALocationDisplay() {
         locationDisplay = esriMap.getLocationDisplay();
@@ -146,12 +156,12 @@ public class DrivingEsri extends AppCompatActivity {
 
     // Closes the driving activity and and stops recording
     public void stop_pressed(View view){
-        stopRecording();
+        String toSend = ConvertToJSON();
+        toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + loggedIn_user.api);
+        //Send to the server
+        new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
 
-        Intent intent = new Intent(this, TripActivity.class);
-        startActivity(intent);
 
-        finish();
     }
 
     // This method is used to notify the user that they must press the back button twice to return to the main screen
@@ -177,7 +187,7 @@ public class DrivingEsri extends AppCompatActivity {
 
         String completeStringToSend = "";
 
-        String[] dataNames = {"Latitude", "Longitude", "TimeLogged"};
+        String[] dataNames = {"lat", "long", "timestamps"};
         int size = queues[0].size();
         //   try {
         for (int i = 0; i < queues.length;  i++) {
@@ -203,17 +213,38 @@ public class DrivingEsri extends AppCompatActivity {
     //********//
 
     private void stopRecording(){
-        // This method will be called when the user either presses the 'Stop!' button once or the back button twice
+        Intent intent = new Intent(this, TripActivity.class);
+        intent.putExtra("Id", trip_id);
+        startActivity(intent);
 
-        //**** Cameron MacKay ****//
-        String postString = ConvertToJSON();
-        postString = postString;
-        // SendToServer sender = new SendToServer();
-        // try {
-        //     sender.Send(postString,"");
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        //}
-        //********//
+        finish();
     }
+
+
+
+    private void startRecording() {
+        String toSend = ("api_key="+loggedIn_user.api);
+        //Send to the server
+        new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/begin_trip", "");
+    }
+
+
+    @Override
+    public void onTaskComplete(String result) {
+
+        try {
+            JSONObject json = new JSONObject(result);
+            if(json.has("trip_id")) {
+                trip_id = json.getString("trip_id");
+                startTrip();
+            } else {
+                stopRecording();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
