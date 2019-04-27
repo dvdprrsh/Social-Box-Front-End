@@ -12,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Chronometer;
@@ -160,8 +159,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
         toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + loggedIn_user.api);
         //Send to the server
         new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
-
-
+        stopRecording();
     }
 
     // This method is used to notify the user that they must press the back button twice to return to the main screen
@@ -238,7 +236,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
                 trip_id = json.getString("trip_id");
                 startTrip();
             } else {
-                stopRecording();
+                //stopRecording();
             }
         } catch (JSONException e) {
             e.printStackTrace();
