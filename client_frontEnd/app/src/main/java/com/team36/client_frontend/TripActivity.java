@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class TripActivity extends AppCompatActivity implements ServerResponded {
     private String journeyDate;
     private double[] journeysRatings;
-    private LoggedIn_User loggedIn_user = new LoggedIn_User();
+    private String api;
 
 
     @Override
@@ -22,7 +22,8 @@ public class TripActivity extends AppCompatActivity implements ServerResponded {
 
         Bundle data = getIntent().getExtras();
         String trip = data.getString("Id");
-        String toSend = ("api_key="+loggedIn_user.api+"&trip_id="+trip);
+        api = data.getString("api");
+        String toSend = ("api_key="+api+"&trip_id="+trip);
         //Send to the server
         new ServerSender(TripActivity.this).execute(toSend, "http://social-box.xyz/api/get_trip_detail", "");
 

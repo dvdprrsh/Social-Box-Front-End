@@ -4,27 +4,29 @@ package com.team36.client_frontend;
 public class LoggedIn_User {
     // Stores information about the user
     String api_key;
-    String user_firstName = "David";
+    String user_firstName;
     String user_lastName;
     String user_email;
     String user_username;
     double[] user_ratings = {4.0, 4.0, 5.0, 3.5};
     double user_overall = calcOverall();
     String[] user_friendIDs;
-    String api = "566fdade-11ae-4405-a1a2-f333b3cd4da7";
+    String api ;
+
+
 
 
     // Assigns the variables above
-    void LoggedIn_UserMethod(String key, String firstName, String lastName, String email,
-                                    String username, double[] rating, String[] friendIDs, String Givenapi){
-        api_key = key;
+    public LoggedIn_User(String key, String firstName, String lastName, String email,
+                                    String username, double[] rating, String[] friendIDs){
+
         user_firstName = firstName;
         user_lastName = lastName;
         user_email = email;
         user_username = username;
         user_ratings = rating;
         user_friendIDs = friendIDs;
-        api = Givenapi;
+        api = key;
     }
 
     // Calculates the overall rating for user logged in

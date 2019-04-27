@@ -32,7 +32,7 @@ public class MainFragment extends Fragment {
     private View returnView;
     final private String WELCOME_MESSAGE = "Hi %s, see your rating below!";
     private TabLayout tabLayout;
-
+    private LoggedIn_User loggedIn_user;
     private String users_name;
     private double users_rating;
 
@@ -130,8 +130,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_main, container, false);
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+        loggedIn_user = baseActivity.loggedIn_user;
 
-        LoggedIn_User loggedIn_user = new LoggedIn_User();
         users_name = loggedIn_user.user_firstName;
         users_rating = loggedIn_user.user_overall;
 
@@ -248,6 +249,7 @@ public class MainFragment extends Fragment {
         }
 
         Intent driving = new Intent(getActivity(), DrivingEsri.class);
+        driving.putExtra("api",loggedIn_user.api);
         startActivity(driving);
     }
 

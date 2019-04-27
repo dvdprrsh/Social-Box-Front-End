@@ -25,6 +25,7 @@ public class ProfileFragment extends Fragment {
     private String USERS_NAME;
     private double USERS_RATING = -1.0;
     private double[] RATINGS;
+    private LoggedIn_User loggedIn_user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,10 +33,12 @@ public class ProfileFragment extends Fragment {
         returnView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Sets the key values used throughout this fragment
-        LoggedIn_User loggedIn_user = new LoggedIn_User();
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+
+        loggedIn_user = baseActivity.loggedIn_user;
         USERS_NAME = loggedIn_user.user_firstName;
         USERS_RATING = loggedIn_user.user_overall;
-        RATINGS = loggedIn_user.user_ratings;
+        RATINGS = new double[]{1, 2, 3, 4}; //loggedIn_user.user_ratings;
 
         Button button = returnView.findViewById(R.id.button_logout);
         button.setOnClickListener(this::onLogout);

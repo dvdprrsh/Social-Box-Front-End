@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
     //**** David Parrish ****//
     // Checks if the user has logged in previously and not logged out
     private void checkLogInState(){
+        /*
         if (networkAvailable.netAvailable()) {
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
@@ -93,8 +94,9 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
                 setUsername();
             }
         }
+        */
     }
-    //********//
+    //********/
 
     public void onLogin(View view){
         if (networkAvailable.netAvailable()) { //**** David Parrish ****//
@@ -125,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
             // Opens base activity which links to the rest of the app
             SaveLogInState(); //**** David Parrish ****//
             Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+            intent.putExtra("json",responseJSON);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //**** David Parrish ****//
             startActivity(intent);
         }else {

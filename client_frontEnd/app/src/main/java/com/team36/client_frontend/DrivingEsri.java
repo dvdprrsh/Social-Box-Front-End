@@ -34,7 +34,8 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     private LocationDisplay locationDisplay;
     public String locationProvider;
     private String trip_id;
-    LoggedIn_User loggedIn_user = new LoggedIn_User();
+    private String api;
+
 
     //**** Cameron MacKay ****//
     Queue<Double> latitudePoints = new LinkedList<>();
@@ -48,6 +49,8 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driving_esri);
 
+        Bundle data = getIntent().getExtras();
+        api = data.getString("api");
         // The below is the license ID for the map API
         ArcGISRuntimeEnvironment.setLicense("runtimelite,1000,rud6686217235,none,C6JC7XLS1MYJ003AD167");
         esriMap = findViewById(R.id.mapView_esriJourney);
@@ -156,7 +159,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     // Closes the driving activity and and stops recording
     public void stop_pressed(View view){
         String toSend = ConvertToJSON();
-        toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + loggedIn_user.api);
+        toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + api);
         //Send to the server
         new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
         stopRecording();
@@ -213,6 +216,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     private void stopRecording(){
         Intent intent = new Intent(this, TripActivity.class);
         intent.putExtra("Id", trip_id);
+        intent.putExtra("api", api);
         startActivity(intent);
 
         finish();
@@ -221,7 +225,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
 
 
     private void startRecording() {
-        String toSend = ("api_key="+loggedIn_user.api);
+        String toSend = ("api_key="+api);
         //Send to the server
         new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/begin_trip", "");
     }
@@ -236,7 +240,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
                 trip_id = json.getString("trip_id");
                 startTrip();
             } else {
-                //stopRecording();
+                stopRecording();
             }
         } catch (JSONException e) {
             e.printStackTrace();
