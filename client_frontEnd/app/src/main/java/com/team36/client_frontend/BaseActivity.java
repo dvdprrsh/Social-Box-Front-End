@@ -99,9 +99,6 @@ public class BaseActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        MainFragment mainFragment = new MainFragment();
-        fragmentManager.beginTransaction().add(R.id.fragment_layout, mainFragment).commit();
-
         navigation_base = findViewById(R.id.navigation_base);
         navigation_base.setOnNavigationItemSelectedListener(myBottomNavigationListener);
 
@@ -114,6 +111,9 @@ public class BaseActivity extends AppCompatActivity {
         }
         // The navigation listener above 'listens' or detects when the user wants to change activity
         // and calls the 'myBottomNavigationListener' method when the user chooses
+
+        MainFragment mainFragment = new MainFragment();
+        fragmentManager.beginTransaction().add(R.id.fragment_layout, mainFragment).commit();
     }
 
     private void fillUser (String json) throws JSONException {
@@ -124,13 +124,20 @@ public class BaseActivity extends AppCompatActivity {
         String firstname = userData.getString("firstname");
         String surname = userData.getString("surname");
         double[] rating = {};
-        JSONArray friendIds = userData.getJSONArray("friends");
-        String[] frinds = new String[friendIds.length()];
 
-        for (int i = 0; i < friendIds.length(); i++) {
-            frinds[i] = (String)(friendIds.get(i));
+        String[] friends;
+        try {
+            JSONArray friendIds = userData.getJSONArray("friends");
+            friends = new String[friendIds.length()];
+
+            for (int i = 0; i < friendIds.length(); i++) {
+                friends[i] = (String)(friendIds.get(i));
+            }
+        } catch (JSONException e){
+            friends = new String[0];
         }
-        loggedIn_user = new LoggedIn_User(api,firstname,surname,email,username,rating,frinds);
+
+        loggedIn_user = new LoggedIn_User(api,firstname,surname,email,username,rating,friends);
     }
 
 }

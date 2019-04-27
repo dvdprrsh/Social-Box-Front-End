@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
@@ -35,6 +36,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     public String locationProvider;
     private String trip_id;
     private String api;
+    private Chronometer chronometer;
 
 
     //**** Cameron MacKay ****//
@@ -62,7 +64,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
 
         Typeface typeface = ResourcesCompat.getFont(this, R.font.quicksand_light);
 
-        Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer = findViewById(R.id.chronometer);
         chronometer.setTypeface(typeface);
         chronometer.start(); // Starts the stopwatch to show how long it has been recording
 
@@ -158,6 +160,9 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
 
     // Closes the driving activity and and stops recording
     public void stop_pressed(View view){
+
+        int recordingTime = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
+
         String toSend = ConvertToJSON();
         toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + api);
         //Send to the server

@@ -35,6 +35,7 @@ public class MainFragment extends Fragment {
     private LoggedIn_User loggedIn_user;
     private String users_name;
     private double users_rating;
+    private String[] users_friends = null;
 
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
     private Map<String, double[]> friends = new HashMap<String, double[]>(){
@@ -120,9 +121,15 @@ public class MainFragment extends Fragment {
 
         @Override
         public void onTabUnselected(TabLayout.Tab tab) {
+            ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
+            myListView.setVisibility(View.VISIBLE);
+            TextView textView_errorMain = returnView.findViewById(R.id.textView_errorMain);
+            textView_errorMain.setVisibility(View.INVISIBLE);
         }
+
         @Override
         public void onTabReselected(TabLayout.Tab tab) {
+
         }
     };
 
@@ -130,11 +137,13 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         returnView = inflater.inflate(R.layout.fragment_main, container, false);
+
         BaseActivity baseActivity = (BaseActivity) getActivity();
         loggedIn_user = baseActivity.loggedIn_user;
 
         users_name = loggedIn_user.user_firstName;
         users_rating = loggedIn_user.user_overall;
+        users_friends = loggedIn_user.user_friendIDs;
 
         tabLayout = returnView.findViewById(R.id.tabLayout_atGlance);
         tabLayout.addOnTabSelectedListener(myTabSelectedListener);
@@ -161,7 +170,7 @@ public class MainFragment extends Fragment {
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
 
         // This for-loop assigns values to the components of each row
-        if (friends != null) {
+        if (users_friends.length > 0) {
             String[] friends_keys = new String[friends.size()];
             friends.keySet().toArray(friends_keys);
 

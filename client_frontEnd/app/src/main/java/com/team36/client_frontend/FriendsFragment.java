@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class FriendsFragment extends Fragment {
     private final String WELCOME_TEXT = "Your Friends";
+    private String[] friends;
 
     private String[] friend_names = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
@@ -65,9 +66,12 @@ public class FriendsFragment extends Fragment {
         TextView textView_welcomeText = returnView.findViewById(R.id.textView_welcomeJsFs);
         textView_welcomeText.setText(WELCOME_TEXT);
 
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+        friends = baseActivity.loggedIn_user.user_friendIDs;
+
         ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
 
-        if (friend_names != null) {
+        if (friends.length > 0) {
             listView.setOnItemClickListener(myItemClickListener);
             LoadList loadList = new LoadList(friend_names, friend_ratings);
             // The below displays all the rows made in the 'loadList' class above
