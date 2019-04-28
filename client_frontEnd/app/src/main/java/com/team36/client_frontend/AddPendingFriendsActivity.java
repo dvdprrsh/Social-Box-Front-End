@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AddPendingFriendsActivity extends AppCompatActivity implements ServerResponded {
-    // David Parrish - 21232252
+    // David Parrish - 201232252
 
     private EditText friendsUsername;
     private boolean friendRequests = false;

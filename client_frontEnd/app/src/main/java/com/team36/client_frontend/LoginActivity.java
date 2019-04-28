@@ -17,14 +17,13 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// TODO: Fix switching between login and register (login stops working and register button can be pressed multiple times)
-
 public class LoginActivity extends AppCompatActivity implements ServerResponded {
     private final String attemptsRemaining = "Number of attempts remaining: %d";
     private NetworkAvailable networkAvailable;
     private Snackbar snackbar;
     private boolean loggedIn = false;
     private String username_text = null;
+    private String password_text = null;
     private EditText username;
     private EditText password;
     private TextView attempts;
@@ -76,27 +75,18 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
     //**** David Parrish ****//
     // Checks if the user has logged in previously and not logged out
     private void checkLogInState(){
-        /*
         if (networkAvailable.netAvailable()) {
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
                 loggedIn = sharedPreferences.getBoolean("logged_in", false);
-                username_text = sharedPreferences.getString("Username", null);
+                username_text = sharedPreferences.getString("username", null);
             } catch (NullPointerException e) {
                 System.out.print("User not previously logged in.");
             }
-
-            if (loggedIn) {
-                Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
                 setUsername();
-            }
         }
-        */
     }
-    //********/
+    //********//
 
     public void onLogin(View view){
         if (networkAvailable.netAvailable()) { //**** David Parrish ****//
@@ -172,16 +162,16 @@ public class LoginActivity extends AppCompatActivity implements ServerResponded 
         SharedPreferences sharedPreferences = getSharedPreferences("Logged_In", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("logged_in", true);
-        editor.putString("Username", username.getText().toString());
+        editor.putString("username", username.getText().toString());
         editor.apply();
     }
 
     //********//
 
     private void registerUser () {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            // Second activity is what links to the rest of the app
-            startActivity(intent);
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        // Second activity is what links to the rest of the app
+        startActivity(intent);
     }
 
 
