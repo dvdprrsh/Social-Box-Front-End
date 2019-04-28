@@ -3,7 +3,7 @@ package com.team36.client_frontend;
 class StarCalculator {
     double[] starRatings;
 
-    StarCalculator(double[] ratings){
+    StarCalculator(int[] ratings){
         starRatings = new double[ratings.length];
 
         for (int i = 0; i < starRatings.length; i++) {

@@ -77,12 +77,12 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            Calendar currenttime = Calendar.getInstance();
+           /* Calendar currenttime = Calendar.getInstance();
             timeRecorded.add((double)currenttime.getTimeInMillis());
             latitudePoints.add(location.getLatitude());
             longitudePoints.add(location.getLongitude());
          //   myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
-
+*/
         }
 
         @Override
@@ -98,6 +98,17 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
         @Override
         public void onProviderDisabled(String provider) {
 
+        }
+    };
+
+    LocationDisplay.LocationChangedListener locationChangedListener = new LocationDisplay.LocationChangedListener() {
+        @Override
+        public void onLocationChanged(LocationDisplay.LocationChangedEvent locationChangedEvent) {
+            Calendar currenttime = Calendar.getInstance();
+            timeRecorded.add((double) (currenttime.getTimeInMillis()));
+
+            latitudePoints.add(locationChangedEvent.getLocation().getPosition().getY());
+            longitudePoints.add(locationChangedEvent.getLocation().getPosition().getX());
         }
     };
     //********//
@@ -152,6 +163,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
         // Navigation pan mode to face the direction of travel and move while the user moves
         locationDisplay.setAutoPanMode(LocationDisplay.AutoPanMode.NAVIGATION);
         locationDisplay.startAsync(); // Starts getting tracking location
+        locationDisplay.addLocationChangedListener(locationChangedListener);
     }
 
     public void reset_map(View view){
@@ -167,7 +179,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
         toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + api);
         //Send to the server
         new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
-        stopRecording();
+       // stopRecording();
     }
 
     // This method is used to notify the user that they must press the back button twice to return to the main screen
@@ -193,7 +205,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
 
         String completeStringToSend = "";
 
-        String[] dataNames = {"lat", "long", "timestamps"};
+        String[] dataNames = {"lat", "long", "timestamp"};
         int size = queues[0].size();
         //   try {
         for (int i = 0; i < queues.length;  i++) {

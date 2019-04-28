@@ -51,7 +51,7 @@ public class TripActivity extends AppCompatActivity implements ServerResponded {
         journeysRatings[3] = scores.getDouble(3);
 
         String overall = String.valueOf(new OverallCalculator(journeysRatings).overallRating);
-        new OpenFriendJourneyFragment(null, new JourneyFragment(), getSupportFragmentManager(), journeyDate, Float.valueOf(overall), String.valueOf(journeysRatings[0]), String.valueOf(journeysRatings[1]), String.valueOf(journeysRatings[2]), String.valueOf(journeysRatings[3]));
+        new OpenFriendJourneyFragment(null, new JourneyFragment(), getSupportFragmentManager(), journeyDate, Float.valueOf(overall), String.valueOf(journeysRatings[0]), String.valueOf(journeysRatings[1]), String.valueOf(journeysRatings[2]), String.valueOf(journeysRatings[3]), null);
     }
 
     @Override

@@ -5,8 +5,7 @@ class OverallCalculator {
     double overallRating;
 
     OverallCalculator(double[] ratings){
-        double[] starRatings = new StarCalculator(ratings).starRatings;
-        overallRating = calcOverall(starRatings);
+        overallRating = calcOverall(ratings);
     }
 
     // Calculates the overall (average) rating from the ratings provided

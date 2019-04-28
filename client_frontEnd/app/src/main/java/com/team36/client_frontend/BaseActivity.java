@@ -14,11 +14,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BaseActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+public class BaseActivity extends AppCompatActivity implements ServerResponded {
     private FragmentManager fragmentManager;
     private BottomNavigationView navigation_base;
     public LoggedIn_User loggedIn_user;
+    public List<TripInformation> TripList = new ArrayList<TripInformation>();
     private boolean netAvailable;
+    private HashMap<String,Integer[]> UserTrips = new HashMap<String,Integer[]>();
+    public JSONObject josn;
     // The below transitions between activities depending on which button in the navigation bar is pressed
     // This method appears in all other activities with the bottom navigation bar and acts in the same way
     private BottomNavigationView.OnNavigationItemSelectedListener myBottomNavigationListener
@@ -109,11 +117,14 @@ public class BaseActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        String toSend = ("api_key="+loggedIn_user.api);
+        //Send to the server
+        new ServerSender(BaseActivity.this).execute(toSend, "http://social-box.xyz/api/get_all_trips", "");
         // The navigation listener above 'listens' or detects when the user wants to change activity
         // and calls the 'myBottomNavigationListener' method when the user chooses
 
-        MainFragment mainFragment = new MainFragment();
-        fragmentManager.beginTransaction().add(R.id.fragment_layout, mainFragment).commit();
+
     }
 
     private void fillUser (String json) throws JSONException {
@@ -123,7 +134,7 @@ public class BaseActivity extends AppCompatActivity {
         String username = userData.getString("username");
         String firstname = userData.getString("firstname");
         String surname = userData.getString("surname");
-        double[] rating = {};
+        int[] rating = {};
 
         String[] friends;
         try {
@@ -138,6 +149,46 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         loggedIn_user = new LoggedIn_User(api,firstname,surname,email,username,rating,friends);
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+
+        try {
+                FillTrips(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private void FillTrips(String json) throws JSONException {
+        JSONObject data = new JSONObject(json);
+        josn = data;
+        JSONArray trips = (data.getJSONArray("trips"));
+
+        for(int i = 0; i < trips.length(); i++) {
+            JSONObject trip = trips.getJSONObject(i);
+            JSONObject JSONscores = trip.getJSONObject("scores");
+            int[] scores;
+
+            try {
+                scores = new int[] {JSONscores.getInt("acceleration"),JSONscores.getInt("braking"),JSONscores.getInt("speeding"),JSONscores.getInt("time_of_day")};
+            } catch (Exception e) {
+                scores = new int[] {0,0,0,0};
+            }
+
+            TripInformation toAdd = new TripInformation(scores,trip.getString("slang_time"), "banging trip id");
+            TripList.add(toAdd);
+        }
+        Collections.reverse(TripList);
+        HandleTrips();
+    }
+
+    private void HandleTrips() {
+        MainFragment mainFragment = new MainFragment();
+        fragmentManager.beginTransaction().add(R.id.fragment_layout, mainFragment).commit();
     }
 
 }

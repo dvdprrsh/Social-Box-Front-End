@@ -48,7 +48,7 @@ public class FriendsFragment extends Fragment {
 
             // Opens the selected friend's fragment
             new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(),
-                    friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
+                    friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime, null);
         }
     };
 
@@ -77,10 +77,10 @@ public class FriendsFragment extends Fragment {
 
         if (friends.length > 0) {
             listView.setOnItemClickListener(myItemClickListener);
-            LoadList loadList = new LoadList(friend_names, friend_ratings);
+            //LoadList loadList = new LoadList(friend_names, friend_ratings);
             // The below displays all the rows made in the 'loadList' class above
-            My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
-            listView.setAdapter(friendsList_myAdapter);
+            //My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
+            //listView.setAdapter(friendsList_myAdapter);
         }else{
             listView.setVisibility(View.INVISIBLE);
             TextView textView_error = returnView.findViewById(R.id.textView_error);
