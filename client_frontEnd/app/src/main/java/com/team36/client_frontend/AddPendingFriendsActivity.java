@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,27 +15,36 @@ public class AddPendingFriendsActivity extends AppCompatActivity implements Serv
 
     private EditText friendsUsername;
     private boolean friendRequests = false;
+    private String api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pending_friends);
 
+        Bundle data = getIntent().getExtras();
+        api = data.getString("api");
         checkPendingFriendRequests();
         friendsUsername = findViewById(R.id.editText_friendsUsername);
     }
 
+    //here
     public void addFriend(View view){
         // Check username exists and send request here
-        String username = friendsUsername.toString();
-        /*
-        String toSend = ("api_key=" + need to put in api key + "friend_username=" + friendUsername);
-        new ServerSender(getActivity()).execute(toSend, "http://social-box.xyz/api/login", "");
-        */
+        String username = friendsUsername.getText().toString();
+        String tosend = ("api_key="+api+"&friend_username=" + username);
+        new ServerSender(AddPendingFriendsActivity.this).execute(tosend, "http://social-box.xyz/api/add_friend", "");
     }
 
     public void handleAddFriend(String result) throws JSONException {
         JSONObject json = new JSONObject(result);
+        Boolean isValid = json.getBoolean("ok");
+        if(isValid) {
+             Toast.makeText(this,(friendsUsername.getText().toString() + " added as a friend!"), Toast.LENGTH_LONG).show();
+        } else {
+            String error = json.getString("message");
+            Toast.makeText(this,error, Toast.LENGTH_LONG).show();
+        }
     }
 
 

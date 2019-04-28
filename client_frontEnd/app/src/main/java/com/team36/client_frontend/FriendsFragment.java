@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class FriendsFragment extends Fragment {
     private final String WELCOME_TEXT = "Your Friends";
     private String[] friends;
-
+    private LoggedIn_User loggedIn_user;
     private String[] friend_names = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
 
@@ -44,6 +44,8 @@ public class FriendsFragment extends Fragment {
             String ratingSpeed = rating3.getTag().toString();
             String ratingTime = rating4.getTag().toString();
 
+
+
             // Opens the selected friend's fragment
             new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(),
                     friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
@@ -55,6 +57,7 @@ public class FriendsFragment extends Fragment {
         public void onClick(View v) {
             // Transitions ot the add friends and pending friend requests activity
             Intent intent = new Intent(getActivity(), AddPendingFriendsActivity.class);
+            intent.putExtra("api", loggedIn_user.api);
             startActivity(intent);
         }
     };
@@ -67,7 +70,8 @@ public class FriendsFragment extends Fragment {
         textView_welcomeText.setText(WELCOME_TEXT);
 
         BaseActivity baseActivity = (BaseActivity) getActivity();
-        friends = baseActivity.loggedIn_user.user_friendIDs;
+        loggedIn_user = baseActivity.loggedIn_user;
+        friends = loggedIn_user.user_friendIDs;
 
         ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
 
