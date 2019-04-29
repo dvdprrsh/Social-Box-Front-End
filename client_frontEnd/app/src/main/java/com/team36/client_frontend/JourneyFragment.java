@@ -1,9 +1,11 @@
 package com.team36.client_frontend;
 // David Parrish - 201232252
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +24,12 @@ import com.esri.arcgisruntime.mapping.view.MapView;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.graphics.Color.rgb;
 
@@ -39,8 +45,9 @@ public class JourneyFragment extends Fragment implements ServerResponded{
 
     private double[] xCoords = {-2.936182, -2.930346};
     private double[] yCoords = {53.394124, 53.390423};
+    private double[] coords;
     private MapView esriMap;
-    private double[] coords = {-2.936182, 53.394124, -2.930346, 53.390423};
+
 
     private final int START_COORDINATE = 0;
     private int END_COORDINATE;
@@ -53,6 +60,7 @@ public class JourneyFragment extends Fragment implements ServerResponded{
         returnView = inflater.inflate(R.layout.fragment_journey, container, false);
 
         arguments = getArguments();
+        coords = arguments.getDoubleArray("coords");
         ReturnView setView = new ReturnView(returnView, WELCOME_MESSAGE, arguments);
 
         // The below is the license ID for the map API
@@ -62,8 +70,8 @@ public class JourneyFragment extends Fragment implements ServerResponded{
         esriMap.setMap(arcGISMap);
 
         END_COORDINATE = (coords.length)-1;
-
         setRoute();
+        //GetData(baseActivity.loggedIn_user.api_key, arguments.get("tripID").toString());
         return setView.returnView;
     }
 
@@ -126,17 +134,27 @@ public class JourneyFragment extends Fragment implements ServerResponded{
 
     //This does all the server shit
     private void GetData(String apiKey, String tripId) {
-        String toSend = "api_key=" + apiKey + "trip_id=" + tripId;
-        new ServerSender(getActivity()).execute(toSend, "http://social-box.xyz/api/login", "");
+        String toSend = "api_key=" + apiKey + "&trip_id=" + tripId;
+        new ServerSender(this.getActivity()).execute(toSend, "http://social-box.xyz/api/get_trip_detail", "");
     }
 
     private void handleData(String jsonStr) throws JSONException {
         JSONObject json = new JSONObject(jsonStr);
+        JSONArray lats = json.getJSONArray("lat");
+        JSONArray longs = json.getJSONArray("long");
+/*
+        for (int i = 0; i < lats.length(); i++) {
+            coords.add(longs.getDouble(i));
+            coords.add(lats.getDouble(i));
+        }*/
+        setRoute();
     }
+
+
 
     @Override
     public void onTaskComplete(String result) {
-
+        int hejvnsjdvn = 0;
         try {
             handleData(result);
         } catch (JSONException e) {

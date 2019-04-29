@@ -13,11 +13,19 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class JourneysFragment extends Fragment {
     private final String WELCOME_TEXT = "Your Journeys";
-
-    private String[] journeyDates = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"};
-    private double[][] journeysRatings = {{3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 5.0, 5.0}, {4.5, 4.0, 4.0, 3.5}, {3.5, 3.5, 4.0, 4.0}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}};
+    private List<TripInformation> tripList;
+    private JSONObject json;
+    private JSONArray jsonTrips;
+    private String[] journeyDates;
+    private double[][] journeysRatings;
 
     public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
 
@@ -25,6 +33,13 @@ public class JourneysFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             JourneyFragment journeyFragment = new JourneyFragment();
+
+            double[] coords = {};
+            try {
+                coords = getCoords(((tripList.size()-1) - position));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             // Finds all the views which data needs to be passed across to 'journeyFragment'
             TextView date = view.findViewById(R.id.textView_dayDate);
@@ -43,9 +58,26 @@ public class JourneysFragment extends Fragment {
 
             // opens the selected journey's fragment
             new OpenFriendJourneyFragment(null, journeyFragment, getActivity().getSupportFragmentManager(),
-                    journeyDate, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
+                    journeyDate, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime, coords);
         }
     };
+
+    private double[] getCoords(int position) throws JSONException {
+
+        JSONObject trip = (jsonTrips.getJSONObject(position));
+        JSONArray lat = trip.getJSONArray("lat");
+        JSONArray longs = trip.getJSONArray("long");
+        double[] coords = new double[(lat.length() * 2)];
+        int x = 0;
+        for (int i = 0; i < coords.length; i++) {
+            coords[i] = longs.getDouble(x);
+            i++;
+            coords[i] = lat.getDouble(x);
+            x++;
+        }
+
+        return coords;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,9 +88,26 @@ public class JourneysFragment extends Fragment {
 
         ListView listView = returnView.findViewById((R.id.listView_journeysFriends));
 
+        BaseActivity baseActivity = (BaseActivity) getActivity();
+        tripList = baseActivity.TripList;
+        try {
+            json = baseActivity.josn;
+            jsonTrips = json.getJSONArray("trips");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        journeyDates = new String[tripList.size()];
+        journeysRatings = new double[tripList.size()][4];
+
+        for (int i = 0; i < tripList.size(); i++) {
+            journeyDates[i] = tripList.get(i).getSlang_time();
+            journeysRatings[i] = tripList.get(i).getScores();
+        }
+
         if (new NetworkAvailable(getActivity()).netAvailable()) {
 
-            if (journeyDates != null) {
+            if (journeyDates.length > 0) {
                 listView.setOnItemClickListener(myItemClickListener);
                 LoadList loadList = new LoadList(journeyDates, journeysRatings);
                 // The below displays all the rows made in the 'loadList' class above

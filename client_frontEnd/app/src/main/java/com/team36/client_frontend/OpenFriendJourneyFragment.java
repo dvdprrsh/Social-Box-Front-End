@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import org.json.JSONArray;
+
 class OpenFriendJourneyFragment {
 
-    OpenFriendJourneyFragment(@Nullable FriendFragment friendFragment, @Nullable JourneyFragment journeyFragment, FragmentManager fragmentManager, String dateName, Float ratingOverall, String ratingAcceleration, String ratingBraking, String ratingSpeed, String ratingTime){
+    OpenFriendJourneyFragment(@Nullable FriendFragment friendFragment, @Nullable JourneyFragment journeyFragment, FragmentManager fragmentManager, String dateName, Float ratingOverall, String ratingAcceleration, String ratingBraking, String ratingSpeed, String ratingTime, @Nullable double[] coords){
         Bundle arguments = new Bundle(); // For passing data across to the 'journeyFragment' fragment
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -20,11 +22,17 @@ class OpenFriendJourneyFragment {
         arguments.putString("ratingSpeed", ratingSpeed);
         arguments.putString("ratingTime", ratingTime);
 
+
+
+
+
+
         if (friendFragment != null){
             friendFragment.setArguments(arguments);
             // Assigns values to the fragment Transaction
             fragmentTransaction.replace(R.id.fragment_layout, friendFragment);
         }else if (journeyFragment != null){
+            arguments.putDoubleArray("coords",coords);
             journeyFragment.setArguments(arguments);
             // Assigns values to the fragment Transaction
             fragmentTransaction.replace(R.id.fragment_layout, journeyFragment);

@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment {
         loggedIn_user = baseActivity.loggedIn_user;
         USERS_NAME = loggedIn_user.user_firstName;
         USERS_RATING = loggedIn_user.user_overall;
-        RATINGS = new double[]{1, 2, 3, 4}; //loggedIn_user.user_ratings;
+        RATINGS = loggedIn_user.user_ratings;
 
         Button button = returnView.findViewById(R.id.button_logout);
         button.setOnClickListener(this::onLogout);
@@ -78,6 +78,9 @@ public class ProfileFragment extends Fragment {
             if (USERS_RATING != -1.0) {
                 RatingBar ratingBar = returnView.findViewById(RATING_BARS[i]);
                 ratingBar.setRating((float) RATINGS[i]);
+
+                TextView textView = returnView.findViewById(R.id.textView_overallRating);
+                textView.setText(String.valueOf(USERS_RATING));
 
                 // Gets the image that the rating corresponds to
                 ImageCalculator imageCalculator = new ImageCalculator(RATINGS[i]);

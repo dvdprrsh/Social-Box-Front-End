@@ -14,13 +14,13 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class FriendsFragment extends Fragment {
     private final String WELCOME_TEXT = "Your Friends";
     private String[] friends;
     private LoggedIn_User loggedIn_user;
-    private String[] friend_names = {"Cam", "Cybs", "Dave", "George", "Javier", "Josh"};
-    private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
-
+    private List<FriendInformation> friendList;
 
     public ListView.OnItemClickListener myItemClickListener = new ListView.OnItemClickListener(){
 
@@ -48,7 +48,7 @@ public class FriendsFragment extends Fragment {
 
             // Opens the selected friend's fragment
             new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(),
-                    friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime);
+                    friendName, ratingOverall, ratingAcceleration, ratingBraking, ratingSpeed, ratingTime, null);
         }
     };
 
@@ -70,14 +70,23 @@ public class FriendsFragment extends Fragment {
         textView_welcomeText.setText(WELCOME_TEXT);
 
         BaseActivity baseActivity = (BaseActivity) getActivity();
+
         loggedIn_user = baseActivity.loggedIn_user;
-        friends = loggedIn_user.user_friendIDs;
+        friendList = baseActivity.FriendList;
+
+        String[] friendUsernames = new String[friendList.size()];
+        double[][] friendsScores = new double[friendList.size()][4];
+
+        for (int i = 0; i < friendList.size(); i++) {
+            friendUsernames[i] = friendList.get(i).getFriendUsername();
+            friendsScores[i] = friendList.get(i).getFriendScores();
+        }
 
         ListView listView = returnView.findViewById(R.id.listView_journeysFriends);
 
-        if (friends.length > 0) {
+        if (friendUsernames.length > 0) {
             listView.setOnItemClickListener(myItemClickListener);
-            LoadList loadList = new LoadList(friend_names, friend_ratings);
+            LoadList loadList = new LoadList(friendUsernames, friendsScores);
             // The below displays all the rows made in the 'loadList' class above
             My_Adapter_JourneysFriends friendsList_myAdapter = new My_Adapter_JourneysFriends(getContext(), loadList.allRows);
             listView.setAdapter(friendsList_myAdapter);
