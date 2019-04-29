@@ -191,8 +191,10 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             snackbar.show();
         }else if (snackbar.isShown()){
-            stopRecording();
-            finish();
+            String toSend = ConvertToJSON();
+            toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + api);
+            //Send to the server
+            new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
         }
         return true;
     }
@@ -230,10 +232,11 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
     }
     //********//
 
-    private void stopRecording(){
+    private void stopRecording(String result){
         Intent intent = new Intent(this, TripActivity.class);
         intent.putExtra("Id", trip_id);
         intent.putExtra("api", api);
+        //intent.putExtra("json",result);
         startActivity(intent);
 
         finish();
@@ -257,7 +260,7 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
                 trip_id = json.getString("trip_id");
                 startTrip();
             } else {
-                stopRecording();
+                stopRecording(result);
             }
         } catch (JSONException e) {
             e.printStackTrace();

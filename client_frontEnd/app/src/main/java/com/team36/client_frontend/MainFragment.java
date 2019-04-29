@@ -42,8 +42,10 @@ public class MainFragment extends Fragment {
     private double users_rating;
     private JSONObject json;
     private JSONArray jsonTrips;
+    private JSONObject frienddata;
     private String[] users_friends = null;
-    public List<TripInformation> TripList = new ArrayList<TripInformation>();
+    public List<TripInformation> TripList = new ArrayList<>();
+    public List<FriendInformation> FriendList = new ArrayList<>();
 
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
     private Map<String, double[]> friends = new HashMap<String, double[]>(){
@@ -87,7 +89,10 @@ public class MainFragment extends Fragment {
             String friendName = dateName.getText().toString();
             RatingBar ratingOverall = view.findViewById(R.id.ratingBar_ratingStars);
 
-            new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(), friendName, ratingOverall.getRating(), String.valueOf(friends.get(friendName)[0]), String.valueOf(friends.get(friendName)[1]), String.valueOf(friends.get(friendName)[2]), String.valueOf(friends.get(friendName)[3]), null);
+            FriendInformation selectedFriend = FriendList.get(position);
+            double[] selectedScores = selectedFriend.getFriendScores();
+
+            new OpenFriendJourneyFragment(friendFragment, null, getActivity().getSupportFragmentManager(), friendName, ratingOverall.getRating(), String.valueOf(selectedScores[0]), String.valueOf(selectedScores[1]), String.valueOf(selectedScores[2]), String.valueOf(selectedScores[3]), null);
         }
     };
 
@@ -162,15 +167,16 @@ public class MainFragment extends Fragment {
 
         BaseActivity baseActivity = (BaseActivity) getActivity();
         loggedIn_user = baseActivity.loggedIn_user;
+        FriendList = baseActivity.FriendList;
         TripList = baseActivity.TripList;
 
         try {
+            frienddata = baseActivity.friendsjson;
             json = baseActivity.josn;
             jsonTrips = json.getJSONArray("trips");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         users_name = loggedIn_user.user_firstName;
         users_rating = loggedIn_user.user_overall;
         users_friends = loggedIn_user.user_friendIDs;
@@ -200,25 +206,22 @@ public class MainFragment extends Fragment {
         ListView myListView = returnView.findViewById(R.id.listView_atAGlance);
 
         // This for-loop assigns values to the components of each row
-        if (users_friends.length > 0) {
-            String[] friends_keys = new String[friends.size()];
-            friends.keySet().toArray(friends_keys);
-
-            /*myListView.setOnItemClickListener(myClickListenerFriend);
+        if (FriendList.size() > 0) {
+            myListView.setOnItemClickListener(myClickListenerFriend);
             OverallCalculator overallCalculator;
-            for (int i = 0; i < friends.size(); i++) {
-                overallCalculator = new OverallCalculator(friends.get(friends_keys[i]));
+            for (int i = 0; i < FriendList.size(); i++) {
+                overallCalculator = new OverallCalculator(FriendList.get(i).getFriendScores());
                 double overall = overallCalculator.overallRating;
 
                 ListView_ItemNormal oneRow = new ListView_ItemNormal(); // Creates a new row
                 // The below assigns each of the values to their corresponding components
                 oneRow.setImage_ratingImage(new ImageCalculator(overall).image);
-                oneRow.setText_nameDay(friends_keys[i]);
+                oneRow.setText_nameDay(FriendList.get(i).friendUsername);
                 oneRow.setRating_ratingStars((float) overall);
                 oneRow.setRating_ratingString(overall);
 
                 allRows.add(oneRow); // Adds each row to the list of rows to be added to the listView below
-            }*/
+            }
         }else {
             myListView.setVisibility(View.INVISIBLE);
             TextView textView_errorMain = returnView.findViewById(R.id.textView_errorMain);
@@ -238,7 +241,7 @@ public class MainFragment extends Fragment {
         myListView.setOnItemClickListener(myClickListenerJourney);
         OverallCalculator overallCalculator;
 
-        if (TripList != null) {
+        if (TripList.size() > 0) {
             for (int i = 0; i < TripList.size(); i++) {
                 overallCalculator = new OverallCalculator(TripList.get(i).getScores());
                 double overall = overallCalculator.overallRating;

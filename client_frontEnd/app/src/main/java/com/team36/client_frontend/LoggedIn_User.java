@@ -9,7 +9,7 @@ public class LoggedIn_User {
     String user_email;
     String user_username;
     double[] user_ratings;
-    double user_overall = calcOverall();
+    double user_overall;
     String[] user_friendIDs;
     String api ;
 
@@ -18,12 +18,13 @@ public class LoggedIn_User {
 
     // Assigns the variables above
     public LoggedIn_User(String key, String firstName, String lastName, String email,
-                                    String username, int[] rating, String[] friendIDs){
+                                    String username, int[] ratings, String[] friendIDs){
         user_firstName = firstName;
         user_lastName = lastName;
         user_email = email;
         user_username = username;
-        user_ratings = new StarCalculator(rating).starRatings;
+        user_ratings = new StarCalculator(ratings).starRatings;
+        user_overall = calcOverall();
         user_friendIDs = friendIDs;
         api = key;
     }

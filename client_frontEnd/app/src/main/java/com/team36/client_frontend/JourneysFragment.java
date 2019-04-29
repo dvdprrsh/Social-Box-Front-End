@@ -107,7 +107,7 @@ public class JourneysFragment extends Fragment {
 
         if (new NetworkAvailable(getActivity()).netAvailable()) {
 
-            if (journeyDates != null) {
+            if (journeyDates.length > 0) {
                 listView.setOnItemClickListener(myItemClickListener);
                 LoadList loadList = new LoadList(journeyDates, journeysRatings);
                 // The below displays all the rows made in the 'loadList' class above
