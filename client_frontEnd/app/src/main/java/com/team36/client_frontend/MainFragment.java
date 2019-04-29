@@ -39,7 +39,7 @@ public class MainFragment extends Fragment {
 
     private double[][] friend_ratings = {{4.5, 4.0, 5.0, 5.0}, {3.0, 4.0, 4.0, 3.5}, {4.5, 4.0, 4.0, 3.5}, {5.0, 4.0, 4.0, 3.5}, {4.0, 4.0, 4.5, 3.5}, {3.5, 3.5, 4.0, 4.0}};
     private Map<String, double[]> friends = new HashMap<String, double[]>(){
-        {
+        { 
             put("Cam", friend_ratings[0]);
             put("Josh", friend_ratings[1]);
             put("Dave", friend_ratings[2]);
