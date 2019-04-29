@@ -27,9 +27,6 @@ public class TripActivity extends AppCompatActivity implements ServerResponded {
         String toSend = ("api_key="+api+"&trip_id="+trip);
         //Send to the server
         new ServerSender(TripActivity.this).execute(toSend, "http://social-box.xyz/api/get_trip_detail", "");
-
-        //String overall = String.valueOf(new OverallCalculator(journeysRatings).overallRating);
-        //new OpenFriendJourneyFragment(null, new JourneyFragment(), getSupportFragmentManager(), journeyDate, Float.valueOf(overall), String.valueOf(journeysRatings[0]), String.valueOf(journeysRatings[1]), String.valueOf(journeysRatings[2]), String.valueOf(journeysRatings[3]));
     }
 
     @Override

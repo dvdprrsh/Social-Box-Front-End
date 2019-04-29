@@ -8,13 +8,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
@@ -172,14 +172,12 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
 
     // Closes the driving activity and and stops recording
     public void stop_pressed(View view){
-
-        int recordingTime = (int) (SystemClock.elapsedRealtime() - chronometer.getBase());
+        view.setEnabled(false);
 
         String toSend = ConvertToJSON();
         toSend = (toSend + "&trip_id=" + trip_id + "&api_key=" + api);
         //Send to the server
         new ServerSender(DrivingEsri.this).execute(toSend, "http://social-box.xyz/api/update_trip", "");
-       // stopRecording();
     }
 
     // This method is used to notify the user that they must press the back button twice to return to the main screen
@@ -264,6 +262,9 @@ public class DrivingEsri extends AppCompatActivity implements ServerResponded {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+
+            Button stopButton = findViewById(R.id.button_stop);
+            stopButton.setEnabled(true);
         }
 
     }

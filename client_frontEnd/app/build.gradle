@@ -6,8 +6,8 @@ android {
         applicationId "com.team36.client_frontend"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 4
-        versionName "0.4"
+        versionCode 10
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
