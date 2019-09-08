@@ -15,3 +15,4 @@ To use the app either download/clone the repository and open up the client_front
 
 ## Requirements
 * Mobile Android Device (may not be compatible with all versions of Android)
+
