@@ -1,2 +1,4 @@
 theme: jekyll-theme-cayman
 title: Social-Box
+show_downloads: true
+description: A social black-box experience
