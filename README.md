@@ -11,10 +11,12 @@ using the user's speed, acceleration and time of day. Once your journey has fini
 you took and which areas you drove worse in. The social aspect of the app comes in with the addition of friends, here
 you will be able to see your friends star rating and be able to compare with your star rating and others. This creates
 some healthy competition between friends to see who is the safest driver.
+
 The target audience is anyone who is able to drive. We imagine it will be younger drivers who will use it the most as
 they are least experienced and will want to know where they can improve on their driving. Moreover, the parents of
 these drivers could also access their child's information through their account on the app to keep an eye on how well
 their child drives.
+
 Most users will use this app to compare their score with other friends to see how well they drive compared to others.
 However, it could also be used to see how well you drive and see which areas of your daily commute you drive worse
 in and therefore improve in those areas whether it be that you speed too much or brake too hard. This app could also
