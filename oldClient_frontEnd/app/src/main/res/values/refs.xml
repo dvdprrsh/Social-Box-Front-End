@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <drawable name="button_round">@drawable/button_bg_rounded_corners</drawable>
-</resources>
