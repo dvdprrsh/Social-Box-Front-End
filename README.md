@@ -21,7 +21,7 @@ in and therefore improve in those areas whether it be that you speed too much or
 be used by parents or other guardians to see how well their child drives to make sure they are driving safely.
 
 ## Usage
-To use the app either download/clone the repository and open it up in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://1drv.ms/u/s!AuQghy7zJpSHiZB38ocHUScvi4e0iA) and enter the password 'Social-Box' for the APK download.
+To use the app either download/clone the repository and open up the client_frontEnd folder in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://1drv.ms/u/s!AuQghy7zJpSHiZB38ocHUScvi4e0iA) and enter the password 'Social-Box' for the APK download.
 
 ## Requirements
 * Mobile Android Device (preferably version 28 up)
