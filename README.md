@@ -1,9 +1,7 @@
 # Social-Box
-
 This project is one which was done by a group of six of us for our second year group project. I handled most of the front end of the application, along with some help from others for linking it up to the back-end of the project.
 
 ## The Project
-
 Social-Box is a mobile application which resembles the use of the black box in cars, which is used to monitor the users
 driving and lower their insurance. We have taken this idea of monitoring the users driving and turned into a social app.
 The app will monitor the users driving and then give them a score using a star rating. The score will be calculated
@@ -24,3 +22,6 @@ be used by parents or other guardians to see how well their child drives to make
 
 ## Usage
 To use the app either download/clone the repository and open it up in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://1drv.ms/u/s!AuQghy7zJpSHiZB38ocHUScvi4e0iA) and enter the password 'Social-Box' for the APK download.
+
+## Requirements
+* Mobile Android Device (preferably version 28 up)
