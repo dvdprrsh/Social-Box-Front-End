@@ -11,7 +11,7 @@ you will be able to see your friends star rating and be able to compare with you
 some healthy competition between friends to see who is the safest driver.
 
 ## Usage
-To use the app either download/clone the repository and open up the client_frontEnd folder in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://1drv.ms/u/s!AuQghy7zJpSHiZB38ocHUScvi4e0iA) and enter the password 'Social-Box' for the APK download.
+To use the app either download/clone the repository and open up the client_frontEnd folder in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://github.com/dvprrsh/Social-Box-Front-End/releases/tag/v1.0-alpha) for the APK download.
 
 ## Requirements
 * Mobile Android Device (may not be compatible with all versions of Android)
