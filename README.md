@@ -24,4 +24,4 @@ be used by parents or other guardians to see how well their child drives to make
 To use the app either download/clone the repository and open up the client_frontEnd folder in Android Studio and run on an emulator or physical device (preferred). Or you can follow this [link](https://1drv.ms/u/s!AuQghy7zJpSHiZB38ocHUScvi4e0iA) and enter the password 'Social-Box' for the APK download.
 
 ## Requirements
-* Mobile Android Device (preferably version 28 up)
+* Mobile Android Device (may not be compatible with all versions of Android)
